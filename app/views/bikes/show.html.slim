@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Brand:
+  = @bike.brand
+p
+  strong Model:
+  = @bike.model
+p
+  strong Year:
+  = @bike.year
+
+= link_to 'Edit', edit_bike_path(@bike)
+'|
+= link_to 'Back', bikes_path

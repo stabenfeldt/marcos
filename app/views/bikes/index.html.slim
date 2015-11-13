@@ -1,0 +1,25 @@
+h1 Listing bikes
+
+table
+  thead
+    tr
+      th Brand
+      th Model
+      th Year
+      th
+      th
+      th
+
+  tbody
+    - @bikes.each do |bike|
+      tr
+        td = bike.brand
+        td = bike.model
+        td = bike.year
+        td = link_to 'Show', bike
+        td = link_to 'Edit', edit_bike_path(bike)
+        td = link_to 'Destroy', bike, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Bike', new_bike_path
