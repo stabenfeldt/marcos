@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Description:
+  = @service.description
+p
+  strong Log:
+  = @service.log
+p
+  strong Due date:
+  = @service.due_date
+p
+  strong Bike:
+  = @service.bike
+p
+  strong User:
+  = @service.user
+
+= link_to 'Edit', edit_service_path(@service)
+'|
+= link_to 'Back', services_path
