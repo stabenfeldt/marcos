@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Brand:
+  = @part.brand
+p
+  strong Model:
+  = @part.model
+p
+  strong Year:
+  = @part.year
+p
+  strong Note:
+  = @part.note
+
+= link_to 'Edit', edit_part_path(@part)
+'|
+= link_to 'Back', parts_path

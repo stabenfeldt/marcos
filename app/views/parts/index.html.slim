@@ -1,0 +1,27 @@
+h1 Listing parts
+
+table
+  thead
+    tr
+      th Brand
+      th Model
+      th Year
+      th Note
+      th
+      th
+      th
+
+  tbody
+    - @parts.each do |part|
+      tr
+        td = part.brand
+        td = part.model
+        td = part.year
+        td = part.note
+        td = link_to 'Show', part
+        td = link_to 'Edit', edit_part_path(part)
+        td = link_to 'Destroy', part, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Part', new_part_path
