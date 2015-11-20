@@ -6,16 +6,16 @@
         - @customer.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :first_name
     = f.text_field :first_name
-  .field
+  .form-group
     = f.label :last_name
     = f.text_field :last_name
-  .field
+  .form-group
     = f.label :mobile
     = f.text_field :mobile
-  .field
+  .form-group
     = f.label :email
     = f.text_field :email
   .actions = f.submit

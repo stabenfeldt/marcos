@@ -1,3 +1,5 @@
+.pull-right
+  = link_to 'Edit', edit_customer_path(@customer)
 h3= @customer.name
 span= "Phone: #{@customer.mobile}"
 br
@@ -6,14 +8,17 @@ span= "Email: #{@customer.email}"
 
 br
 br
-= link_to 'Edit', edit_customer_path(@customer)
 
 
 h2 Bikes
+.box-shadow
 
-ul.bikes
-  - @customer.bikes.each do |b|
-    li
-      = link_to b.name, [@customer, b]
+  ul.bikes
+    - @customer.bikes.each do |b|
+      li
+        = link_to b.name, [@customer, b]
 
-= link_to 'Add bike', new_customer_bike_path(@customer)
+br
+br
+br
+= link_to 'Add bike', new_customer_bike_path(@customer), class: 'btn btn-default'

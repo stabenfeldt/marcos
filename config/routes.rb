@@ -5,7 +5,10 @@ Rails.application.routes.draw do
 
   resources :services do
   end
-  resources :bikes
+
+  resources :bikes do
+  end
+
   resources :users
   resources :customers do
     resources :bikes

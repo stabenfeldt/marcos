@@ -1,15 +1,40 @@
 - content_for :breadcrumb do
+  li= link_to 'Customers', customers_path
   li= link_to @customer.name, @customer
   li
     strong= @bike.name
-p
-  strong Brand:
-  = @bike.brand
-p
-  strong Model:
-  = @bike.model
-p
-  strong Year:
-  = @bike.year
 
-= link_to 'Edit', edit_bike_path(@bike)
+
+.pull-right
+  = link_to 'Edit', edit_customer_bike_path(@customer,@bike), class: 'btn '
+  = link_to 'Destroy', customer_bike_path(@customer, @bike), method: :delete,
+    data: { confirm: "Are you sure?" }, class: 'btn'
+p
+  h2= @bike.name
+  span= @bike.year
+
+
+hr
+
+.box-shadow
+  h5 Parts
+  = collection_check_boxes(:bike, :part_ids,
+    @parts, :id, :name)  do |c|
+      .checkbox
+        = c.label { c.check_box + c.text }
+
+  - if @bike.parts.present?
+    .panel.panel-default
+      .panel-heading Parts
+        table.table
+          thead
+            tr
+              th Brand
+              th Model
+              th Year
+              th Link to techdoc
+          tbody
+            - @parts.each do |p|
+              tr
+                td = p.name
+

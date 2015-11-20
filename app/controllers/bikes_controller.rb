@@ -1,6 +1,6 @@
 class BikesController < ApplicationController
-  before_action :set_bike, only: [:show, :edit, :update, :destroy]
-  before_action :set_customer, only: [:new, :create, :show]
+  before_action :set_bike #, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer #, only: [:new, :create, :show]
 
   # GET /bikes
   # GET /bikes.json
@@ -11,6 +11,13 @@ class BikesController < ApplicationController
   # GET /bikes/1
   # GET /bikes/1.json
   def show
+    @parts = Part.all
+  end
+
+  def parts
+  end
+
+  def add_part
   end
 
   # GET /bikes/new
@@ -44,7 +51,7 @@ class BikesController < ApplicationController
   def update
     respond_to do |format|
       if @bike.update(bike_params)
-        format.html { redirect_to @bike, notice: 'Bike was successfully updated.' }
+        format.html { redirect_to [@customer, @bike], notice: 'Bike was successfully updated.' }
         format.json { render :show, status: :ok, location: @bike }
       else
         format.html { render :edit }
