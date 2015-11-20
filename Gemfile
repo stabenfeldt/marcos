@@ -28,6 +28,8 @@ gem 'sass-rails', '>= 3.2'
 
 gem 'fabrication'
 gem 'brakeman', :require => false
+gem 'react-rails', '~> 1.4.0'
+
 
 
 
