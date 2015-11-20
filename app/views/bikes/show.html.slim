@@ -1,5 +1,7 @@
-p#notice = notice
-
+- content_for :breadcrumb do
+  li= link_to @customer.name, @customer
+  li
+    strong= @bike.name
 p
   strong Brand:
   = @bike.brand
@@ -11,5 +13,3 @@ p
   = @bike.year
 
 = link_to 'Edit', edit_bike_path(@bike)
-'|
-= link_to 'Back', bikes_path

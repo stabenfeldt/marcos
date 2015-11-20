@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails'
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'
 
@@ -23,11 +23,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'slim-rails'
 gem 'slim'
-gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '>= 3.2'
 
 gem 'fabrication'
+gem 'brakeman', :require => false
+
+
 
 
 
@@ -39,6 +41,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'railroady'
 end
 
 group :test do

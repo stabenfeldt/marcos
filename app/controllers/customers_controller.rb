@@ -7,6 +7,14 @@ class CustomersController < ApplicationController
     @customers = Customer.all
   end
 
+  def search
+    first,last = params[:q].split if params[:q].present?
+    if params[:q]
+       @customers = Customer.where('first_name ILIKE ? AND last_name ILIKE ?',
+                                "%#{first}%", "%#{last}%")
+    end
+  end
+
   # GET /customers/1
   # GET /customers/1.json
   def show

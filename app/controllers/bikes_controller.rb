@@ -1,5 +1,6 @@
 class BikesController < ApplicationController
   before_action :set_bike, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer, only: [:new, :create, :show]
 
   # GET /bikes
   # GET /bikes.json
@@ -25,10 +26,11 @@ class BikesController < ApplicationController
   # POST /bikes.json
   def create
     @bike = Bike.new(bike_params)
+    @bike.customer = @customer
 
     respond_to do |format|
       if @bike.save
-        format.html { redirect_to @bike, notice: 'Bike was successfully created.' }
+        format.html { redirect_to @bike.customer, notice: 'Bike was successfully created.' }
         format.json { render :show, status: :created, location: @bike }
       else
         format.html { render :new }
@@ -66,6 +68,11 @@ class BikesController < ApplicationController
     def set_bike
       @bike = Bike.find(params[:id])
     end
+
+    def set_customer
+      @customer = Customer.find(params[:customer_id])
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bike_params

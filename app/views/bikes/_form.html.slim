@@ -1,4 +1,4 @@
-= form_for @bike do |f|
+= form_for [@customer, @bike] do |f|
   - if @bike.errors.any?
     #error_explanation
       h2 = "#{pluralize(@bike.errors.count, "error")} prohibited this bike from being saved:"

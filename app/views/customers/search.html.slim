@@ -1,12 +1,23 @@
-h1 Register new service
+h1 Search for customer
 
-strong Search for customer
 
-= form_tag(customers_search_path, method: 'get') do
-  = label_tag :q, 'Search for:'
-  = text_field_tag(:q)
-  = submit_tag("Search")
+= form_tag(customers_search_path, method: 'get', id: 'q') do
+  .input-group
+    = text_field_tag 'q', nil, placeholder: 'Search for customer..',
+      class: 'form-control', value: params[:q]
 
-ul
-  - @customers.all.each do |c|
-  = c.first_name
+    span.input-group-btn
+      = submit_tag 'GO', :class => 'btn btn-default'
+
+- if @customers.present?
+  ul.customers.list-group
+    strong Search result:
+    - @customers.all.each do |c|
+      li.list-group-item
+        = link_to c.name, c
+- elsif params[:q]
+  .alert.alert-info(role="alert")
+    = "Could not find #{params[:q]}"
+
+hr
+= link_to "Create new customer", new_customer_path, :class => 'btn btn-primary'

@@ -1,18 +1,19 @@
-p#notice = notice
+h3= @customer.name
+span= "Phone: #{@customer.mobile}"
+br
+span= "Email: #{@customer.email}"
 
-p
-  strong First name:
-  = @customer.first_name
-p
-  strong Last name:
-  = @customer.last_name
-p
-  strong Mobile:
-  = @customer.mobile
-p
-  strong Email:
-  = @customer.email
 
+br
+br
 = link_to 'Edit', edit_customer_path(@customer)
-'|
-= link_to 'Back', customers_path
+
+
+h2 Bikes
+
+ul.bikes
+  - @customer.bikes.each do |b|
+    li
+      = link_to b.name, [@customer, b]
+
+= link_to 'Add bike', new_customer_bike_path(@customer)

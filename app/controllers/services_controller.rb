@@ -12,6 +12,7 @@ class ServicesController < ApplicationController
   def show
   end
 
+
   # GET /services/new
   def new
     @service = Service.new
@@ -19,6 +20,10 @@ class ServicesController < ApplicationController
 
   # GET /services/1/edit
   def edit
+  end
+
+  def find_customer
+
   end
 
   # POST /services
