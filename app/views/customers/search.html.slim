@@ -1,0 +1,12 @@
+h1 Register new service
+
+strong Search for customer
+
+= form_tag(customers_search_path, method: 'get') do
+  = label_tag :q, 'Search for:'
+  = text_field_tag(:q)
+  = submit_tag("Search")
+
+ul
+  - @customers.all.each do |c|
+  = c.first_name
