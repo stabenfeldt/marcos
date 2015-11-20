@@ -1,15 +1,24 @@
 Rails.application.routes.draw do
-  resources :services
+  resources :parts
+  get 'customers/search' => 'customers#search'
+  get 'customers/search/:q' => 'customers#search'
+
+  resources :services do
+  end
   resources :bikes
   resources :users
-  resources :customers
-  resources :customers
-  resources :customers
+  resources :customers do
+    resources :bikes
+  end
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'customers#search'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
