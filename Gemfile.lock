@@ -192,6 +192,7 @@ DEPENDENCIES
   rspec-rails (~> 3.0.0)
   sass-rails (>= 3.2)
   sdoc (~> 0.4.0)
+  slim
   slim-rails
   spring
   turbolinks

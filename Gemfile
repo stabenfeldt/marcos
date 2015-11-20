@@ -21,7 +21,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 
-gem "slim-rails"
+gem 'slim-rails'
+gem 'slim'
 gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '>= 3.2'
