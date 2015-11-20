@@ -1,10 +1,13 @@
 doctype html
 html lang="en"
   = render "layouts/head"
-  body
+  body(id=body_id )
     = render "layouts/navbar"
+    - if content_for?(:breadcrumb)
+      ol.breadcrumb = yield(:breadcrumb)
     #content.container
 
+      = flash_messages
       = yield
 
       = render "layouts/footer"
