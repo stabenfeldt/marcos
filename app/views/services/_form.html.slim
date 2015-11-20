@@ -1,24 +1,33 @@
-= form_for @service do |f|
-  - if @service.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@service.errors.count, "error")} prohibited this service from being saved:"
-      ul
-        - @service.errors.full_messages.each do |message|
-          li = message
+.form-horizontal
+  = form_for @service do |f|
+    - if @service.errors.any?
+      #error_explanation
+        h2 = "#{pluralize(@service.errors.count, "error")} prohibited this service from being saved:"
+        ul
+          - @service.errors.full_messages.each do |message|
+            li = message
 
-  .field
-    = f.label :description
-    = f.text_field :description
-  .field
-    = f.label :log
-    = f.text_field :log
-  .field
-    = f.label :due_date
-    = f.date_select :due_date
-  .field
-    = f.label :bike
-    = f.text_field :bike
-  .field
-    = f.label :user
-    = f.text_field :user
-  .actions = f.submit
+    .form-group
+      = f.label :description
+      = f.text_area :description, class: 'form-control', rows: 6
+
+    - unless @service.new_record?
+      .form-group
+        = f.label :log
+        = f.text_field :log
+
+    .form-group
+      = f.label :due_date
+      br
+      = f.date_select :due_date
+
+    .form-group
+      = f.label :bike
+      = f.text_field :bike
+
+    .form-group
+      = f.label :user
+      = f.text_field :user
+
+    .form-group
+        = f.submit :class => 'btn btn-default'
