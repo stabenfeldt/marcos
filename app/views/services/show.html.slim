@@ -1,4 +1,9 @@
-p#notice = notice
+- content_for :breadcrumb do
+  li= link_to 'Customers', customers_path
+  li= link_to @bike.customer.name, @bike.customer
+  li= link_to @bike.name, [@bike.customer, @bike]
+  li
+    strong= Service
 
 p
   strong Description:
