@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :bikes do
+    resources :services
   end
 
   resources :users
