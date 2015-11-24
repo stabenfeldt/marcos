@@ -5,22 +5,20 @@
   li
     strong= Service
 
-p
-  strong Description:
-  = @service.description
-p
-  strong Log:
-  = @service.log
-p
-  strong Due date:
-  = @service.due_date
-p
-  strong Bike:
-  = @service.bike
-p
-  strong User:
-  = @service.user
+.box-shadow
+  .pull-right
+    span= "Due date: #{@service.due_date}"
+    br
+    = link_to 'Edit', edit_service_path(@service)
 
-= link_to 'Edit', edit_service_path(@service)
-'|
-= link_to 'Back', services_path
+  h2= @bike.name
+  strong Description
+  br
+  = @service.description
+
+  - @service.log.present?
+    p
+      strong Log:
+      = @service.log
+
+//= link_to 'Edit', edit_service_path(@service)
