@@ -9,15 +9,31 @@ span= "Email: #{@customer.email}"
 br
 br
 
+ul.nav.nav-tabs
+  li.active role="presentation"
+    a href="#this_service"  data-toggle="tab" This service
+  li role="presentation"
+    a href="#new_service" data-toggle="tab"  Register new service
+  li role="presentation"
+    a href="#service_history"  data-toggle="tab" Service history
+  li role="presentation"
+    a href="#bikes"  data-toggle="tab" Bikes
 
-h2 Bikes
-.box-shadow
 
-  ul.bikes
-    - @customer.bikes.each do |b|
-      li
-        = link_to b.name, [@customer, b]
-
+.tab-content
+  #this_service.tab-pane.fade
+    span This service
+  #new_service.tab-pane.fade
+    span New serciw
+  #service_history.tab-pane.fade.in.active
+    span history
+  #bikes.tab-pane.fade
+    h2 Bikes
+    .box-shadow
+      ul.bikes
+        - @customer.bikes.each do |b|
+          li
+            = link_to b.name, [@customer, b]
 br
 br
 br
