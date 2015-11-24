@@ -13,8 +13,7 @@
 
 class Service < ActiveRecord::Base
   belongs_to :bike
-  belongs_to :customer
 
-  validates :description, :due_date, :bike, :user,
+  validates :description, :due_date, :bike,
     presence: true
 end
