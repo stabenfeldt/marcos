@@ -11,7 +11,8 @@ class BikesController < ApplicationController
   # GET /bikes/1
   # GET /bikes/1.json
   def show
-    @parts = Part.all
+    @service = Service.new
+    #@parts = Part.all
   end
 
   def parts
