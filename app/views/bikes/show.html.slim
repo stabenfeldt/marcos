@@ -1,13 +1,13 @@
 - content_for :breadcrumb do
   li= link_to 'Customers', customers_path
-  li= link_to @customer.name, @customer
+  li= link_to @bike.customer.name, @bike.customer
   li
     strong= @bike.name
 
 
 .pull-right
-  = link_to 'Edit', edit_customer_bike_path(@customer,@bike), class: 'btn '
-  = link_to 'Destroy', customer_bike_path(@customer, @bike), method: :delete,
+  = link_to 'Edit', edit_customer_bike_path(@bike.customer,@bike), class: 'btn '
+  = link_to 'Destroy', customer_bike_path(@bike.customer, @bike), method: :delete,
     data: { confirm: "Are you sure?" }, class: 'btn'
 p
   h2= @bike.name
@@ -16,12 +16,30 @@ p
 
 hr
 
+
 .box-shadow
-  h5 Parts
-  = collection_check_boxes(:bike, :part_ids,
-    @parts, :id, :name)  do |c|
-      .checkbox
-        = c.label { c.check_box + c.text }
+  h6 = "Register new service for #{@bike.name}"
+  = form_for [@bike, @service] do |f|
+    .form-group
+      = f.label :description
+      br
+      = f.text_area :description, rows: 10
+    .form-group
+      = f.label :due_date
+      br
+      = f.date_field :due_date
+    .actions = f.submit
+
+
+
+/.box-shadow
+  h5 Available parts
+  = form_for [@customer, @bike] do |f|
+    = collection_check_boxes(:bike, :part_ids,
+      @parts, :id, :name, value: true)  do |c|
+        .checkbox
+          = c.label { c.check_box + c.text }
+    = f.submit
 
   - if @bike.parts.present?
     .panel.panel-default
