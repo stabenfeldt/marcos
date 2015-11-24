@@ -1,5 +1,5 @@
 .form-horizontal
-  = form_for @service do |f|
+  = form_for [@bike, @service] do |f|
     - if @service.errors.any?
       #error_explanation
         h2 = "#{pluralize(@service.errors.count, "error")} prohibited this service from being saved:"
@@ -21,13 +21,9 @@
       br
       = f.date_select :due_date
 
-    .form-group
+    /.form-group
       = f.label :bike
       = f.text_field :bike
-
-    .form-group
-      = f.label :user
-      = f.text_field :user
 
     .form-group
         = f.submit :class => 'btn btn-default'
