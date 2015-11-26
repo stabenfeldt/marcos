@@ -14,6 +14,10 @@
 class Service < ActiveRecord::Base
   belongs_to :bike
 
+  def completed?
+    completed
+  end
+
   validates :description, :due_date, :bike,
     presence: true
 end
