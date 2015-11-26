@@ -14,7 +14,7 @@
 class Customer < ActiveRecord::Base
 
   has_many :bikes
-  has_many :services
+  has_many :services, through: :bikes
 
   def name
     "#{first_name} #{last_name}"
