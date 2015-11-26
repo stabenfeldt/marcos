@@ -1,8 +1,11 @@
+- content_for :breadcrumb do
+  li= link_to 'Customers', customers_path
+  li= link_to @service.bike.customer.name, @service.bike.customer
+  li= link_to @service.bike.name, [@service.bike.customer, @bike]
+  li
+    strong= Service
+
 h1 Editing service
 
 == render 'form'
-
-= link_to 'Show', @service
-'|
-= link_to 'Back', services_path
 
