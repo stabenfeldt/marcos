@@ -19,16 +19,8 @@ hr
 
 .box-shadow
   h6 = "Register new service for #{@bike.name}"
-  = form_for [@bike, @service] do |f|
-    .form-group
-      = f.label :description
-      br
-      = f.text_area :description, rows: 10
-    .form-group
-      = f.label :due_date
-      br
-      = f.date_field :due_date
-    .actions = f.submit
+  .container
+    = render 'services/form'
 
 
 
