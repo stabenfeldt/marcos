@@ -5,20 +5,4 @@
   li
     strong= Service
 
-.box-shadow
-  .pull-right
-    span= "Due date: #{@service.due_date}"
-    br
-    = link_to 'Edit', edit_service_path(@service)
-
-  h2= @bike.name
-  strong Description
-  br
-  = @service.description
-
-  - @service.log.present?
-    p
-      strong Log:
-      = @service.log
-
-//= link_to 'Edit', edit_service_path(@service)
+= render @service
