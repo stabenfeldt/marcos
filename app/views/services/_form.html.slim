@@ -9,21 +9,28 @@
 
     .form-group
       = f.label :description
-      = f.text_area :description, class: 'form-control', rows: 6
+      = f.text_area :description, class: 'form-control', rows: 6,
+        placeholder: "- What does the customer want us to help with? \n" \
+        "- Have we agreed upon a price? \n" \
+        "- Anything we should check up and call the customer about?"
 
     - unless @service.new_record?
       .form-group
         = f.label :log
-        = f.text_field :log
+        = f.text_area :log, class: 'form-control', rows: 6,
+          placeholder: "Describe what's done.."
 
     .form-group
       = f.label :due_date
       br
       = f.date_select :due_date
 
-    /.form-group
-      = f.label :bike
-      = f.text_field :bike
+    .form-group
+      = f.label :completed
+      br
+      = check_box_tag 'completed', 'completed', @service.completed
+
+
 
     .form-group
-        = f.submit :class => 'btn btn-default'
+        = f.submit :class => 'btn btn-default', value: 'Save'
