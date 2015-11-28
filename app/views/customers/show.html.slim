@@ -18,8 +18,7 @@ ul.nav.nav-tabs
       a href="#service_history"  data-toggle="tab" Service history
   li(role="presentation"
     class="#{ (!@services_in_progress.present? ? 'active' : '') }")
-    a(href="#bikes" data-toggle="tab")
-      | Bikes
+    a href="#bikes" data-toggle="tab" Bikes
 
 .tab-content
   - if @services_in_progress.present?
@@ -36,11 +35,11 @@ ul.nav.nav-tabs
         = render s
 
   - if @bikes.present?
-    #bikes.tab-pane.fade
+    #bikes.tab-pane.fade.in.active
       h3 Bikes
       .box-shadow
         ul.bikes
-          - @customer.bikes.each do |b|
+          - @bikes.each do |b|
             li
               = link_to b.name, [@customer, b]
   br
