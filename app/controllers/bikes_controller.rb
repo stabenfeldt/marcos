@@ -1,5 +1,5 @@
 class BikesController < ApplicationController
-  before_action :set_bike #, only: [:show, :edit, :update, :destroy]
+  before_action :set_bike, only: [:show, :edit, :update, :destroy]
   before_action :set_customer #, only: [:new, :create, :show]
 
   # GET /bikes
@@ -11,7 +11,8 @@ class BikesController < ApplicationController
   # GET /bikes/1
   # GET /bikes/1.json
   def show
-    @service = Service.new
+    @service  = @bike.services.new
+    @services = @bike.services.in_progress
     #@parts = Part.all
   end
 

@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
-    @service = @customer.services.last
+    @services = @customer.services.in_progress
   end
 
   # GET /customers/new
