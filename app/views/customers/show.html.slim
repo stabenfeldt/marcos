@@ -14,11 +14,12 @@ ul.nav.nav-tabs
   - if @services_in_progress.present?
     li.active role="presentation"
       a href="#this_service"  data-toggle="tab" Services in progress
+  - if @service_history.present?
     li role="presentation"
       a href="#service_history"  data-toggle="tab" Service history
   li(role="presentation"
     class="#{ (!@services_in_progress.present? ? 'active' : '') }")
-    a href="#bikes" data-toggle="tab" Bikes
+      a href="#bikes" data-toggle="tab" Bikes
 
 .tab-content
   - if @services_in_progress.present?
@@ -27,7 +28,7 @@ ul.nav.nav-tabs
       = render @services_in_progress
 
   - if @service_history.present?
-    #service_history.tab-pane.fade
+    #service_history.tab-pane.fade.in.active
       br
       br
       br
@@ -40,7 +41,6 @@ ul.nav.nav-tabs
       .box-shadow
         ul.bikes
           - @bikes.each do |b|
-            li
-              = link_to b.name, [@customer, b]
+            li = link_to b.name, [@customer, b]
   br
   = link_to 'Add bike', new_customer_bike_path(@customer), class: 'btn btn-primary'
