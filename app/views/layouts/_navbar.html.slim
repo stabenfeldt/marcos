@@ -13,6 +13,8 @@ nav.navbar.navbar-inverse
       ul.nav.navbar-nav
         li(class="#{ body_id == 'parts_index' ? 'active' : nil }")
           = link_to 'Parts', parts_path
+        li(class="#{ body_id == 'customers_index' ? 'active' : nil }")
+          = link_to 'Customers', customers_path
         //li.active
         //  a href="#"
         //    | Link
