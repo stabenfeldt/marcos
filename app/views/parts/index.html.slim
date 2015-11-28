@@ -15,13 +15,12 @@ table
     - @parts.each do |part|
       tr
         td = part.brand
-        td = part.model
+        td = link_to part.model, part
         td = part.year
         td = part.note
-        td = link_to 'Show', part
-        td = link_to 'Edit', edit_part_path(part)
-        td = link_to 'Destroy', part, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = link_to 'Edit', edit_part_path(part), class: 'btn'
+        td = link_to 'Destroy', part, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn'
 
 br
 
-= link_to 'New Part', new_part_path
+= link_to 'New Part', new_part_path, class: 'btn btn-primary'
