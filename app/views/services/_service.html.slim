@@ -1,28 +1,29 @@
 .box-shadow
   .pull-right
     span
-      strong= "Due in #{distance_of_time_in_words(Time.now, @service.due_date)}"
+      strong= "Due in #{distance_of_time_in_words(DateTime.now, service.due_date)}"
       br
-      .pull-right.em.mute= l(@service.due_date)
+      .pull-right.em.text-muted= l(service.due_date)
 
-  - if @service.completed?
+  - if service.completed?
     span.label.label-success Completed
   - else
     span.label.label-warning Not done
 
-  h2= @service.bike.name
+  h2= service.bike.name
   hr
   strong Description
   br
-  = @service.description
+  = service.description
 
-  - @service.log.present?
+  - service.log.present?
     p
       strong Log:
-      = @service.log
+      = service.log
 
   br
   br
   br
-  .button-group
-    = link_to 'Edit', edit_service_path(@service), class: 'btn btn-primary'
+  - if service.persisted?
+    .button-group
+      = link_to 'Edit', edit_service_path(service), class: 'btn btn-primary'
