@@ -1,6 +1,6 @@
-p
-  h2= @bike.name
-  span= @bike.year
+.well
+  h2= bike.name
+  span= bike.year
   br
-  .img-responsive= image_tag(@bike.image_url, size: "400x400") if @bike.image?
+  .img-responsive= image_tag(bike.image_url, width: "400px") if bike.image?
 
