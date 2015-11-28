@@ -10,9 +10,20 @@
     = f.label :model, class: 'control-label col-sm-2'
     .col-sm-10
       = f.text_field :model, class: 'form-control'
+
   .form-group
     = f.label :year, class: 'control-label col-sm-2'
     .col-sm-10
       = f.number_field :year, class: 'form-control'
+
+  .form-group
+    = f.label :image, class: 'control-label col-sm-2'
+    .col-sm-10
+       = f.file_field :image
+
+
+  br
+  br
+  br
 
   = f.submit :class => 'btn btn-primary'

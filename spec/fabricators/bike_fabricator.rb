@@ -9,6 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  customer_id :integer
+#  image       :string
 #
 
 Fabricator(:bike) do
