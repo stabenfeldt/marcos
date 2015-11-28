@@ -1,11 +1,7 @@
+/= render partial: 'layouts/form_error_messages', locals: { form_object: @service }
+
 .form-horizontal
   = form_for [@bike, @service] do |f|
-    - if @service.errors.any?
-      #error_explanation
-        h2 = "#{pluralize(@service.errors.count, "error")} prohibited this service from being saved:"
-        ul
-          - @service.errors.full_messages.each do |message|
-            li = message
 
     .form-group
       = f.label :description
@@ -23,14 +19,17 @@
     .form-group
       = f.label :due_date
       br
-      = f.date_select :due_date
+      = f.datetime_select :due_date, start_year: Time.now.year,
+        end_year: Time.now.year+1, order: [:day, :month, :year]
+
+    - unless @service.completed? || @service.new_record?
+      .form-group
+        .checkbox
+          label
+            = check_box_tag 'service[completed]', true, @service.completed
+            | Completed
+
+
 
     .form-group
-      = f.label :completed
-      br
-      = check_box_tag 'completed', 'completed', @service.completed
-
-
-
-    .form-group
-        = f.submit :class => 'btn btn-default', value: 'Save'
+        = f.submit :class => 'btn btn-primary', value: 'Save'

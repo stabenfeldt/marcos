@@ -1,18 +1,18 @@
 = form_for [@customer, @bike] do |f|
-  - if @bike.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@bike.errors.count, "error")} prohibited this bike from being saved:"
-      ul
-        - @bike.errors.full_messages.each do |message|
-          li = message
+  = render partial: 'layouts/form_error_messages',
+    locals: { form_object: @bike }
 
-  .field
-    = f.label :brand
-    = f.text_field :brand
-  .field
-    = f.label :model
-    = f.text_field :model
-  .field
-    = f.label :year
-    = f.text_field :year
-  .actions = f.submit
+  .form-group
+    = f.label :brand, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.text_field :brand, class: 'form-control'
+  .form-group
+    = f.label :model, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.text_field :model, class: 'form-control'
+  .form-group
+    = f.label :year, class: 'control-label col-sm-2'
+    .col-sm-10
+      = f.number_field :year, class: 'form-control'
+
+  = f.submit :class => 'btn btn-primary'
