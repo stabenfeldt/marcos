@@ -2,8 +2,10 @@
   .pull-right
     - if service.completed?
       span.label.label-success Completed
+      br
+      strong = l service.due_date.to_date, format: :short
     - else
-      strong= "Due in #{distance_of_time_in_words(DateTime.now, service.due_date)}"
+      strong= "Hentes om #{distance_of_time_in_words(DateTime.now, service.due_date)}"
       br
       .pull-right.em.text-muted= l(service.due_date)
       hr
@@ -14,7 +16,8 @@
     p.text-muted
       = link_to service.bike.customer.name, service.bike.customer
     hr
-    .img-responsive= image_tag(service.bike.image_url) if service.bike.image?
+    .img-responsive
+      = image_tag(service.bike.image_url, width: '400') if service.bike.image?
 
   strong Description
   br

@@ -1,0 +1,16 @@
+nb:
+  time:
+    formats:
+      short_w_year: "%d %B %Y"
+      datepicker: "%d.%m.%Y"
+      short_date: "%B %d"
+      short_month: "%^b"
+      dd_mm_yy: "%d.%m.%Y"
+  date:
+    date: Dato
+    formats:
+      short_w_year: "%d %B %Y"
+      datepicker: "%d.%m.%Y"
+      short_date: "%B %d"
+      short_month: "%^b"
+      dd_mm_yy: "%d.%m.%Y"
