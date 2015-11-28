@@ -16,9 +16,12 @@
   br
   = service.description
 
-  - service.log.present?
+  - if service.log.present?
+    br
+    br
     p
-      strong Log:
+      strong Log
+      br
       = service.log
 
   br
