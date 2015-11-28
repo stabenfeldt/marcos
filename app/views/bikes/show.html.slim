@@ -16,35 +16,53 @@ p
 
 hr
 
+ul.nav.nav-tabs
+  li.active role="presentation"
+    - if @bike.services.in_progress.present?
+      a href="#this_service"  data-toggle="tab" This service
+    - else
+      a href="#new_service"  data-toggle="tab" New service
 
-.box-shadow
-  h6 = "Register new service for #{@bike.name}"
-  .container
-    = render 'services/form'
+  li role="presentation"
+    a href="#service_history"  data-toggle="tab" Service history
 
 
+.tab-content
+  - if @services.present?
+    #this_service.tab-pane.fade.in.active
+      h2 Services in progress
+      = render @services
+  - else
+    #new_service.tab-pane.fade.in.active
+      h2 New service
+      = render 'services/form'
+  #service_history.tab-pane.fade
+    span history
+br
+br
+br
 
-/.box-shadow
-  h5 Available parts
-  = form_for [@customer, @bike] do |f|
-    = collection_check_boxes(:bike, :part_ids,
-      @parts, :id, :name, value: true)  do |c|
-        .checkbox
-          = c.label { c.check_box + c.text }
-    = f.submit
 
-  - if @bike.parts.present?
-    .panel.panel-default
-      .panel-heading Parts
-        table.table
-          thead
-            tr
-              th Brand
-              th Model
-              th Year
-              th Link to techdoc
-          tbody
-            - @parts.each do |p|
-              tr
-                td = p.name
+  //h5 Available parts
+  //= form_for [@customer, @bike] do |f|
+  //  = collection_check_boxes(:bike, :part_ids,
+  //    @parts, :id, :name, value: true)  do |c|
+  //      .checkbox
+  //        = c.label { c.check_box + c.text }
+  //  = f.submit
+
+  //- if @bike.parts.present?
+  //  .panel.panel-default
+  //    .panel-heading Parts
+  //      table.table
+  //        thead
+  //          tr
+  //            th Brand
+  //            th Model
+  //            th Year
+  //            th Link to techdoc
+  //        tbody
+  //          - @parts.each do |p|
+  //            tr
+  //              td = p.name
 
