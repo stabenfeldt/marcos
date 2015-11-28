@@ -21,10 +21,10 @@ class ServicesController < ApplicationController
 
   # GET /services/1/edit
   def edit
+    @bike = @service.bike
   end
 
   def find_customer
-
   end
 
   # POST /services
@@ -34,7 +34,7 @@ class ServicesController < ApplicationController
     @service.bike = @bike
 
     respond_to do |format|
-      if @service.save
+      if @service.save!
         format.html { redirect_to [@bike.customer, @bike], notice: 'Service was successfully created.' }
         format.json { render :show, status: :created, location: @service }
       else
@@ -49,7 +49,8 @@ class ServicesController < ApplicationController
   def update
     respond_to do |format|
       if @service.update!(service_params)
-        format.html { redirect_to [@service.bike, @service], notice: 'Service was successfully updated.' }
+        notice = @service.completed? ? 'Service marked as complete'  : 'Updated'
+        format.html { redirect_to @service.bike.customer, notice: notice }
         format.json { render :show, status: :ok, location: @service }
       else
         format.html { render :edit }
@@ -80,6 +81,7 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:description, :log, :due_date, :bike_id, :user_id, :completed)
+      params.require(:service).permit(:description, :log, :due_date, :bike_id,
+                                      :user_id, :completed)
     end
 end
