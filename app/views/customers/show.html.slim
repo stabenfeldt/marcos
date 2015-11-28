@@ -10,13 +10,14 @@ br
 br
 
 ul.nav.nav-tabs
-  li.active role="presentation"
-    - if @services.present?
+  - if @services.present?
+    li.active role="presentation"
       a href="#this_service"  data-toggle="tab" Services in progress
+    li role="presentation"
+      a href="#service_history"  data-toggle="tab" Service history
   li role="presentation"
-    a href="#service_history"  data-toggle="tab" Service history
-  li role="presentation"
-    a href="#bikes"  data-toggle="tab" Bikes
+    a(href="#bikes" class="#{@services.present? ? nil : 'active'}" data-toggle="tab")
+      Bikes
 
 
 .tab-content
@@ -24,9 +25,13 @@ ul.nav.nav-tabs
     #this_service.tab-pane.fade.in.active
       h2 Services in progress
       = render @services
-  #service_history.tab-pane.fade
-    span history
-  #bikes.tab-pane.fade
+    #service_history.tab-pane.fade
+      - @services.each do |s|
+        .well
+          strong = s.bike.name
+          p = s.description
+          p = s.log
+  #bikes.tab-pane.fade(class="#{@services.present? ? nil : 'in active'}")
     h3 Bikes
     .box-shadow
       ul.bikes
