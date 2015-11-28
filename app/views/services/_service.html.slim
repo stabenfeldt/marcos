@@ -9,10 +9,13 @@
       hr
 
 
-  h2= service.bike.name
-  p.text-muted
-    = link_to service.bike.customer.name, service.bike.customer
-  hr
+  - unless body_id == 'bikes_show'
+    h2= link_to service.bike.name, [service.bike.customer, service.bike]
+    p.text-muted
+      = link_to service.bike.customer.name, service.bike.customer
+    hr
+    .img-responsive= image_tag(service.bike.image_url) if service.bike.image?
+
   strong Description
   br
   = service.description
