@@ -70,3 +70,5 @@ group :development do
   gem 'spring'
 end
 
+gem 'newrelic_rpm'
+
