@@ -5,7 +5,7 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all.in_progress
+    @services = Service.all.in_progress.order(:due_date)
   end
 
   # GET /services/1
