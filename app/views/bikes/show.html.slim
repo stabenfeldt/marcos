@@ -38,6 +38,7 @@ ul.nav.nav-tabs
       h2 New service
       .container
         = render 'services/form'
+
   - if @service_history.present?
     #service_history.tab-pane.fade
       - @service_history.each do |s|
