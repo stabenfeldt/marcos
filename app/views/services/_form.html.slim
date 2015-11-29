@@ -22,7 +22,7 @@
       = f.datetime_select :due_date, start_year: Time.now.year,
         end_year: Time.now.year+1, order: [:day, :month, :year]
 
-    - unless @service.completed? || @service.new_record?
+    - unless @service.new_record?
       .form-group
         .checkbox
           label
