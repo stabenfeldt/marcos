@@ -16,8 +16,11 @@
     p.text-muted
       = link_to service.bike.customer.name, service.bike.customer
     hr
-    .img-responsive
-      = image_tag(service.bike.image_url, width: '400') if service.bike.image?
+    - if service.bike.image?
+      .row
+        .col-sm-6.col-md-4
+          .img-responsive.thumbnail
+            = image_tag(service.bike.image_url, width: '400')
 
   strong Description
   br
