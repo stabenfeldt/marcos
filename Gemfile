@@ -34,6 +34,8 @@ gem 'brakeman', :require => false
 gem 'react-rails', '~> 1.4.0'
 gem 'carrierwave'
 
+gem 'mixpanel-ruby'
+
 
 
 
@@ -72,3 +74,4 @@ end
 
 gem 'newrelic_rpm'
 
+gem 'fog'
