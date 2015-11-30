@@ -35,13 +35,7 @@ gem 'react-rails', '~> 1.4.0'
 gem 'carrierwave'
 
 gem 'mixpanel-ruby'
-
-
-
-
-
-
-
+gem 'mini_magick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
