@@ -4,8 +4,8 @@ class PartList extends React.Component {
           return <Part {...element} />
       });
     return(
-        <div>
-        {list}
+        <div className="list-group">
+          {list}
         </div>
     );
   }

@@ -1,17 +1,15 @@
 class Part extends React.Component {
   render () {
     return (
-      <div className="col-sm-6 col-md-4">
-        <div className="thumbnail">
-          <img src={this.props.image} />
-          <div className="caption">
-            <div>Brand: {this.props.brand}</div>
-            <div>Model: {this.props.model}</div>
-            <div>Year: {this.props.year}</div>
-            <div>Note: {this.props.note}</div>
-          </div>
+        <div className="list-group-item">
+            <div className="pull-right">
+              <a href={'parts/'+this.props.id+'/edit'}> Rediger </a>
+              <a href={'parts/'+this.props.id} data-method="delete"> Slett </a>
+            </div>
+            <h4> {this.props.brand} - {this.props.model} </h4>
+            <em> {this.props.year} </em>
+            <span>{this.props.note}</span>
         </div>
-      </div>
     );
   }
 }

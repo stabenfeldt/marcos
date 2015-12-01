@@ -1,35 +1,6 @@
 h1 Listing parts
 
-/= react_component('Part', brand: 'SRAM')
-= react_component('PartList', items: [ { brand: 'SRAM', model: 'fork'}, { brand: 'Shimano', model: 'XTR'}, { brand: 'Avid', model: 'bb7'} ])
-
-br
-br
-br
-hr
-
-
-table
-  thead
-    tr
-      th Brand
-      th Model
-      th Year
-      th Note
-      th
-      th
-      th
-
-  tbody
-    - @parts.each do |part|
-      tr
-        td = part.brand
-        td = link_to part.model, part
-        td = part.year
-        td = part.note
-        td = link_to 'Edit', edit_part_path(part), class: 'btn'
-        td = link_to 'Destroy', part, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn'
-
-br
+/= react_component('PartList', items: [ { brand: 'SRAM', model: 'fork', id: 1}, { brand: 'Shimano', model: 'XTR', id: 1}, { brand: 'Avid', model: 'bb7', id: 1} ])
+= react_component('PartList', items: @parts )
 
 = link_to 'New Part', new_part_path, class: 'btn btn-primary'
