@@ -1,5 +1,6 @@
 class BikesController < ApplicationController
   before_action :set_bike, only: [:show, :edit, :update, :destroy]
+  before_action :set_bike_from_id, only: [:parts, :add_part, :remove_part]
   before_action :set_customer #, only: [:new, :create, :show]
 
   # GET /bikes
@@ -17,9 +18,13 @@ class BikesController < ApplicationController
   end
 
   def parts
+    @parts = Part.all
   end
 
   def add_part
+  end
+
+  def remove_part
   end
 
   # GET /bikes/new
@@ -76,6 +81,10 @@ class BikesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_bike
       @bike = Bike.find(params[:id])
+    end
+
+    def set_bike_from_id
+      @bike = Bike.find(params[:bike_id])
     end
 
     def set_customer
