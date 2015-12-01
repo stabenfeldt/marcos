@@ -1,6 +1,5 @@
-h1 Listing parts
+h1 Deler
 
-/= react_component('PartList', items: [ { brand: 'SRAM', model: 'fork', id: 1}, { brand: 'Shimano', model: 'XTR', id: 1}, { brand: 'Avid', model: 'bb7', id: 1} ])
 = react_component('PartList', items: @parts )
 
 = link_to 'New Part', new_part_path, class: 'btn btn-primary'
