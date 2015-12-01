@@ -1,11 +1,16 @@
 class Part extends React.Component {
   render () {
     return (
-      <div>
-        <div>Brand: {this.props.brand}</div>
-        <div>Model: {this.props.model}</div>
-        <div>Year: {this.props.year}</div>
-        <div>Note: {this.props.note}</div>
+      <div className="col-sm-6 col-md-4">
+        <div className="thumbnail">
+          <img src={this.props.image} />
+          <div className="caption">
+            <div>Brand: {this.props.brand}</div>
+            <div>Model: {this.props.model}</div>
+            <div>Year: {this.props.year}</div>
+            <div>Note: {this.props.note}</div>
+          </div>
+        </div>
       </div>
     );
   }
