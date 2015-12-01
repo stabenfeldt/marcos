@@ -1,7 +1,12 @@
 class PartList extends React.Component {
   render () {
-    return (
-
+      var list = this.props.items.map(function (element) {
+          return <Part {...element} />
+      });
+    return(
+        <div>
+        {list}
+        </div>
     );
   }
 }
