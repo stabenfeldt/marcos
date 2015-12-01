@@ -5,7 +5,7 @@ class Part extends React.Component {
     render () {
         return (
             <div className="list-group-item" key={this.props.id}
-            onClick={this.handleClick}>
+            onClick={this.props.whenClicked}>
 
             <div className={this.props.hide_menu ? 'hidden' : 'pull-right'}>
             <a href={'parts/'+this.props.id+'/edit'}> Rediger </a>
