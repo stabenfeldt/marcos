@@ -1,8 +1,9 @@
-h1 Editing part
+- content_for :breadcrumb do
+  li= link_to 'Deler', parts_path
+  li= link_to @part.name, @part
+  li
+    strong Rediger
+
+h1 Rediger del
 
 == render 'form'
-
-= link_to 'Show', @part
-'|
-= link_to 'Back', parts_path
-
