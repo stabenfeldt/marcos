@@ -69,3 +69,4 @@ end
 gem 'newrelic_rpm'
 
 gem 'fog'
+gem 'exception_notification'
