@@ -21,6 +21,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Unicorn as the app server
 # gem 'unicorn'
 
+gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+
+
 gem 'slim-rails'
 gem 'slim'
 gem 'bootstrap-sass', '~> 3.3.5'
@@ -29,12 +32,10 @@ gem 'sass-rails', '>= 3.2'
 gem 'fabrication'
 gem 'brakeman', :require => false
 gem 'react-rails', '~> 1.4.0'
+gem 'carrierwave'
 
-
-
-
-
-
+gem 'mixpanel-ruby'
+gem 'mini_magick'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -65,3 +66,6 @@ group :development do
   gem 'spring'
 end
 
+gem 'newrelic_rpm'
+
+gem 'fog'

@@ -9,6 +9,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  customer_id :integer
+#  image       :string
 #
 
 class Bike < ActiveRecord::Base
@@ -17,6 +18,9 @@ class Bike < ActiveRecord::Base
   belongs_to :customer
   has_and_belongs_to_many :parts
   has_many :services
+
+  mount_uploader :image, ImageUploader
+
 
   def name
     "#{brand} - #{model}"

@@ -1,0 +1,42 @@
+.box-shadow
+  .pull-right
+    - if service.completed?
+      span.label.label-success Completed
+      br
+      strong = l service.due_date.to_date, format: :short
+    - else
+      strong= "Hentes om #{distance_of_time_in_words(DateTime.now, service.due_date)}"
+      br
+      .pull-right.em.text-muted= l(service.due_date)
+      hr
+
+
+  - unless body_id == 'bikes_show'
+    h2= link_to service.bike.name, [service.bike.customer, service.bike]
+    p.text-muted
+      = link_to service.bike.customer.name, service.bike.customer
+    hr
+    - if service.bike.image?
+      .row
+        .col-sm-6.col-md-4
+          .img-responsive.thumbnail
+            = image_tag(service.bike.image_url, width: '400')
+
+  strong Description
+  br
+  = service.description
+
+  - if service.log.present?
+    br
+    br
+    p
+      strong Log
+      br
+      = service.log
+
+  br
+  br
+  br
+  - if service.persisted?
+    .button-group
+      = link_to 'Edit', edit_service_path(service), class: 'btn btn-primary'

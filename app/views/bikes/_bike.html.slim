@@ -1,0 +1,10 @@
+.well
+  h2= bike.name
+  span= bike.year
+  br
+  - if bike.image?
+    .row
+      .col-sm-6.col-md-4
+        .img-responsive.thumbnail
+          = image_tag(bike.image_url, width: '400')
+

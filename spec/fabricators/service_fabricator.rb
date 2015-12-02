@@ -5,10 +5,11 @@
 #  id          :integer          not null, primary key
 #  description :string
 #  log         :string
-#  due_date    :date
+#  due_date    :datetime
 #  bike_id     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  completed   :boolean          default(FALSE)
 #
 
 Fabricator(:service) do

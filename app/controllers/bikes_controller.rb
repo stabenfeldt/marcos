@@ -1,5 +1,5 @@
 class BikesController < ApplicationController
-  before_action :set_bike #, only: [:show, :edit, :update, :destroy]
+  before_action :set_bike, only: [:show, :edit, :update, :destroy]
   before_action :set_customer #, only: [:new, :create, :show]
 
   # GET /bikes
@@ -11,8 +11,9 @@ class BikesController < ApplicationController
   # GET /bikes/1
   # GET /bikes/1.json
   def show
-    @service = Service.new
-    #@parts = Part.all
+    @service              = @bike.services.new
+    @services_in_progress = @bike.services.in_progress
+    @service_history      = @bike.services.completed
   end
 
   def parts
@@ -84,6 +85,6 @@ class BikesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bike_params
-      params.require(:bike).permit(:brand, :model, :year)
+      params.require(:bike).permit(:brand, :model, :year, :image)
     end
 end

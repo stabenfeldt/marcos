@@ -9,6 +9,7 @@
 #  note       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  tech_doc   :string
 #
 
 require 'rails_helper'

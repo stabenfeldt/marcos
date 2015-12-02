@@ -3,38 +3,44 @@
 h3= @customer.name
 span= "Phone: #{@customer.mobile}"
 br
-span= "Email: #{@customer.email}"
+- if @customer.email.present?
+  span= "Email: #{@customer.email}"
 
 
 br
 br
 
 ul.nav.nav-tabs
-  li.active role="presentation"
-    a href="#this_service"  data-toggle="tab" This service
-  li role="presentation"
-    a href="#new_service" data-toggle="tab"  Register new service
-  li role="presentation"
-    a href="#service_history"  data-toggle="tab" Service history
-  li role="presentation"
-    a href="#bikes"  data-toggle="tab" Bikes
-
+  - if @services_in_progress.present?
+    li.active role="presentation"
+      a href="#this_service"  data-toggle="tab" Services in progress
+  - if @service_history.present?
+    li role="presentation"
+      a href="#service_history"  data-toggle="tab" Service history
+  li(role="presentation"
+    class="#{ (!@services_in_progress.present? ? 'active' : '') }")
+      a href="#bikes" data-toggle="tab" Bikes
 
 .tab-content
-  #this_service.tab-pane.fade
-    span This service
-  #new_service.tab-pane.fade
-    span New serciw
-  #service_history.tab-pane.fade.in.active
-    span history
-  #bikes.tab-pane.fade
-    h2 Bikes
-    .box-shadow
-      ul.bikes
-        - @customer.bikes.each do |b|
-          li
-            = link_to b.name, [@customer, b]
-br
-br
-br
-= link_to 'Add bike', new_customer_bike_path(@customer), class: 'btn btn-default'
+  - if @services_in_progress.present?
+    #this_service.tab-pane.fade.in.active
+      h2 Services in progress
+      = render @services_in_progress
+
+  - if @service_history.present?
+    #service_history.tab-pane.fade.in.active
+      br
+      br
+      br
+      - @service_history.each do |s|
+        = render s
+
+  - if @bikes.present?
+    #bikes.tab-pane.fade.in.active
+      h3 Bikes
+      .box-shadow
+        ul.bikes
+          - @bikes.each do |b|
+            li = link_to b.name, [@customer, b]
+  br
+  = link_to 'Add bike', new_customer_bike_path(@customer), class: 'btn btn-primary'
