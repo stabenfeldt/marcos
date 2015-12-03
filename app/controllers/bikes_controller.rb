@@ -18,7 +18,8 @@ class BikesController < ApplicationController
   end
 
   def parts
-    @parts = Part.all
+    @used_parts      = @bike.parts
+    @available_parts = Part.all - @bike.parts
   end
 
   def add_part
