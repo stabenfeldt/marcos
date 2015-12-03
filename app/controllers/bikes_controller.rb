@@ -44,6 +44,7 @@ class BikesController < ApplicationController
 
     respond_to do |format|
       if @bike.save
+        MIXPANEL.track("Created a bike")
         format.html { redirect_to @bike.customer, notice: 'Bike was successfully created.' }
         format.json { render :show, status: :created, location: @bike }
       else
