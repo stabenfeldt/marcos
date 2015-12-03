@@ -69,5 +69,7 @@ group :development do
 end
 
 gem 'newrelic_rpm'
-gem 'underscore-rails'
+#gem 'underscore-rails'
+
+gem "bower-rails", "~> 0.10.0"
 
