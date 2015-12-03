@@ -69,3 +69,5 @@ group :development do
 end
 
 gem 'newrelic_rpm'
+gem 'underscore-rails'
+
