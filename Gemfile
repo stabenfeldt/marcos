@@ -33,6 +33,7 @@ gem 'fabrication'
 gem 'brakeman', :require => false
 gem 'react-rails', '~> 1.4.0'
 gem 'carrierwave'
+gem 'fog'
 
 gem 'mixpanel-ruby'
 gem 'mini_magick'
@@ -45,6 +46,7 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0.0'
   gem 'railroady'
+  gem 'rubocop'
 end
 
 group :test do
@@ -67,5 +69,3 @@ group :development do
 end
 
 gem 'newrelic_rpm'
-
-gem 'fog'
