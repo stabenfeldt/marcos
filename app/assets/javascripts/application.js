@@ -10,7 +10,10 @@
 //= require react
 //= require react_ujs
 //= require components
-//= require underscore
 //= require jquery
 //= require bootstrap-sprockets
+//
+// Bower packages
+//= require fetch/fetch
+//= require underscore/underscore
 //= require_tree .
