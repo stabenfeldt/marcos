@@ -24,16 +24,17 @@ class BikePartList extends React.Component {
                         DELETE /customers/:customer_id/bikes/:bike_id/:id(.:format)   bikes#remove_part
     */
 
-    addPart(element) {
-        console.log("add element: ", element.id);
+    addPart(part) {
+        console.log("add part: ", part.id);
 
         var updatedUsedParts      = this.state.usedParts;
         var updatedAvailableParts = this.state.availableParts;
+        var bikeID = ''
 
         // Add to list of used
-        updatedUsedParts.push(element)
+        updatedUsedParts.push(part)
         // Remove from available
-        updatedAvailableParts = _.without(updatedAvailableParts, _.findWhere(updatedUsedParts, element));
+        updatedAvailableParts = _.without(updatedAvailableParts, _.findWhere(updatedUsedParts, part));
 
         console.log("Used: ", updatedUsedParts);
         console.log("Available: ", updatedAvailableParts);
@@ -43,17 +44,23 @@ class BikePartList extends React.Component {
           usedParts: updatedUsedParts,
           availableParts: updatedAvailableParts
         })
+
+        fetch('/customers/'+this.props.bike.customer_id+'/bikes/'+this.props.bike.id+'/'+part.id, {
+          method: 'post',
+          body: 'test'
+        })
+
     }
 
-    removePart(element) {
-        console.log("remove element: ", element.id);
+    removePart(part) {
+        console.log("remove part: ", part.id);
         var updatedUsedParts      = this.state.usedParts;
         var updatedAvailableParts = this.state.availableParts;
 
         // Add to list of available
-        updatedAvailableParts.push(element)
+        updatedAvailableParts.push(part)
         // Remove from available
-        updatedUsedParts = _.without(this.state.usedParts, _.findWhere(this.state.usedParts, element));
+        updatedUsedParts = _.without(this.state.usedParts, _.findWhere(this.state.usedParts, part));
 
         console.log("Used: ", updatedUsedParts);
         console.log("Available: ", updatedAvailableParts);
@@ -70,20 +77,20 @@ class BikePartList extends React.Component {
     render () {
 
         // Available parts
-        var availablePartsList = this.state.availableParts.map( (element) => {
+        var availablePartsList = this.state.availableParts.map( (part) => {
             return (
-                <Part {...element} hide_menu="true"
-                 whenClicked={this.addPart.bind(this, element)} />
+                <Part {...part} hide_menu="true"
+                 whenClicked={this.addPart.bind(this, part)} />
             )
         });
 
 
 
         //// Used parts
-        var usedPartsList = this.state.usedParts.map( (element) => {
+        var usedPartsList = this.state.usedParts.map( (part) => {
             return (
-                <Part {...element} hide_menu="true"
-                 whenClicked={this.removePart.bind(this, element)} />
+                <Part {...part} hide_menu="true"
+                 whenClicked={this.removePart.bind(this, part)} />
             )
         });
 
