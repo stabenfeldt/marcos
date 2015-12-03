@@ -1,18 +1,51 @@
 class BikePartList extends React.Component {
-    yo() {
-        alert('yo')
+    getInitalState() {
+        return {
+            availableParts: [],
+            usedParts: []
+        }
+    }
+
+    componentDidMount() {
+      this.setState( {
+        availableParts: this.props.availableParts,
+        usedParts: this.props.usedParts
+      })
+    }
+
+    addPart(element) {
+        console.log("add element: ", element.id);
+        //usedParts.push(element);
+        //this.state.availableParts.pop(element);
+    }
+
+    removePart(element) {
+        console.log("remove element: ", element.id);
     }
 
     render () {
-        var availableParts = this.props.availableParts
-        var usedParts      = this.props.usedParts
 
-        var list = this.props.items.map( (element) => {
-            return <Part {...element} hide_menu="true" whenClicked={this.yo} />
+        // Available parts
+        var availablePartsList = this.props.availableParts.map( (element) => {
+            return (
+                <Part {...element} hide_menu="true"
+                 whenClicked={this.addPart(element)} />
+            )
         });
+
+        //// Used parts
+        //var usedPartsList = this.props.usedParts.map( (element) => {
+        //    return (
+        //        <Part {...element} hide_menu="true"
+        //         whenClicked={this.removePart(element)} />
+        //    )
+        //});
+
         return(
             <div className="list-group">
-                {list}
+                <strong> Available </strong>
+                {availablePartsList}
+                <strong> Used </strong>
             </div>
         );
     }
