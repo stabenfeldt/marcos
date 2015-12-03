@@ -46,7 +46,8 @@ class BikesController < ApplicationController
     respond_to do |format|
       if @bike.save
         MIXPANEL.track("Created a bike")
-        format.html { redirect_to @bike.customer, notice: 'Bike was successfully created.' }
+        format.html { redirect_to @bike.customer,
+                      notice: 'Bike was successfully created.' }
         format.json { render :show, status: :created, location: @bike }
       else
         format.html { render :new }
@@ -60,7 +61,8 @@ class BikesController < ApplicationController
   def update
     respond_to do |format|
       if @bike.update(bike_params)
-        format.html { redirect_to [@customer, @bike], notice: 'Bike was successfully updated.' }
+        format.html { redirect_to [@customer, @bike],
+                      notice: 'Bike was successfully updated.' }
         format.json { render :show, status: :ok, location: @bike }
       else
         format.html { render :edit }
