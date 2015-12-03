@@ -18,6 +18,12 @@ class BikePartList extends React.Component {
       console.log("STate: ", this.state);
     }
 
+    /*
+    customer_bike_parts GET    /customers/:customer_id/bikes/:bike_id/parts(.:format) bikes#parts
+                        POST   /customers/:customer_id/bikes/:bike_id/:id(.:format)   bikes#add_part
+                        DELETE /customers/:customer_id/bikes/:bike_id/:id(.:format)   bikes#remove_part
+    */
+
     addPart(element) {
         console.log("add element: ", element.id);
 
