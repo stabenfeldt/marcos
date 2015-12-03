@@ -8,6 +8,7 @@
         .img-responsive.thumbnail
           = image_tag(bike.image_url, width: '400')
 
+
   = render @bike.parts
   = link_to 'Legg til eller fjern deler', customer_bike_parts_path(bike.customer, bike), class: 'btn'
 
