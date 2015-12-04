@@ -75,5 +75,4 @@ end
 gem 'newrelic_rpm'
 gem "bower-rails", "~> 0.10.0"
 
-gem 'fog'
 gem 'exception_notification'
