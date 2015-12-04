@@ -9,3 +9,8 @@ postgres:
   security_opt:
     - label:user:user
     - label:role:user
+
+
+# Works from console:
+# docker run -it --rm --name pg1 -p 5432:5432 -e POSTGRES_PASSWORD=12345 -e POSTGRES_USER=bob postgres:9.4
+
