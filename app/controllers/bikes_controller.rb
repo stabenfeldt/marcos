@@ -23,9 +23,17 @@ class BikesController < ApplicationController
   end
 
   def add_part
+    # Parameters: {"customer_id"=>"1", "bike_id"=>"1", "id"=>"1"}
+    @part = Part.find params[:id]
+    @bike.parts << @part
+    @bike.save!
+    head 200, content_type: "text/html"
   end
 
   def remove_part
+    @bike.parts.delete Part.find(params[:id])
+    @bike.save!
+    head 200, content_type: "text/html"
   end
 
   # GET /bikes/new
@@ -45,7 +53,7 @@ class BikesController < ApplicationController
 
     respond_to do |format|
       if @bike.save
-        $mixpanel.track("Created a bike")
+        $mixpanel.track('Admin', 'Created a bike')
         format.html { redirect_to @bike.customer,
                       notice: 'Bike was successfully created.' }
         format.json { render :show, status: :created, location: @bike }
@@ -76,7 +84,7 @@ class BikesController < ApplicationController
   def destroy
     @bike.destroy
     respond_to do |format|
-      format.html { redirect_to bikes_url, notice: 'Bike was successfully destroyed.' }
+      format.html { redirect_to [@bike.customer], notice: 'Bike was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

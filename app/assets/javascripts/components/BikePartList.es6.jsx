@@ -46,6 +46,7 @@ class BikePartList extends React.Component {
         })
 
         fetch('/customers/'+this.props.bike.customer_id+'/bikes/'+this.props.bike.id+'/'+part.id, {
+          credentials: 'same-origin',
           method: 'post',
           body: 'test'
         })
@@ -65,10 +66,15 @@ class BikePartList extends React.Component {
         console.log("Used: ", updatedUsedParts);
         console.log("Available: ", updatedAvailableParts);
 
-
         this.setState({
           usedParts: updatedUsedParts,
           availableParts: updatedAvailableParts
+        })
+
+        fetch('/customers/'+this.props.bike.customer_id+'/bikes/'+this.props.bike.id+'/'+part.id, {
+          credentials: 'same-origin',
+          method: 'delete',
+          body: 'test'
         })
     }
 
@@ -96,10 +102,14 @@ class BikePartList extends React.Component {
 
         return(
             <div className="list-group">
-                <h3> Available </h3>
-                {availablePartsList}
-                <h3> Used </h3>
-                {usedPartsList}
+                <h3> Tilgjenlige </h3>
+                <div className="alert alert-info">
+                  {availablePartsList}
+                </div>
+                <h3> Valgte </h3>
+                <div className="alert alert-success">
+                  {usedPartsList}
+                </div>
             </div>
         );
     }
