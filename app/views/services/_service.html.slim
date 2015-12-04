@@ -27,7 +27,7 @@
 
   strong Description
   br
-  = service.description
+  = simple_format service.description
 
   - if service.log.present?
     br
@@ -35,7 +35,7 @@
     p
       strong Log
       br
-      = service.log
+      = simple_format service.log
 
   br
   br
