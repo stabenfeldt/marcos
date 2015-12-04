@@ -1,6 +1,5 @@
 class BikePartList extends React.Component {
 
-
     constructor(props) {
       super(props);
       this.state = {
@@ -10,12 +9,10 @@ class BikePartList extends React.Component {
     }
 
     componentDidMount() {
-      console.log("did mount");
       this.setState( {
         availableParts: this.props.availableParts,
         usedParts: this.props.usedParts
       })
-      console.log("STate: ", this.state);
     }
 
     /*
@@ -25,8 +22,6 @@ class BikePartList extends React.Component {
     */
 
     addPart(part) {
-        console.log("add part: ", part.id);
-
         var updatedUsedParts      = this.state.usedParts;
         var updatedAvailableParts = this.state.availableParts;
         var bikeID = ''
@@ -35,10 +30,6 @@ class BikePartList extends React.Component {
         updatedUsedParts.push(part)
         // Remove from available
         updatedAvailableParts = _.without(updatedAvailableParts, _.findWhere(updatedUsedParts, part));
-
-        console.log("Used: ", updatedUsedParts);
-        console.log("Available: ", updatedAvailableParts);
-
 
         this.setState({
           usedParts: updatedUsedParts,
@@ -54,7 +45,6 @@ class BikePartList extends React.Component {
     }
 
     removePart(part) {
-        console.log("remove part: ", part.id);
         var updatedUsedParts      = this.state.usedParts;
         var updatedAvailableParts = this.state.availableParts;
 
@@ -62,9 +52,6 @@ class BikePartList extends React.Component {
         updatedAvailableParts.push(part)
         // Remove from available
         updatedUsedParts = _.without(this.state.usedParts, _.findWhere(this.state.usedParts, part));
-
-        console.log("Used: ", updatedUsedParts);
-        console.log("Available: ", updatedAvailableParts);
 
         this.setState({
           usedParts: updatedUsedParts,
@@ -91,7 +78,6 @@ class BikePartList extends React.Component {
         });
 
 
-
         //// Used parts
         var usedPartsList = this.state.usedParts.map( (part) => {
             return (
@@ -102,7 +88,7 @@ class BikePartList extends React.Component {
 
         return(
             <div className="list-group">
-                <h3> Tilgjenlige </h3>
+                <h3> Tilgjengelig </h3>
                 <div className="alert alert-info">
                   {availablePartsList}
                 </div>
