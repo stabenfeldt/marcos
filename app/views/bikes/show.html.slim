@@ -1,14 +1,15 @@
 - content_for :breadcrumb do
-  li= link_to 'Customers', customers_path
+  li= link_to 'Kunder', customers_path
   li= link_to @bike.customer.name, @bike.customer
+  li= link_to 'Sykler', @bike.customer
   li
     strong= @bike.name
 
 
 .pull-right
-  = link_to 'Edit', edit_customer_bike_path(@bike.customer,@bike), class: 'btn '
-  = link_to 'Destroy', customer_bike_path(@bike.customer, @bike), method: :delete,
-    data: { confirm: "Are you sure?" }, class: 'btn'
+  = link_to 'Rediger', edit_customer_bike_path(@bike.customer,@bike), class: 'btn '
+  = link_to 'Slett', customer_bike_path(@bike.customer, @bike), method: :delete,
+    data: { confirm: "Virkelig slette?" }, class: 'btn'
 = render @bike
 
 
@@ -17,23 +18,23 @@ hr
 ul.nav.nav-tabs
   li.active role="presentation"
     - if @services_in_progress.present?
-      a href="#this_service"  data-toggle="tab" This service
+      a href="#this_service"  data-toggle="tab" Denne servicen
     - else
-      a href="#new_service"  data-toggle="tab" New service
+      a href="#new_service"  data-toggle="tab" Ny service
 
   - if @service_history.present?
     li role="presentation"
-      a href="#service_history"  data-toggle="tab" Service history
+      a href="#service_history"  data-toggle="tab" Service historikk
 
 
 .tab-content
   - if @services_in_progress.present?
     #this_service.tab-pane.fade.in.active
-      h2 Services in progress
+      h2 Aktive serviser
       = render @services_in_progress
   - else
     #new_service.tab-pane.fade.in.active
-      h2 New service
+      h2 Ny service
       .container
         = render 'services/form'
 
@@ -44,28 +45,4 @@ ul.nav.nav-tabs
 br
 br
 br
-
-
-  //h5 Available parts
-  //= form_for [@customer, @bike] do |f|
-  //  = collection_check_boxes(:bike, :part_ids,
-  //    @parts, :id, :name, value: true)  do |c|
-  //      .checkbox
-  //        = c.label { c.check_box + c.text }
-  //  = f.submit
-
-  //- if @bike.parts.present?
-  //  .panel.panel-default
-  //    .panel-heading Parts
-  //      table.table
-  //        thead
-  //          tr
-  //            th Brand
-  //            th Model
-  //            th Year
-  //            th Link to techdoc
-  //        tbody
-  //          - @parts.each do |p|
-  //            tr
-  //              td = p.name
 

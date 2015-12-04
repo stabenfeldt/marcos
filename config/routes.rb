@@ -12,7 +12,11 @@ Rails.application.routes.draw do
 
   resources :users
   resources :customers do
-    resources :bikes
+    resources :bikes do
+      get '/parts' => 'bikes#parts'
+      post '/:id' => 'bikes#add_part'
+      delete '/:id' => 'bikes#remove_part'
+    end
   end
 
 

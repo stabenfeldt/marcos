@@ -1,12 +1,12 @@
 br
-h1 Listing customers
+h1 Kunde
 
 table.table
   thead
     tr
-      th Name
-      th Mobile
-      th Email
+      th Navn
+      th Mobil
+      th Epost
       th
       th
       th
@@ -17,13 +17,13 @@ table.table
         td = link_to customer.name, customer
         td = customer.mobile
         td = customer.email
-        td = link_to 'Edit', edit_customer_path(customer), class: 'btn'
+        td = link_to 'Rediger', edit_customer_path(customer), class: 'btn'
         td
-          = link_to 'Destroy', customer, data: {:confirm => 'Are you sure?'},
+          = link_to 'Slett', customer, data: {:confirm => 'Are you sure?'},
             :method => :delete, class: 'btn'
 
 br
 
 .btn-group
-  = link_to 'New Customer', new_customer_path, :class => 'btn btn-default'
-  = link_to 'Search', customers_search_path, :class => 'btn btn-default'
+  = link_to 'Ny kunde', new_customer_path, :class => 'btn btn-default'
+  = link_to 'Søk', customers_search_path, :class => 'btn btn-default'

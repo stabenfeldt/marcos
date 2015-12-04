@@ -1,12 +1,12 @@
 - content_for :breadcrumb do
-  li= link_to 'Customers', customers_path
+  li= link_to 'Kunder', customers_path
   li= link_to @bike.customer.name, @bike
   li= link_to @bike.name, [@bike.customer, @bike]
   li
-    strong Edit
+    strong Rediger
 
 
-h1 Editing bike
+h1 Rediger sykkel
 
 == render 'form'
 

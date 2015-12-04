@@ -7,14 +7,14 @@ nav.navbar.navbar-inverse
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      = link_to Marcos, root_path, class: 'navbar-brand'
+      = link_to 'Sykler som må fikses', root_path, class: 'navbar-brand'
     /! Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
         li(class="#{ body_id == 'parts_index' ? 'active' : nil }")
-          = link_to 'Parts', parts_path
+          = link_to 'Deler', parts_path
         li(class="#{ body_id == 'customers_index' ? 'active' : nil }")
-          = link_to 'Customers', customers_path
+          = link_to 'Kunder', customers_path
         //li.active
         //  a href="#"
         //    | Link

@@ -1,0 +1,61 @@
+nb:
+  activerecord:
+    models:
+      service:
+        one: service
+      part:
+        one: del
+        other: deler
+      customer:
+        one: kunde
+        other: kunder
+      image:
+        one: bilde
+        other: bilder
+        other: avdelinger
+      bike:
+        one: sykkel
+        other: sykler
+      user:
+        one: bruker
+        other: brukere
+
+    attributes:
+      part:
+        name: navn
+      customer:
+        first_name: fornavn
+        last_name: etternavn
+        mobile: mobil
+        email: epost
+      project:
+        project_number: Prosjektnummer
+        project_owner: Prosjekteier
+        name: Navn
+        description: Beskrivelse
+        department: Avdeling
+        customer_reference: Kundereferanse
+        project_reference: Prosjektreferanse
+        comment: Kommentar
+        start_date: Oppstartsdato
+        due_date: Sluttdato
+        execution_address: Adresse
+      task:
+        description: Beskrivelse
+        start_date: Oppstartsdato
+        due_date: Sluttdato
+        address: Adresse
+      user:
+        home_address: Hjemmeadresse
+        home_area: Poststed
+        home_area_code: Postnr
+        age: Alder
+        birth_date: Fødselsdag
+        department_id: Avdeling
+        emp_id: Ansattnr
+        gender: Kjønn
+        first_name: Fornavn
+        mobile: Mobil
+        last_name: Etternavn
+        skill_ids: Ferdigheter
+        relatives: Pårørende

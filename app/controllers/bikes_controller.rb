@@ -1,5 +1,6 @@
 class BikesController < ApplicationController
   before_action :set_bike, only: [:show, :edit, :update, :destroy]
+  before_action :set_bike_from_id, only: [:parts, :add_part, :remove_part]
   before_action :set_customer #, only: [:new, :create, :show]
 
   # GET /bikes
@@ -17,9 +18,22 @@ class BikesController < ApplicationController
   end
 
   def parts
+    @used_parts      = @bike.parts
+    @available_parts = Part.all - @bike.parts
   end
 
   def add_part
+    # Parameters: {"customer_id"=>"1", "bike_id"=>"1", "id"=>"1"}
+    @part = Part.find params[:id]
+    @bike.parts << @part
+    @bike.save!
+    head 200, content_type: "text/html"
+  end
+
+  def remove_part
+    @bike.parts.delete Part.find(params[:id])
+    @bike.save!
+    head 200, content_type: "text/html"
   end
 
   # GET /bikes/new
@@ -39,7 +53,9 @@ class BikesController < ApplicationController
 
     respond_to do |format|
       if @bike.save
-        format.html { redirect_to @bike.customer, notice: 'Bike was successfully created.' }
+        $mixpanel.track('Admin', 'Created a bike')
+        format.html { redirect_to @bike.customer,
+                      notice: 'Bike was successfully created.' }
         format.json { render :show, status: :created, location: @bike }
       else
         format.html { render :new }
@@ -53,7 +69,8 @@ class BikesController < ApplicationController
   def update
     respond_to do |format|
       if @bike.update(bike_params)
-        format.html { redirect_to [@customer, @bike], notice: 'Bike was successfully updated.' }
+        format.html { redirect_to [@customer, @bike],
+                      notice: 'Bike was successfully updated.' }
         format.json { render :show, status: :ok, location: @bike }
       else
         format.html { render :edit }
@@ -67,7 +84,7 @@ class BikesController < ApplicationController
   def destroy
     @bike.destroy
     respond_to do |format|
-      format.html { redirect_to bikes_url, notice: 'Bike was successfully destroyed.' }
+      format.html { redirect_to [@bike.customer], notice: 'Bike was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,6 +93,10 @@ class BikesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_bike
       @bike = Bike.find(params[:id])
+    end
+
+    def set_bike_from_id
+      @bike = Bike.find(params[:bike_id])
     end
 
     def set_customer

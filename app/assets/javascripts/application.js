@@ -12,4 +12,9 @@
 //= require components
 //= require jquery
 //= require bootstrap-sprockets
+//
+// Bower packages
+//= require fetch/fetch
+//= require underscore/underscore
+//= require es6-promise/promise
 //= require_tree .

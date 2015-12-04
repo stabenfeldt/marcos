@@ -1,26 +1,5 @@
-h1 Listing parts
+h1 Deler
 
-table
-  thead
-    tr
-      th Brand
-      th Model
-      th Year
-      th Note
-      th
-      th
-      th
+= react_component('PartList', items: @parts )
 
-  tbody
-    - @parts.each do |part|
-      tr
-        td = part.brand
-        td = link_to part.model, part
-        td = part.year
-        td = part.note
-        td = link_to 'Edit', edit_part_path(part), class: 'btn'
-        td = link_to 'Destroy', part, data: {:confirm => 'Are you sure?'}, :method => :delete, class: 'btn'
-
-br
-
-= link_to 'New Part', new_part_path, class: 'btn btn-primary'
+= link_to 'Ny del', new_part_path, class: 'btn btn-primary'
