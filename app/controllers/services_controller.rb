@@ -35,7 +35,7 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save!
-        $mixpanel.track("Registered a service")
+        $mixpanel.track('Admin', 'Registered a service')
         format.html { redirect_to [@bike.customer, @bike],
                       notice: 'Service was successfully created.' }
         format.json { render :show, status: :created, location: @service }
