@@ -1,17 +1,17 @@
-h1 Search for customer
+h1 Søk etter kunde
 
 
 = form_tag(customers_search_path, method: 'get', id: 'q') do
   .input-group
-    = text_field_tag 'q', nil, placeholder: 'Search for customer..',
+    = text_field_tag 'q', nil, placeholder: 'Søk på navn..',
       class: 'form-control', value: params[:q]
 
     span.input-group-btn
-      = submit_tag 'GO', :class => 'btn btn-default'
+      = submit_tag 'Søk', :class => 'btn btn-default'
 
 - if @customers.present?
   ul.customers.list-group
-    strong Search result:
+    strong Treff:
     - @customers.all.each do |c|
       li.list-group-item
         = link_to c.name, c
@@ -20,5 +20,5 @@ h1 Search for customer
     = "Could not find #{params[:q]}"
 
 hr
-= link_to "Create new customer", new_customer_path, :class => 'btn btn-primary'
-= link_to "List all customers", customers_path, :class => 'btn'
+= link_to "Lag ny kunde", new_customer_path, :class => 'btn btn-primary'
+= link_to "Vis alle kunder", customers_path, :class => 'btn'

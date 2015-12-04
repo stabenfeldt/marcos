@@ -1,18 +1,24 @@
 p#notice = notice
 
-p
-  strong Brand:
-  = @part.brand
-p
-  strong Model:
-  = @part.model
-p
-  strong Year:
-  = @part.year
-p
-  strong Note:
-  = @part.note
+.box-shadow
+  .pull-right = link_to 'Edit', edit_part_path(@part)
+  p
+    strong Brand
+    br
+    = @part.brand
+  p
+    strong Model
+    br
+    = @part.model
+  p
+    strong Year
+    br
+    = @part.year
+  p
+    strong Note
+    br
+    = @part.note
 
-= link_to 'Edit', edit_part_path(@part)
-'|
-= link_to 'Back', parts_path
+
+.wellx
+  = link_to 'Tilbake', parts_path

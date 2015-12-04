@@ -1,4 +1,7 @@
-h1 Today's work
+- if @services.empty?
+  span Bra jobba! Alle syklene er reparert! :-)
+- else
+  h1 Sykler som må fikses
 
 = render @services
 
@@ -7,4 +10,4 @@ br
 br
 br
 br
-= link_to 'Register new service', customers_search_path, class: 'btn btn-success'
+= link_to 'Registrer ny service', customers_search_path, class: 'btn btn-success'
