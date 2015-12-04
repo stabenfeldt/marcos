@@ -10,15 +10,14 @@ br
 br
 br
 
-ul.nav.nav-tabs
+ul.nav.nav-tabs role='tablist'
   - if @services_in_progress.present?
     li.active role="presentation"
       a href="#this_service"  data-toggle="tab" Services in progress
   - if @service_history.present?
     li role="presentation"
       a href="#service_history"  data-toggle="tab" Service history
-  li(role="presentation"
-    class="#{ (!@services_in_progress.present? ? 'active' : '') }")
+  li(role="presentation" class="#{ (@services_in_progress.blank? ? 'active' : '') }")
       a href="#bikes" data-toggle="tab" Bikes
 
 .tab-content
@@ -36,7 +35,7 @@ ul.nav.nav-tabs
         = render s
 
   - if @bikes.present?
-    #bikes.tab-pane.fade.in.active
+    #bikes.tab-pane.fade.in(class="#{ (@services_in_progress.blank? ? 'active' : '') }")
       h3 Sykler
       .box-shadow
         ul.bikes
