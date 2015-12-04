@@ -6,6 +6,10 @@ gem 'rails'
 gem 'pg'
 gem 'uglifier', '>= 1.3.0'
 
+# Include 'rails_12factor' gem to enable all platform features
+# See https://devcenter.heroku.com/articles/rails-integration-gems for more information.
+gem 'rails_12factor'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks

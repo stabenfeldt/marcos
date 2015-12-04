@@ -51,7 +51,10 @@ class ServicesController < ApplicationController
   def update
     respond_to do |format|
       if @service.update!(service_params)
-        @service.update_attribute(:completed, (params[:service][:completed] ? true : false))
+        completed = params[:service][:completed] ? true : false
+        @service.update_attribute(:completed, completed)
+
+        $mixpanel.track('Admin', 'Service completed') if completed
 
         notice = @service.completed? ? 'Service marked as complete'  : 'Updated'
         format.html { redirect_to @service.bike.customer, notice: notice }
