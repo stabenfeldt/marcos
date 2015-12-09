@@ -1,3 +1,8 @@
+- content_for :breadcrumb do
+  li= link_to 'Kunder', customers_path
+  li
+    strong= @customer.name
+
 .pull-right
   = link_to 'Rediger', edit_customer_path(@customer)
 h3= @customer.name

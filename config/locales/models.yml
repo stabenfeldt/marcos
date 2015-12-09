@@ -21,8 +21,21 @@ nb:
         other: brukere
 
     attributes:
+      bike:
+        brand: merke
+        model: model
+        year: årsmodell
+        image: bilde
       part:
-        name: navn
+        brand: merke
+        model: model
+        year: årsmodell
+        image: bilde
+        tech_doc: link til Tech Doc
+        note: notat
+
+
+
       customer:
         first_name: fornavn
         last_name: etternavn
