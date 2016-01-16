@@ -7,13 +7,15 @@
 
 ul.nav.nav-tabs role='tablist'
   - if @services_in_progress.present?
-    li(role="presentation" class="#{ (@services_in_progress.present? ? 'active' : '') }")
+    li(role="presentation"
+      class="#{ (@services_in_progress.present? ? 'active' : '') }")
       a href="#this_service"  data-toggle="tab" Til reperasjon
   - if @service_history.present?
     li role="presentation"
       a href="#service_history"  data-toggle="tab" Historikk
-  li(role="presentation" class="#{ (@services_in_progress.blank? ? 'active' : '') }")
-      a href="#bikes" data-toggle="tab" Sykler
+  li(role="presentation"
+    class="#{ (@services_in_progress.blank? ? 'active' : '') }")
+    a href="#bikes" data-toggle="tab" Sykler
 
 .tab-content
   - if @services_in_progress.present?
@@ -22,7 +24,7 @@ ul.nav.nav-tabs role='tablist'
       = render @services_in_progress
 
   - if @service_history.present?
-    #service_history.tab-pane.fade.in(class="#{ (@services_in_progress.blank? ? 'active' : '') }")
+    #service_history.tab-pane.fade.in
       br
       br
       br
