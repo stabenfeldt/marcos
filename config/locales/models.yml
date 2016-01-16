@@ -33,6 +33,9 @@ nb:
         image: bilde
         tech_doc: link til Tech Doc
         note: notat
+      service:
+        due_date: Ferdigstillelsesdato
+        description: Beskrivelse
 
 
 
