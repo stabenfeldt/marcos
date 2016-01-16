@@ -3,17 +3,7 @@
   li
     strong= @customer.name
 
-.pull-right
-  = link_to 'Rediger', edit_customer_path(@customer)
-h3= @customer.name
-span= "Phone: #{@customer.mobile}"
-br
-- if @customer.email.present?
-  span= "Email: #{@customer.email}"
-
-
-br
-br
+= render 'header'
 
 ul.nav.nav-tabs role='tablist'
   - if @services_in_progress.present?
