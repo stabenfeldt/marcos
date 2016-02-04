@@ -40,7 +40,7 @@ class CustomersController < ApplicationController
     respond_to do |format|
       if @customer.save
         $mixpanel.track('Admin', "Added a customer")
-        format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
+        format.html { redirect_to @customer, notice: 'Kunden ble opprettet' }
         format.json { render :show, status: :created, location: @customer }
       else
         format.html { render :new }

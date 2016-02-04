@@ -1,0 +1,11 @@
+.pull-right
+  = link_to 'Rediger', edit_customer_path(@customer)
+h3= @customer.name
+span= "Mobil: #{@customer.mobile}"
+br
+- if @customer.email.present?
+  span= "E-post: #{@customer.email}"
+
+
+br
+br

@@ -27,10 +27,10 @@
         .checkbox
           label
             = check_box_tag 'service[completed]', true, @service.completed
-            | Completed
+            | Ferdig
 
 
 
     .form-group
         = f.submit :class => 'btn btn-primary', value: 'Save'
-        = link_to 'Back', :back, class: 'btn'
+        = link_to 'tilbake', :back, class: 'btn'

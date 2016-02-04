@@ -1,33 +1,30 @@
-.pull-right
-  = link_to 'Rediger', edit_customer_path(@customer)
-h3= @customer.name
-span= "Phone: #{@customer.mobile}"
-br
-- if @customer.email.present?
-  span= "Email: #{@customer.email}"
+- content_for :breadcrumb do
+  li= link_to 'Kunder', customers_path
+  li
+    strong= @customer.name
 
-
-br
-br
+= render 'header'
 
 ul.nav.nav-tabs role='tablist'
   - if @services_in_progress.present?
-    li.active role="presentation"
-      a href="#this_service"  data-toggle="tab" Services in progress
+    li(role="presentation"
+      class="#{ (@services_in_progress.present? ? 'active' : '') }")
+      a href="#this_service"  data-toggle="tab" Til reperasjon
   - if @service_history.present?
     li role="presentation"
-      a href="#service_history"  data-toggle="tab" Service history
-  li(role="presentation" class="#{ (@services_in_progress.blank? ? 'active' : '') }")
-      a href="#bikes" data-toggle="tab" Bikes
+      a href="#service_history"  data-toggle="tab" Historikk
+  li(role="presentation"
+    class="#{ (@services_in_progress.blank? ? 'active' : '') }")
+    a href="#bikes" data-toggle="tab" Sykler
 
 .tab-content
   - if @services_in_progress.present?
-    #this_service.tab-pane.fade.in.active
+    #this_service.tab-pane.fade.in(class="#{ (@services_in_progress.present? ? 'active' : '') }")
       h2 Sykler til reparasjon
       = render @services_in_progress
 
   - if @service_history.present?
-    #service_history.tab-pane.fade.in.active
+    #service_history.tab-pane.fade.in
       br
       br
       br
