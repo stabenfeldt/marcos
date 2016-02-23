@@ -1,7 +1,8 @@
 .box-shadow
   .pull-right
-    span Service nr:
-    h4.label.label-info = service.id
+    .text-right
+      span Service nr:
+      h4.label.label-info = service.id
     br
     - if service.completed?
       span.label.label-success Completed
