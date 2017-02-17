@@ -21,6 +21,7 @@ Rails.application.routes.draw do
 
 
   get '/fp' => 'front_page#index'
+  post '/contact_form' => 'front_page#contact_form'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
