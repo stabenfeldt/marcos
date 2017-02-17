@@ -9,7 +9,7 @@ nav.navbar.navbar-inverse
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      = link_to 'Til reparasjon', root_path, class: 'navbar-brand'
+      = link_to 'Til reparasjon', services_path, class: 'navbar-brand'
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
         li(class="#{ body_id == 'parts_index' ? 'active' : nil }")
@@ -18,5 +18,7 @@ nav.navbar.navbar-inverse
           = link_to 'Kunder', customers_path
         li(class="#{ body_id == 'products_index' ? 'active' : nil }")
           = link_to 'Produkter til forsiden', products_path
+        li(class="#{ body_id == 'orders_index' ? 'active' : nil }")
+          = link_to 'Bestillinger av servicepakken', orders_path
         li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
           = link_to 'Forsiden', fp_path
