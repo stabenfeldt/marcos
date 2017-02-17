@@ -10,7 +10,7 @@
       li
         strong Ingen uforutsette utgifter. Du betaler en fast pris for hele sesongen
     p
-      a.btn.btn-primary.btn-lg href="#" role="button"  Learn more &raquo;
+      a.btn.btn-primary.btn-lg href="#order" role="button"  Learn more &raquo;
 
 
 .container
@@ -31,7 +31,7 @@
          li Ring oss 24 timer i døgnet for assistanse.
          li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
       p
-        a.btn.btn-default href="#" role="button" Bestill
+        a.btn.btn-default href="#order" role="button" Bestill
 
     .col-md-4
       h2 Gull
@@ -42,7 +42,7 @@
           li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
           br
       p
-        a.btn.btn-default href="#" role="button" Bestill
+        a.btn.btn-default href="#order" role="button" Bestill
 
     .col-md-4
       h2 Sølv
@@ -53,7 +53,25 @@
           br
           br
       p
-        a.btn.btn-default href="#" role="button" Bestill
+        a.btn.btn-default href="#order" role="button" Bestill
+
+  #order
+    hr
+    h2 Bestill her
+    = form_tag contact_form_path do
+      h3 Velg produkt
+      = radio_button_tag(:product, "Diamant")
+      = label_tag(:product, "Diamant")
+      br
+      = radio_button_tag(:product, "Gull")
+      = label_tag(:product, "Gull")
+      br
+      = radio_button_tag(:product, "Sølv")
+      = label_tag(:product, "Sølv")
+      br
+      = label_tag(:name, 'Navn')
+      = text_field_tag(:name, 'Ditt navn')
+      = submit_tag('Bestill')
 
   hr/
 
