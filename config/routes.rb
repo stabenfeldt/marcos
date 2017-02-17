@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders
   resources :products
   resources :parts
   get 'customers/search' => 'customers#search'
@@ -29,7 +30,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'services#index'
+  root 'front_page#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
