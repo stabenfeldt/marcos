@@ -60,11 +60,14 @@
     h2 Bestill her
 
     = form_tag contact_form_path, class: 'form form-horizontal' do
-      h3 Velg produkt
-      - @products.each do |product|
-        = radio_button_tag(:product_id, product.id) do
-        = label_tag(:product, product.name)
-        br
+      .row
+        .col-lg-3
+          - @products.each do |product|
+            = radio_button_tag(:product_id, product.id) do
+            = label_tag(:product, product.name)
+            br
+
+      br
 
       br
       .form-group
@@ -89,6 +92,7 @@
         = label_tag 'bike_brand', nil, class: 'control-label col-lg-2'
         .col-lg-10
           = text_field_tag(:bike_brand, nil, placeholder: 'Sykkelmerke')
+
       br
       .form-group
         = label_tag 'bike_model', nil, class: 'control-label col-lg-2'
