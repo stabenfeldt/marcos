@@ -32,8 +32,8 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 gem 'slim-rails'
 gem 'slim'
-gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sass-rails', '>= 3.2'
+gem "twitter-bootstrap-rails"
 
 gem 'fabrication'
 gem 'brakeman', :require => false
@@ -78,3 +78,5 @@ gem 'newrelic_rpm'
 gem "bower-rails", "~> 0.10.0"
 
 gem 'exception_notification'
+
+
