@@ -21,7 +21,7 @@ table.table.table-striped
       tr
         td= link_to order.id, order_path(order)
         td= order.name
-        td= order.product_id
+        td= order.product.name rescue nil
         td= order.phone
         td= order.email
         td= order.payment_received
