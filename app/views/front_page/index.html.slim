@@ -31,7 +31,7 @@
          li Ring oss 24 timer i døgnet for assistanse.
          li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
       p
-        a.btn.btn-default href="#order" role="button" Bestill
+        a.btn.btn-default href="#order" role="button" onClick="selectOrder('Diamant')" Bestill
 
     .col-md-4
       h2 Gull
@@ -42,7 +42,7 @@
           li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
           br
       p
-        a.btn.btn-default href="#order" role="button" Bestill
+        a.btn.btn-default href="#order" role="button" onClick="selectOrder('Gull')" Bestill
 
     .col-md-4
       h2 Sølv
@@ -53,7 +53,7 @@
           br
           br
       p
-        a.btn.btn-default href="#order" role="button" Bestill
+        a.btn.btn-default href="#order" role="button" onClick="selectOrder('Sølv')" Bestill
 
   #order
     hr
@@ -63,7 +63,7 @@
       .row
         .col-lg-3
           - @products.each do |product|
-            = radio_button_tag(:product_id, product.id) do
+            = radio_button_tag(:product_id, product.id, false, class: product.name )
             = label_tag(:product, product.name)
             br
 
