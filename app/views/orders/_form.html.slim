@@ -21,8 +21,16 @@
     = f.error_span(:email)
   .form-group
     = f.label :payment_received, :class => 'control-label col-lg-2'
-    .col-lg-10
-      = f.text_field :payment_received, :class => 'form-control'
+    .col-lg-10.payment_received
+
+      = f.radio_button :payment_received, true,
+        :checked => @order.payment_received
+      = label :payment_received, "YES"
+
+      = f.radio_button :payment_received, false,
+        :checked => !@order.payment_received
+      = label :payment_received, "NO"
+
     = f.error_span(:payment_received)
   .form-group
     = f.label :bike_brand, :class => 'control-label col-lg-2'
@@ -37,13 +45,21 @@
   .form-group
     = f.label :description, :class => 'control-label col-lg-2'
     .col-lg-10
-      = f.text_field :description, :class => 'form-control'
+      = f.text_area :description, class: 'form-control', rows: 10
     = f.error_span(:description)
+
   .form-group
     = f.label :valid_through, :class => 'control-label col-lg-2'
     .col-lg-10
-      = f.text_field :valid_through, :class => 'form-control'
+      = f.date_select(:valid_through,
+        start_year: DateTime.now.year, use_month_numbers: true,
+        discard_day: false, include_blank: true,
+        default: 6.months.from_now,
+        selected: Date.today)
     = f.error_span(:valid_through)
+
+  br
+  br
   .form-group
     .col-lg-offset-2.col-lg-10
       = f.submit nil, :class => 'btn btn-primary'
