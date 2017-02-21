@@ -2,6 +2,8 @@ class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
   before_action :set_bike, only: [:new, :show, :create]
 
+  http_basic_authenticate_with name: "bike", password: "lover"
+
   # GET /services
   # GET /services.json
   def index

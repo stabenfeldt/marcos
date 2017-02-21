@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
 
+  http_basic_authenticate_with name: "bike", password: "lover"
+
   # GET /orders
   # GET /orders.json
   def index
