@@ -4,7 +4,8 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    @orders = Order.all
+    @payed      = Order.payed
+    @not_payed  = Order.not_payed
   end
 
   # GET /orders/1

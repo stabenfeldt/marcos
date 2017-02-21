@@ -16,23 +16,7 @@ table.table.table-striped
       th= model_class.human_attribute_name(:valid_through)
       th= model_class.human_attribute_name(:created_at)
       th=t '.actions', :default => t("helpers.actions")
-  tbody
-    - @orders.each do |order|
-      tr
-        td= link_to order.id, order_path(order)
-        td= order.name
-        td= order.product.name rescue nil
-        td= order.phone
-        td= order.email
-        td= order.payment_received
-        td= order.bike_brand
-        td= order.bike_model
-        td= order.description
-        td= order.valid_through
-        td=l order.created_at
-        td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_order_path(order), :class => 'btn btn-default btn-xs'
-          '
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), order_path(order), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+
+    = render "list",  collection: @payed, as: :orders
 
 = link_to t('.new', :default => t("helpers.links.new")), new_order_path, :class => 'btn btn-primary'
