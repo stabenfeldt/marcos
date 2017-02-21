@@ -18,4 +18,7 @@
 
 class Order < ActiveRecord::Base
   belongs_to :product
+
+  scope :payed,     -> { where(payment_received: true) }
+  scope :not_payed, -> { where(payment_received: false) }
 end
