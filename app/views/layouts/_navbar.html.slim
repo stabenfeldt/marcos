@@ -1,3 +1,5 @@
+- return if body_id == 'front_page_index'
+
 nav.navbar.navbar-inverse
   .container-fluid
     /! Brand and toggle get grouped for better mobile display
@@ -7,58 +9,16 @@ nav.navbar.navbar-inverse
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      = link_to 'Sykler som må fikses', root_path, class: 'navbar-brand'
-    /! Collect the nav links, forms, and other content for toggling
+      = link_to 'Til reparasjon', services_path, class: 'navbar-brand'
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       ul.nav.navbar-nav
         li(class="#{ body_id == 'parts_index' ? 'active' : nil }")
           = link_to 'Deler', parts_path
         li(class="#{ body_id == 'customers_index' ? 'active' : nil }")
           = link_to 'Kunder', customers_path
-        //li.active
-        //  a href="#"
-        //    | Link
-        //    span.sr-only (current)
-        //li
-        //  a href="#"  Link
-        //li.dropdown
-        //  a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-        //    | Dropdown
-        //    span.caret
-        //  ul.dropdown-menu
-        //    li
-        //      a href="#"  Action
-        //    li
-        //      a href="#"  Another action
-        //    li
-        //      a href="#"  Something else here
-        //    li.divider role="separator"
-        //    li
-        //      a href="#"  Separated link
-        //    li.divider role="separator"
-        //    li
-        //      a href="#"  One more separated link
-      //form.navbar-form.navbar-left role="search"
-      //  .form-group
-      //    input.form-control placeholder="Search" type="text" /
-      //  button.btn.btn-default type="submit"  Submit
-      //ul.nav.navbar-nav.navbar-right
-      //  li
-      //    a href="#"  Link
-      //  li.dropdown
-      //    a.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-      //      | Dropdown
-      //      span.caret
-      //    ul.dropdown-menu
-      //      li
-      //        a href="#"  Action
-      //      li
-      //        a href="#"  Another action
-      //      li
-      //        a href="#"  Something else here
-      //      li.divider role="separator"
-      //      li
-      //        a href="#"  Separated link
-    /! /.navbar-collapse
-  /! /.container-fluid
-
+        li(class="#{ body_id == 'products_index' ? 'active' : nil }")
+          = link_to 'Produkter til forsiden', products_path
+        li(class="#{ body_id == 'orders_index' ? 'active' : nil }")
+          = link_to 'Bestillinger av servicepakken', orders_path
+        li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
+          = link_to 'Forsiden', fp_path
