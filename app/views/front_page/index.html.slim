@@ -63,7 +63,8 @@
     = form_tag contact_form_path, class: 'form form-horizontal' do
       .form-group
         - @products.blank?
-          p | You need to add some products to the database.
+          .alert.alert-warning
+            You need to add some products to the database.
 
         - @products.each do |product|
           .col-lg-10
