@@ -21,3 +21,6 @@ tbody
           :method => :delete, :data => { :confirm => t('.confirm',
           :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
+        = link_to t('.payment_received', :default => t("orders.payment_received")), order_payment_received_path(order),
+          :method => :delete, :data => {}, :class => 'btn btn-xs btn-info'
+
