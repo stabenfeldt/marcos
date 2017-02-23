@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order_by_order_id, only: [:payment_received]
 
   http_basic_authenticate_with name: "bike", password: "lover"
 
@@ -24,6 +25,23 @@ class OrdersController < ApplicationController
   def edit
   end
 
+  # Marks the order as payed and created a new customer.
+  def payment_received
+    first_name, last_name  = @order.name.split
+    @order.update_attribute(:payment_received, true)
+    @customer = Customer.find(phone: @order.phone)
+    unless @customer
+      @customer = Customer.new(
+        first_name: first_name,
+        last_name: last_name,
+        email: @order.email,
+        phone: @order.phone
+      )
+    end
+    redirect_to orders_path, notice: 'Marked as payed and new customer created'
+  end
+
+
   # POST /orders
   # POST /orders.json
   def create
@@ -31,11 +49,13 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to @order,
+                      notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
-        format.json { render json: @order.errors, status: :unprocessable_entity }
+        format.json { render json: @order.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -68,6 +88,10 @@ class OrdersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_order
       @order = Order.find(params[:id])
+    end
+
+    def set_order_by_order_id
+      @order = Order.find(params[:order_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
