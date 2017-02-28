@@ -22,3 +22,5 @@ nav.navbar.navbar-inverse
           = link_to 'Bestillinger av servicepakken', orders_path
         li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
           = link_to 'Forsiden', fp_path
+        li
+          = link_to 'Logg inn', '/auth/twitter/'
