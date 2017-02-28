@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   resources :orders
   post 'payment_received/:id', to: 'orders#payment_received', as: :payment_received
 
+	get '/auth/:provider/callback', to: 'sessions#create'
+
+
 
   resources :products
   resources :parts
