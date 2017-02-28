@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   resources :orders
+  post 'payment_received/:id', to: 'orders#payment_received', as: :payment_received
+
+
   resources :products
   resources :parts
   get 'customers/search' => 'customers#search'
