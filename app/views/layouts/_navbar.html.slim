@@ -1,4 +1,4 @@
-- return if body_id == 'front_page_index'
+/- return if body_id == 'front_page_index'
 
 nav.navbar.navbar-inverse
   .container-fluid
@@ -23,4 +23,6 @@ nav.navbar.navbar-inverse
         li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
           = link_to 'Forsiden', fp_path
         li
-          = link_to 'Logg inn', '/auth/twitter/'
+          p= "Hei #{current_user.first_name}"
+
+          = link_to 'Logg inn', '/auth/strava/'
