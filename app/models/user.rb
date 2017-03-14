@@ -25,12 +25,16 @@ class User < ActiveRecord::Base
   def self.create_from_omniauth(user_data)
 		user_object = OpenStruct.new(user_data["athlete"])
     create! do |user|
-      user.provider   = :strava
+      user.email      = user_object.email
       user.first_name = user_object.firstname
       user.last_name  = user_object.lastname
-      user.email      = user_object.email
+      user.provider   = :strava
       user.username   = user_object.username
     end
+  end
+
+  def admin?
+    role.to_sym == :admin
   end
 
   private
