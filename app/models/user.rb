@@ -9,25 +9,27 @@
 #  mobile     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  provider   :string
+#  uid        :string
+#  username   :string
 #
 
 # The User class is used for authenication for the system.
 class User < ActiveRecord::Base
 
-  def self.from_omniauth(auth_params)
-    Rails.logger.debug "auth_params: #{auth_params.to_json}"
-    where(auth_params.slice("provider", "uid")).first || create_from_omniauth(auth_params)
+  def self.from_strava_omniauth(user_data)
+    username = user_data.parsed_response["athlete"]["username"]
+    where( { username: username, provider: :strava }).first || create_from_omniauth(user_data)
   end
 
-  def self.create_from_omniauth(auth_params)
-    uid = auth_params.uid
-    provider = auth_params.provider
-    name = auth_params.info.name
-
+  def self.create_from_omniauth(user_data)
+		user_object = OpenStruct.new(user_data["athlete"])
     create! do |user|
-      user.provider   = provider
-      user.uid        = uid
-      user.first_name, user.last_name = name
+      user.provider   = :strava
+      user.first_name = user_object.firstname
+      user.last_name  = user_object.lastname
+      user.email      = user_object.email
+      user.username   = user_object.username
     end
   end
 
