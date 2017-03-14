@@ -5,6 +5,12 @@ ruby '2.2.4'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'omniauth-openid', github: 'intridea/omniauth-openid'
 gem 'omniauth-twitter'
+gem 'omniauth-strava'
+gem 'strava-api-v3'
+
+
+
+gem 'httparty'
 
 
 
