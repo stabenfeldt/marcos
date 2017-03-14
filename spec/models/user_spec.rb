@@ -9,6 +9,9 @@
 #  mobile     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  provider   :string
+#  uid        :string
+#  username   :string
 #
 
 require 'rails_helper'
