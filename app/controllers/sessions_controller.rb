@@ -8,12 +8,13 @@ class SessionsController < ApplicationController
     redirect_to root_url, notice: "Welcome"
   end
 
-  protected
+  def logout
+    Rails.logger.debug "LOGOUT=================="
+    reset_session
+    redirect_to root_url, notice: "You're logged out"
+  end
 
-  # $ curl -X POST https://www.strava.com/oauth/token \
-  #   -F client_id=5 \
-  #   -F client_secret=7b2946535949ae70f015d696d8ac602830ece412 \
-  #   -F code=75e251e3ff8fff
+  protected
 
 	def fetch_user_data(code)
     client_id     = ENV["STRAVA_CLIENT_ID"]
