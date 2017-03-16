@@ -17,6 +17,17 @@
 # The User class is used for authenication for the system.
 class User < ActiveRecord::Base
 
+  has_many :bikes
+  has_many :services, through: :bikes
+  validates :first_name, :last_name, :mobile, presence: true
+  validates :mobile, :email, uniqueness: true, allow_blank: true
+
+  scope :services_in_progress, -> { where(field: value) }
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   def self.from_strava_omniauth(user_data)
     username = user_data.parsed_response["athlete"]["username"]
     where( { username: username, provider: :strava }).first || create_from_omniauth(user_data)
