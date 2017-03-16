@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314133158) do
+ActiveRecord::Schema.define(version: 20170316142226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,13 +20,11 @@ ActiveRecord::Schema.define(version: 20170314133158) do
     t.string   "brand"
     t.string   "model"
     t.string   "year"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "customer_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "image"
+    t.integer  "user_id"
   end
-
-  add_index "bikes", ["customer_id"], name: "index_bikes_on_customer_id", using: :btree
 
   create_table "bikes_parts", id: false, force: :cascade do |t|
     t.integer "bike_id"
@@ -104,7 +102,6 @@ ActiveRecord::Schema.define(version: 20170314133158) do
     t.string   "role",       default: "normal"
   end
 
-  add_foreign_key "bikes", "customers"
   add_foreign_key "orders", "products"
   add_foreign_key "services", "bikes"
 end
