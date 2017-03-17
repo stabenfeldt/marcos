@@ -19,8 +19,8 @@ nav.navbar.navbar-inverse
           - if current_user.admin?
             li(class="#{ body_id == 'parts_index' ? 'active' : nil }")
               = link_to 'Deler', parts_path
-            li(class="#{ body_id == 'customers_index' ? 'active' : nil }")
-              = link_to 'Kunder', customers_path
+            li(class="#{ body_id == 'users_index' ? 'active' : nil }")
+              = link_to 'Kunder', users_path
             li(class="#{ body_id == 'products_index' ? 'active' : nil }")
               = link_to 'Produkter til forsiden', products_path
             li(class="#{ body_id == 'orders_index' ? 'active' : nil }")
@@ -30,4 +30,5 @@ nav.navbar.navbar-inverse
           li
             p
               = "Hei #{current_user.first_name}"
+              = link_to 'Din side', user_path(current_user)
               = link_to 'Logg ut', '/logout/'

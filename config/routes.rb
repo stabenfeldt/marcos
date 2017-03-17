@@ -9,8 +9,8 @@ Rails.application.routes.draw do
 
   resources :products
   resources :parts
-  get 'customers/search' => 'customers#search'
-  get 'customers/search/:q' => 'customers#search'
+  get 'users/search' => 'users#search'
+  get 'users/search/:q' => 'users#search'
 
   resources :services do
   end
@@ -19,8 +19,7 @@ Rails.application.routes.draw do
     resources :services
   end
 
-  resources :users
-  resources :customers do
+  resources :users do
     resources :bikes do
       get '/parts' => 'bikes#parts'
       post '/:id' => 'bikes#add_part'

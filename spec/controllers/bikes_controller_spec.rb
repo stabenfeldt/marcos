@@ -54,7 +54,8 @@ RSpec.describe BikesController, :type => :controller do
 
   describe "GET new" do
     it "assigns a new bike as @bike" do
-      get :new, {}, valid_session
+      @customer = Fabricate(:user, role: :customer)
+      get :new, {:customer_id => @customer.id}, valid_session
       expect(assigns(:bike)).to be_a_new(Bike)
     end
   end

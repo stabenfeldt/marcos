@@ -3,7 +3,7 @@ class BikesController < ApplicationController
   before_action :set_bike_from_id, only: [:parts, :add_part, :remove_part]
   before_action :set_customer #, only: [:new, :create, :show]
 
-  http_basic_authenticate_with name: "bike", password: "lover"
+  #http_basic_authenticate_with name: "bike", password: "lover"
 
   # GET /bikes
   # GET /bikes.json
