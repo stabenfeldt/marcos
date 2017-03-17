@@ -19,7 +19,10 @@ class SessionsController < ApplicationController
 	def fetch_user_data(code)
     client_id     = ENV["STRAVA_CLIENT_ID"]
     client_secret = ENV["STRAVA_CLIENT_SECRET"]
-    HTTParty.post( "https://www.strava.com/oauth/token?" + "client_id=#{client_id}" + "&client_secret=#{client_secret}" + "&code=#{code}")
+    HTTParty.post( "https://www.strava.com/oauth/token?" +
+                   "client_id=#{client_id}" +
+                   "&client_secret=#{client_secret}" +
+                   "&code=#{code}")
 	end
 
   def auth_hash
