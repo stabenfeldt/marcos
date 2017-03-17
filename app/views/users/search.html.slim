@@ -1,0 +1,24 @@
+h1 Søk etter kunde
+
+
+= form_tag(users_search_path, method: 'get', id: 'q') do
+  .input-group
+    = text_field_tag 'q', nil, placeholder: 'Søk på navn..',
+      class: 'form-control', value: params[:q]
+
+    span.input-group-btn
+      = submit_tag 'Søk', :class => 'btn btn-default'
+
+- if @users.present?
+  ul.users.list-group
+    strong Treff:
+    - @users.all.each do |c|
+      li.list-group-item
+        = link_to c.name, c
+- elsif params[:q]
+  .alert.alert-info(role="alert")
+    = "Could not find #{params[:q]}"
+
+hr
+= link_to "Lag ny kunde", new_user_path, :class => 'btn btn-primary'
+= link_to "Vis alle kunder", users_path, :class => 'btn'
