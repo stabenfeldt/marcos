@@ -84,7 +84,8 @@ class UsersController < ApplicationController
     end
 
     def only_admins
-      redirect_to root_url unless current_user.admin? || current_user == @user
+      redirect_to root_url, warning: 'Only for admins' \
+        unless current_user.admin? || current_user == @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

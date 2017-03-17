@@ -12,18 +12,18 @@ table.table
       th
 
   tbody
-    - @customers.each do |customer|
+    - @users.each do |user|
       tr
-        td = link_to customer.name, customer
-        td = customer.mobile
-        td = customer.email
-        td = link_to 'Rediger', edit_customer_path(customer), class: 'btn'
+        td = link_to user.name, user
+        td = user.mobile
+        td = user.email
+        td = link_to 'Rediger', edit_user_path(user), class: 'btn'
         td
-          = link_to 'Slett', customer, data: {:confirm => 'Are you sure?'},
+          = link_to 'Slett', user, data: {:confirm => 'Are you sure?'},
             :method => :delete, class: 'btn'
 
 br
 
 .btn-group
-  = link_to 'Ny kunde', new_customer_path, :class => 'btn btn-default'
-  = link_to 'Søk', customers_search_path, :class => 'btn btn-default'
+  = link_to 'Ny kunde', new_user_path, :class => 'btn btn-default'
+  = link_to 'Søk', users_search_path, :class => 'btn btn-default'
