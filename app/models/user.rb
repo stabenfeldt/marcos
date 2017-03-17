@@ -12,6 +12,7 @@
 #  provider   :string
 #  uid        :string
 #  username   :string
+#  role       :string           default("normal")
 #
 
 # The User class is used for authenication for the system.

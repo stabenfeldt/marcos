@@ -10,5 +10,5 @@
 
 
   = render @bike.parts
-  = link_to 'Legg til eller fjern deler', customer_bike_parts_path(bike.customer, bike), class: 'btn'
+  = link_to 'Legg til eller fjern deler', user_bike_parts_path(bike.user, bike), class: 'btn'
 

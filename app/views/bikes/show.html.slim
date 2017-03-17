@@ -1,14 +1,14 @@
 - content_for :breadcrumb do
-  li= link_to 'Kunder', customers_path
-  li= link_to @bike.customer.name, @bike.customer
-  li= link_to 'Sykler', @bike.customer
+  li= link_to 'Kunder', users_path
+  li= link_to @bike.user.name, @bike.user
+  li= link_to 'Sykler', @bike.user
   li
     strong= @bike.name
 
 
 .pull-right
-  = link_to 'Rediger', edit_customer_bike_path(@bike.customer,@bike), class: 'btn '
-  = link_to 'Slett', customer_bike_path(@bike.customer, @bike), method: :delete,
+  = link_to 'Rediger', edit_user_bike_path(@bike.user,@bike), class: 'btn '
+  = link_to 'Slett', user_bike_path(@bike.user, @bike), method: :delete,
     data: { confirm: "Virkelig slette?" }, class: 'btn'
 = render @bike
 

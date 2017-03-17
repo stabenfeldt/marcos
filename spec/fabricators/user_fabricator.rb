@@ -12,6 +12,7 @@
 #  provider   :string
 #  uid        :string
 #  username   :string
+#  role       :string           default("normal")
 #
 
 Fabricator(:user) do
