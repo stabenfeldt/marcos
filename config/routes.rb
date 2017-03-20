@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :users do
+    get 'fetch_bikes_from_strava' => 'users#fetch_bikes_from_strava'
     resources :bikes do
       get '/parts' => 'bikes#parts'
       post '/:id' => 'bikes#add_part'

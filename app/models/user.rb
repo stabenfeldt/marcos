@@ -2,17 +2,18 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  first_name :string
-#  last_name  :string
-#  email      :string
-#  mobile     :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  provider   :string
-#  uid        :string
-#  username   :string
-#  role       :string           default("normal")
+#  id                   :integer          not null, primary key
+#  first_name           :string
+#  last_name            :string
+#  email                :string
+#  mobile               :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  provider             :string
+#  uid                  :string
+#  username             :string
+#  role                 :string           default("normal")
+#  strava_omniauth_code :string
 #
 
 # The User class is used for authenication for the system.
@@ -30,8 +31,8 @@ class User < ActiveRecord::Base
   end
 
   def fetch_bikes_from_strava
+    user_data = User.fetch_user_data(strava_omniauth_code)
     bikes = user_data["athlete"]["bikes"].map { |bike| OpenStruct.new(bike) }
-    Rails.logger.debug "GOT BIKES: #{bikes.first}"
   end
 
   def self.fetch_user_data(code)
@@ -46,7 +47,9 @@ class User < ActiveRecord::Base
   def self.from_strava_omniauth(code)
     user_data = fetch_user_data(code)
     username = user_data.parsed_response["athlete"]["username"]
-    where( { username: username, provider: :strava }).first || create_from_omniauth(user_data)
+    user = where( { username: username, provider: :strava }).first || create_from_omniauth(user_data)
+    user.update_attribute(:strava_omniauth_code,  code)
+    user
   end
 
   def self.create_from_omniauth(user_data)

@@ -77,6 +77,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def fetch_bikes_from_strava
+    bikes = current_user.fetch_bikes_from_strava
+    bikes.each do |b|
+      Rails.logger.debug "one bike is #{b.inspect}"
+      current_user.bikes.new( name: b.name,
+                              strava_id: b.id,
+                              distance: b.distance,
+                            )
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
