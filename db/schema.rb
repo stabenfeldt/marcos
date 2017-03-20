@@ -11,19 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316142226) do
+ActiveRecord::Schema.define(version: 20170320145633) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "bikes", force: :cascade do |t|
-    t.string   "brand"
-    t.string   "model"
     t.string   "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "image"
     t.integer  "user_id"
+    t.string   "name"
+    t.integer  "strava_id"
   end
 
   create_table "bikes_parts", id: false, force: :cascade do |t|
@@ -94,12 +94,13 @@ ActiveRecord::Schema.define(version: 20170316142226) do
     t.string   "last_name"
     t.string   "email"
     t.string   "mobile"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "provider"
     t.string   "uid"
     t.string   "username"
-    t.string   "role",       default: "normal"
+    t.string   "role",                 default: "normal"
+    t.string   "strava_omniauth_code"
   end
 
   add_foreign_key "orders", "products"
