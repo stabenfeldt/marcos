@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320145633) do
+ActiveRecord::Schema.define(version: 20170321102920) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,8 @@ ActiveRecord::Schema.define(version: 20170320145633) do
     t.string   "image"
     t.integer  "user_id"
     t.string   "name"
-    t.integer  "strava_id"
+    t.string   "strava_id"
+    t.float    "distance"
   end
 
   create_table "bikes_parts", id: false, force: :cascade do |t|

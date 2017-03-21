@@ -9,7 +9,8 @@
 #  image      :string
 #  user_id    :integer
 #  name       :string
-#  strava_id  :integer
+#  strava_id  :string
+#  distance   :float
 #
 
 require 'rails_helper'
