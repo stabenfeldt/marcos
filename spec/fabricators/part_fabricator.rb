@@ -2,14 +2,16 @@
 #
 # Table name: parts
 #
-#  id         :integer          not null, primary key
-#  brand      :string
-#  model      :string
-#  year       :integer
-#  note       :text
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  tech_doc   :string
+#  id               :integer          not null, primary key
+#  brand            :string
+#  model            :string
+#  year             :integer
+#  note             :text
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  tech_doc         :string
+#  service_interval :integer
+#  kind             :string
 #
 
 Fabricator(:part) do

@@ -14,8 +14,6 @@
 #
 
 Fabricator(:bike) do
-  brand "MyString"
-  model "MyString"
-  year  "MyString"
+  name "Avid BB7"
   user { Fabricate(:user) }
 end
