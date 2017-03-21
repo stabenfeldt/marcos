@@ -22,8 +22,4 @@ class Bike < ActiveRecord::Base
   mount_uploader :image, ImageUploader
 
 
-  def name
-    "#{brand} - #{model}"
-  end
-
 end
