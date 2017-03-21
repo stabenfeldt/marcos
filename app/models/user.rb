@@ -32,7 +32,13 @@ class User < ActiveRecord::Base
 
   def fetch_bikes_from_strava
     user_data = User.fetch_user_data(strava_omniauth_code)
-    bikes = user_data["athlete"]["bikes"].map { |bike| OpenStruct.new(bike) }
+    user_data["athlete"]["bikes"].each do |b|
+      puts "IMPORTING #{b.inspect}"
+      puts "find_or_create_by #{b['id']}"
+      bike = self.bikes.find_or_create_by(strava_id: b['id'])
+      bike.update_attributes(name: b["name"], distance: b["distance"])
+      puts "BIKE saved: #{bike.inspect}"
+    end
   end
 
   def self.fetch_user_data(code)
