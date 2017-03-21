@@ -22,5 +22,12 @@ class Bike < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  def parts_due_for_service
+    parts.map { |p|
+      km_since_last = distance - p.service_done_at_bike_distance
+      return p if km_since_last >= p.service_interval
+     }
+  end
+
 
 end
