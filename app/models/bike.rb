@@ -15,15 +15,17 @@
 
 class Bike < ActiveRecord::Base
 
+  has_many :bike_parts, dependent: :destroy
+  has_many :parts, through: :bike_parts
+
+  has_many :services
   validates :name, :user, presence: true
   belongs_to :user
-  has_and_belongs_to_many :parts
-  has_many :services
 
   mount_uploader :image, ImageUploader
 
   def parts_due_for_service
-    parts.map { |p|
+    bike_parts.map { |p|
       km_since_last = distance - p.service_done_at_bike_distance
       return p if km_since_last >= p.service_interval
      }

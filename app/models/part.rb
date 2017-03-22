@@ -15,7 +15,9 @@
 #
 
 class Part < ActiveRecord::Base
-  has_and_belongs_to_many :bikes
+  has_many :bike_parts
+  has_many :bikes, through: :bike_parts, dependent: :destroy
+
   validates :brand, :model, presence: true
 
   def name
