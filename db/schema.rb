@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170321135910) do
+ActiveRecord::Schema.define(version: 20170322090821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bike_parts", force: :cascade do |t|
+    t.integer  "bike_id"
+    t.integer  "part_id"
+    t.float    "service_done_at_bike_distance", default: 0.0
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+  end
+
+  add_index "bike_parts", ["bike_id"], name: "index_bike_parts_on_bike_id", using: :btree
+  add_index "bike_parts", ["part_id"], name: "index_bike_parts_on_part_id", using: :btree
 
   create_table "bikes", force: :cascade do |t|
     t.string   "year"
@@ -69,7 +80,7 @@ ActiveRecord::Schema.define(version: 20170321135910) do
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.string   "tech_doc"
-    t.integer  "service_interval"
+    t.float    "service_interval"
     t.string   "kind"
   end
 
