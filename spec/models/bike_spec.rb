@@ -29,14 +29,17 @@ RSpec.describe Bike, :type => :model do
     before :all do
       @suspention = Fabricate(:part, brand: 'RoxShox', model: 'Reba',
                               kind: 'suspension', service_interval: 100,
-                              service_done_at_bike_distance: 0)
+                              )
       @bike.parts << @suspention
       @bike.save
     end
 
     it "Know when it´s time for service" do
+      part_id = @bike.parts.where(kind: :suspension).first.id
+      bike_part = @bike.bike_parts.where(part_id: part_id).first
+      bike_part.update_attribute(:service_done_at_bike_distance, 100)
       @bike.update_attribute(:distance, 200)
-      expect(@bike.parts_due_for_service).to match(@suspention)
+      expect(@bike.parts_due_for_service).to match(bike_part)
     end
 
 
