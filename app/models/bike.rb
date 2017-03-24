@@ -22,6 +22,8 @@ class Bike < ActiveRecord::Base
   validates :name, :user, presence: true
   belongs_to :user
 
+  after_create :add_default_parts, on: :create
+
   mount_uploader :image, ImageUploader
 
   def parts_due_for_service
@@ -29,6 +31,34 @@ class Bike < ActiveRecord::Base
       km_since_last = distance - p.service_done_at_bike_distance
       return p if km_since_last >= p.service_interval
      }
+  end
+
+  def add_default_parts
+    #puts "in add_default_parts"
+    default_parts.each do |kind_of_part|
+    #  puts "looking for part #{kind_of_part}"
+      part = Part.where(kind: kind_of_part).first
+    #  puts "will add #{part.inspect}"
+      next unless part
+      self.parts << part
+    end
+    save!
+    #puts "added #{parts.size} parts"
+  end
+
+  def default_parts
+    [
+      'cassette',
+      'chain',
+      'front break',
+      'front derailleur',
+      'headset',
+      'rear break',
+      'rear derailleur',
+      'rear shock',
+      'shifters',
+      'suspension fork'
+    ]
   end
 
 
