@@ -1,4 +1,8 @@
-.well
+.wellX
+  .pull-right
+    = link_to 'Rediger', edit_user_bike_path(@bike.user,@bike), class: 'btn '
+    = link_to 'Slett', user_bike_path(@bike.user, @bike), method: :delete,
+      data: { confirm: "Virkelig slette?" }, class: 'btn'
   h2= bike.name
   span= bike.year
   br
@@ -10,5 +14,11 @@
 
 
   = render @bike.parts
-  = link_to 'Legg til eller fjern deler', user_bike_parts_path(bike.user, bike), class: 'btn'
+  .alert.alert-info
+    | Vi har lagt til de vanligste delene for deg. Om du søker opp riktig merke og modell så får du mer presise service instruksjoner.
+      Når du har gjort det vil du få beskjed om nå de forskjellige serviceintervallene er.
+  - @bike.default_parts.each do |part|
+    = part
+    br
+  = link_to 'Legg til eller fjern deler', user_bike_parts_path(bike.user, bike), class: 'btn btn-primary'
 

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get 'users/search' => 'users#search'
   get 'users/search/:q' => 'users#search'
 
+  get '/parts/search:q' => 'parts#search'
+
   resources :services do
   end
 
