@@ -14,8 +14,16 @@ class BikePart < ActiveRecord::Base
     part.service_interval
   end
 
-  def km_untill_next_service
-    bike.distance - service_done_at_bike_distance
+  def km_until_next_service
+    next_service = service_done_at_bike_distance + part.service_interval
+    next_service - bike.distance
   end
+
+  ##=
+  # Service gjort 100km
+  # Serice intervall 100
+  # Neste service blir da 200km
+  # kmstand er 200, da blir neste service på 100 + 100 = 200
+  # Avstand dit blir 200 - 200 = 0 NÅ
 
 end

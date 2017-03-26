@@ -23,4 +23,5 @@ class Part < ActiveRecord::Base
   def name
     "#{brand} - #{model}"
   end
+
 end

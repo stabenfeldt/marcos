@@ -5,6 +5,8 @@
       data: { confirm: "Virkelig slette?" }, class: 'btn'
   h2= bike.name
   span= bike.year
+  em= "Kilometerstand: #{number_with_precision((bike.distance / 1000), locale: 'nb', presition: 2 )}"
+  br
   br
   - if bike.image?
     .row
@@ -13,12 +15,25 @@
           = image_tag(bike.image_url, width: '400')
 
 
-  = render @bike.parts
   .alert.alert-info
     | Vi har lagt til de vanligste delene for deg. Om du søker opp riktig merke og modell så får du mer presise service instruksjoner.
       Når du har gjort det vil du få beskjed om nå de forskjellige serviceintervallene er.
-  - @bike.default_parts.each do |part|
-    = part
     br
+
+  table
+    tr
+      th Del
+      //th Merke
+      th Service intervall
+      th Antall km til neste service
+    - @bike.bike_parts.each do |part|
+      tr
+        td = part.kind
+        // td = part.name
+        td(align="right") = part.service_interval.to_i
+        td(align="right") = km_until_next_service(part)
+
+  br
+  br
   = link_to 'Legg til eller fjern deler', user_bike_parts_path(bike.user, bike), class: 'btn btn-primary'
 
