@@ -34,16 +34,12 @@ class Bike < ActiveRecord::Base
   end
 
   def add_default_parts
-    #puts "in add_default_parts"
     default_parts.each do |kind_of_part|
-    #  puts "looking for part #{kind_of_part}"
       part = Part.where(kind: kind_of_part).first
-    #  puts "will add #{part.inspect}"
       next unless part
       self.parts << part
     end
     save!
-    #puts "added #{parts.size} parts"
   end
 
   def default_parts
