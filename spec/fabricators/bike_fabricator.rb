@@ -2,18 +2,18 @@
 #
 # Table name: bikes
 #
-#  id          :integer          not null, primary key
-#  brand       :string
-#  model       :string
-#  year        :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  customer_id :integer
-#  image       :string
+#  id         :integer          not null, primary key
+#  year       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  image      :string
+#  user_id    :integer
+#  name       :string
+#  strava_id  :string
+#  distance   :float
 #
 
 Fabricator(:bike) do
-  brand "MyString"
-  model "MyString"
-  year  "MyString"
+  name "Avid BB7"
+  user { Fabricate(:user) }
 end

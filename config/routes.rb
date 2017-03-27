@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
   resources :orders
+  post 'payment_received/:id', to: 'orders#payment_received', as: :payment_received
+
+	get '/auth/:provider/callback', to: 'sessions#create'
+	get '/logout', to: 'sessions#logout'
+
+
+
   resources :products
   resources :parts
-  get 'customers/search' => 'customers#search'
-  get 'customers/search/:q' => 'customers#search'
+  get 'users/search' => 'users#search'
+  get 'users/search/:q' => 'users#search'
+
+  get '/parts/search:q' => 'parts#search'
 
   resources :services do
   end
@@ -12,8 +21,8 @@ Rails.application.routes.draw do
     resources :services
   end
 
-  resources :users
-  resources :customers do
+  resources :users do
+    get 'fetch_bikes_from_strava' => 'users#fetch_bikes_from_strava'
     resources :bikes do
       get '/parts' => 'bikes#parts'
       post '/:id' => 'bikes#add_part'

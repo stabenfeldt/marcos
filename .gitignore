@@ -21,3 +21,7 @@ config/database.yml
 
 *.swp
 *.swo
+
+.DS_Store
+
+.byebug_history

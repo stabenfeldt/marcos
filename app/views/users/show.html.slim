@@ -1,17 +1,43 @@
+- content_for :breadcrumb do
+  li= link_to 'Kunder', users_path
+  li
+    strong= @user.name
 
-p
-  strong First name:
-  = @user.first_name
-p
-  strong Last name:
-  = @user.last_name
-p
-  strong Email:
-  = @user.email
-p
-  strong Mobile:
-  = @user.mobile
+= render 'header'
 
-= link_to 'Edit', edit_user_path(@user)
-'|
-= link_to 'Back', users_path
+ul.nav.nav-tabs role='tablist'
+  - if @services_in_progress.present?
+    li(role="presentation"
+      class="#{ (@services_in_progress.present? ? 'active' : '') }")
+      a href="#this_service"  data-toggle="tab" Til reperasjon
+  - if @service_history.present?
+    li role="presentation"
+      a href="#service_history"  data-toggle="tab" Historikk
+  li(role="presentation"
+    class="#{ (@services_in_progress.blank? ? 'active' : '') }")
+    a href="#bikes" data-toggle="tab" Sykler
+
+.tab-content
+  - if @services_in_progress.present?
+    #this_service.tab-pane.fade.in(class="#{ (@services_in_progress.present? ? 'active' : '') }")
+      h2 Sykler til reparasjon
+      = render @services_in_progress
+
+  - if @service_history.present?
+    #service_history.tab-pane.fade.in
+      br
+      br
+      br
+      - @service_history.each do |s|
+        = render s
+
+  - if @bikes.present?
+    #bikes.tab-pane.fade.in(class="#{ (@services_in_progress.blank? ? 'active' : '') }")
+      h3 Sykler
+      .box-shadow
+        ul.bikes
+          - @bikes.each do |b|
+            li = link_to b.name, [@user, b]
+  br
+  = link_to 'Legg til sykkel', new_user_bike_path(@user), class: 'btn btn-primary'
+  = link_to 'Hent sykler fra Strava', user_fetch_bikes_from_strava_path(@user), class: 'btn btn-primary'

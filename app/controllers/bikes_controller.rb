@@ -1,9 +1,9 @@
 class BikesController < ApplicationController
   before_action :set_bike, only: [:show, :edit, :update, :destroy]
   before_action :set_bike_from_id, only: [:parts, :add_part, :remove_part]
-  before_action :set_customer #, only: [:new, :create, :show]
+  before_action :set_user #, only: [:new, :create, :show]
 
-  http_basic_authenticate_with name: "bike", password: "lover"
+  #http_basic_authenticate_with name: "bike", password: "lover"
 
   # GET /bikes
   # GET /bikes.json
@@ -25,7 +25,7 @@ class BikesController < ApplicationController
   end
 
   def add_part
-    # Parameters: {"customer_id"=>"1", "bike_id"=>"1", "id"=>"1"}
+    # Parameters: {"user_id"=>"1", "bike_id"=>"1", "id"=>"1"}
     @part = Part.find params[:id]
     @bike.parts << @part
     @bike.save!
@@ -50,13 +50,12 @@ class BikesController < ApplicationController
   # POST /bikes
   # POST /bikes.json
   def create
-    @bike = Bike.new(bike_params)
-    @bike.customer = @customer
+    @bike = @user.bikes.new(bike_params)
 
     respond_to do |format|
       if @bike.save
         $mixpanel.track('Admin', 'Created a bike')
-        format.html { redirect_to @bike.customer,
+        format.html { redirect_to @bike.user,
                       notice: 'Bike was successfully created.' }
         format.json { render :show, status: :created, location: @bike }
       else
@@ -71,7 +70,7 @@ class BikesController < ApplicationController
   def update
     respond_to do |format|
       if @bike.update(bike_params)
-        format.html { redirect_to [@customer, @bike],
+        format.html { redirect_to [@user, @bike],
                       notice: 'Bike was successfully updated.' }
         format.json { render :show, status: :ok, location: @bike }
       else
@@ -86,7 +85,7 @@ class BikesController < ApplicationController
   def destroy
     @bike.destroy
     respond_to do |format|
-      format.html { redirect_to [@bike.customer], notice: 'Bike was successfully destroyed.' }
+      format.html { redirect_to [@bike.user], notice: 'Bike was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -101,8 +100,8 @@ class BikesController < ApplicationController
       @bike = Bike.find(params[:bike_id])
     end
 
-    def set_customer
-      @customer = Customer.find(params[:customer_id])
+    def set_user
+      @user = User.find(params[:user_id])
     end
 
 

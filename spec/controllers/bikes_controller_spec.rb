@@ -31,6 +31,13 @@ RSpec.describe BikesController, :type => :controller do
     skip("Add a hash of attributes invalid for your model")
   }
 
+  before(:all) do
+    puts "destroy all"
+    User.destroy_all
+    @customer = Fabricate(:user, role: :customer)
+    @customer.save
+  end
+
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # BikesController. Be sure to keep this updated too.
@@ -54,7 +61,8 @@ RSpec.describe BikesController, :type => :controller do
 
   describe "GET new" do
     it "assigns a new bike as @bike" do
-      get :new, {}, valid_session
+      puts "customer is #{@customer.inspect}"
+      get :new, {:id => @customer.id}, valid_session
       expect(assigns(:bike)).to be_a_new(Bike)
     end
   end

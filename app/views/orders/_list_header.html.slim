@@ -1,0 +1,18 @@
+- model_class = Order
+.page-header
+  h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+table.table.table-striped
+  thead
+    tr
+      th= model_class.human_attribute_name(:id)
+      th= model_class.human_attribute_name(:name)
+      th= model_class.human_attribute_name(:product_id)
+      th= model_class.human_attribute_name(:phone)
+      th= model_class.human_attribute_name(:email)
+      th= model_class.human_attribute_name(:payment_received)
+      th= model_class.human_attribute_name(:bike_brand)
+      th= model_class.human_attribute_name(:bike_model)
+      th= model_class.human_attribute_name(:description)
+      th= model_class.human_attribute_name(:valid_through)
+      th= model_class.human_attribute_name(:created_at)
+      th=t '.actions', :default => t("helpers.actions")

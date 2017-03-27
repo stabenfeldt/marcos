@@ -77,6 +77,14 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+
+	# Authenication
+	Rails.application.config.middleware.use OmniAuth::Builder do
+	  require 'openid/store/filesystem'
+	  provider :github, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
+	  provider :openid, store: OpenID::Store::Filesystem.new('/tmp')
+	end
+
   # Exceptiosn
   Rails.application.config.middleware.use ExceptionNotification::Rack,
     :email => {

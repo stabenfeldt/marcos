@@ -1,6 +1,10 @@
 class OrdersController < ApplicationController
+<<<<<<< HEAD
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :set_order_by_order_id, only: [:payment_received]
+=======
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :payment_received]
+>>>>>>> 4989280241b89c20fbf85b639326e53f0259ad7c
 
   http_basic_authenticate_with name: "bike", password: "lover"
 
@@ -57,6 +61,39 @@ class OrdersController < ApplicationController
         format.json { render json: @order.errors,
                       status: :unprocessable_entity }
       end
+    end
+  end
+
+  # Updates the order and creates a new customer
+  def payment_received
+
+    first_name, last_name = @order.name.split
+
+    @customer = Customer.find_or_create_by(
+      mobile: @order.phone
+    )
+
+    if @customer.blank?
+      @customer = Customer.create(
+        first_name: first_name,
+        last_name:  last_name,
+        email: @order.email,
+        mobile: @order.phone,
+        bike: Bike.creat
+      )
+    end
+
+    @bike = Bike.create(
+      brand: @order.bike_brand,
+      model: @order.bike_model
+    )
+
+    @customer.bikes << @bike
+    if @customer.save
+      redirect_to orders_path
+    else
+      flash[:warning] = "could not mark the order as payed: #{@order.errors.full_messages}"
+      render :index
     end
   end
 

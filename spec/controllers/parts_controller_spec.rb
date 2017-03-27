@@ -53,8 +53,8 @@ RSpec.describe PartsController, :type => :controller do
   end
 
   describe "GET new" do
-    it "assigns a new part as @part" do
-      get :new, {}, valid_session
+  it "assigns a new part as @part" do
+get :new, {}, valid_session
       expect(assigns(:part)).to be_a_new(Part)
     end
   end

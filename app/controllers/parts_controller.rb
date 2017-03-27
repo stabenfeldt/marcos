@@ -18,6 +18,10 @@ class PartsController < ApplicationController
     @part = Part.new
   end
 
+  def search
+    @result = Part.where(kind: params[:kind])
+  end
+
   # GET /parts/1/edit
   def edit
   end

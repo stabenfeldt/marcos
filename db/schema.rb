@@ -11,26 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223085302) do
+ActiveRecord::Schema.define(version: 20170327130452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bikes", force: :cascade do |t|
-    t.string   "brand"
-    t.string   "model"
-    t.string   "year"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "customer_id"
-    t.string   "image"
+  create_table "bike_parts", force: :cascade do |t|
+    t.integer  "bike_id"
+    t.integer  "part_id"
+    t.float    "service_done_at_bike_distance", default: 0.0
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
-  add_index "bikes", ["customer_id"], name: "index_bikes_on_customer_id", using: :btree
+  add_index "bike_parts", ["bike_id"], name: "index_bike_parts_on_bike_id", using: :btree
+  add_index "bike_parts", ["part_id"], name: "index_bike_parts_on_part_id", using: :btree
+
+  create_table "bikes", force: :cascade do |t|
+    t.string   "year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "image"
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "strava_id"
+    t.float    "distance"
+  end
 
   create_table "bikes_parts", id: false, force: :cascade do |t|
     t.integer "bike_id"
     t.integer "part_id"
+    t.float   "service_done_at_bike_distance"
   end
 
   add_index "bikes_parts", ["bike_id"], name: "index_bikes_parts_on_bike_id", using: :btree
@@ -66,9 +77,11 @@ ActiveRecord::Schema.define(version: 20170223085302) do
     t.string   "model"
     t.integer  "year"
     t.text     "note"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "tech_doc"
+    t.float    "service_interval"
+    t.string   "kind"
   end
 
   create_table "products", force: :cascade do |t|
@@ -84,9 +97,10 @@ ActiveRecord::Schema.define(version: 20170223085302) do
     t.string   "log"
     t.datetime "due_date"
     t.integer  "bike_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.boolean  "completed",   default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "completed",    default: false
+    t.integer  "bike_part_id"
   end
 
   add_index "services", ["bike_id"], name: "index_services_on_bike_id", using: :btree
@@ -96,11 +110,15 @@ ActiveRecord::Schema.define(version: 20170223085302) do
     t.string   "last_name"
     t.string   "email"
     t.string   "mobile"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "username"
+    t.string   "role",                 default: "normal"
+    t.string   "strava_omniauth_code"
   end
 
-  add_foreign_key "bikes", "customers"
   add_foreign_key "orders", "products"
   add_foreign_key "services", "bikes"
 end
