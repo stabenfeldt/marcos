@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  http_basic_authenticate_with name: "bike", password: "lover"
+  before_action :only_admins, except: [:show, :fetch_bikes_from_strava]
+
+  #http_basic_authenticate_with name: "bike", password: "lover"
 
   # GET /users
   # GET /users.json
@@ -9,10 +11,22 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def search
+    first,last = params[:q].split if params[:q].present?
+    if params[:q]
+       @users = User.where('first_name ILIKE ? AND last_name ILIKE ?',
+                                "%#{first}%", "%#{last}%")
+    end
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
+    @services_in_progress = @user.services.in_progress
+    @service_history      = @user.services.completed
+    @bikes                = @user.bikes
   end
+
 
   # GET /users/new
   def new
@@ -63,10 +77,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def fetch_bikes_from_strava
+    current_user.fetch_bikes_from_strava
+    redirect_to current_user, notice: "Bikes imported"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def only_admins
+      redirect_to root_url, warning: 'Only for admins' \
+        unless current_user.admin? || current_user == @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -16,9 +16,9 @@ class BikePartList extends React.Component {
     }
 
     /*
-    customer_bike_parts GET    /customers/:customer_id/bikes/:bike_id/parts(.:format) bikes#parts
-                        POST   /customers/:customer_id/bikes/:bike_id/:id(.:format)   bikes#add_part
-                        DELETE /customers/:customer_id/bikes/:bike_id/:id(.:format)   bikes#remove_part
+    user_bike_parts GET    /users/:user_id/bikes/:bike_id/parts(.:format) bikes#parts
+                        POST   /users/:user_id/bikes/:bike_id/:id(.:format)   bikes#add_part
+                        DELETE /users/:user_id/bikes/:bike_id/:id(.:format)   bikes#remove_part
     */
 
     addPart(part) {
@@ -36,7 +36,7 @@ class BikePartList extends React.Component {
           availableParts: updatedAvailableParts
         })
 
-        fetch('/customers/'+this.props.bike.customer_id+'/bikes/'+this.props.bike.id+'/'+part.id, {
+        fetch('/users/'+this.props.bike.user_id+'/bikes/'+this.props.bike.id+'/'+part.id, {
           credentials: 'same-origin',
           method: 'post',
           body: 'test'
@@ -58,7 +58,7 @@ class BikePartList extends React.Component {
           availableParts: updatedAvailableParts
         })
 
-        fetch('/customers/'+this.props.bike.customer_id+'/bikes/'+this.props.bike.id+'/'+part.id, {
+        fetch('/users/'+this.props.bike.user_id+'/bikes/'+this.props.bike.id+'/'+part.id, {
           credentials: 'same-origin',
           method: 'delete',
           body: 'test'

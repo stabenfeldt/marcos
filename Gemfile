@@ -1,6 +1,19 @@
 source 'https://rubygems.org'
 
-ruby '2.2.4'
+ruby '2.2.3'
+
+gem 'omniauth-github', github: 'intridea/omniauth-github'
+gem 'omniauth-openid', github: 'intridea/omniauth-openid'
+gem 'omniauth-twitter'
+gem 'omniauth-strava'
+gem 'strava-api-v3'
+
+
+
+gem 'httparty'
+
+
+
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -56,6 +69,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'database_cleaner'
 end
 
 group :development do

@@ -1,12 +1,12 @@
-h1 Listing users
+br
+h1 Kunde
 
-table
+table.table
   thead
     tr
-      th First name
-      th Last name
-      th Email
-      th Mobile
+      th Navn
+      th Mobil
+      th Epost
       th
       th
       th
@@ -14,14 +14,16 @@ table
   tbody
     - @users.each do |user|
       tr
-        td = user.first_name
-        td = user.last_name
-        td = user.email
+        td = link_to user.name, user
         td = user.mobile
-        td = link_to 'Show', user
-        td = link_to 'Edit', edit_user_path(user)
-        td = link_to 'Destroy', user, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td = user.email
+        td = link_to 'Rediger', edit_user_path(user), class: 'btn'
+        td
+          = link_to 'Slett', user, data: {:confirm => 'Are you sure?'},
+            :method => :delete, class: 'btn'
 
 br
 
-= link_to 'New User', new_user_path
+.btn-group
+  = link_to 'Ny kunde', new_user_path, :class => 'btn btn-default'
+  = link_to 'Søk', users_search_path, :class => 'btn btn-default'

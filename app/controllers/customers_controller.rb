@@ -4,13 +4,13 @@ class CustomersController < ApplicationController
   # GET /customers
   # GET /customers.json
   def index
-    @customers = Customer.all
+    @customers = User.all
   end
 
   def search
     first,last = params[:q].split if params[:q].present?
     if params[:q]
-       @customers = Customer.where('first_name ILIKE ? AND last_name ILIKE ?',
+       @customers = User.where('first_name ILIKE ? AND last_name ILIKE ?',
                                 "%#{first}%", "%#{last}%")
     end
   end
@@ -25,7 +25,7 @@ class CustomersController < ApplicationController
 
   # GET /customers/new
   def new
-    @customer = Customer.new
+    @customer = User.new
   end
 
   # GET /customers/1/edit
@@ -36,7 +36,6 @@ class CustomersController < ApplicationController
   # POST /customers.json
   def create
     @customer = Customer.new(customer_params)
-
     respond_to do |format|
       if @customer.save
         $mixpanel.track('Admin', "Added a customer")
@@ -76,7 +75,7 @@ class CustomersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_customer
-      @customer = Customer.find(params[:id])
+      @customer = User.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
