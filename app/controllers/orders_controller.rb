@@ -1,10 +1,6 @@
 class OrdersController < ApplicationController
-<<<<<<< HEAD
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :set_order_by_order_id, only: [:payment_received]
-=======
-  before_action :set_order, only: [:show, :edit, :update, :destroy, :payment_received]
->>>>>>> 4989280241b89c20fbf85b639326e53f0259ad7c
 
   http_basic_authenticate_with name: "bike", password: "lover"
 
