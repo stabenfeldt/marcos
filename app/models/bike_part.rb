@@ -1,6 +1,7 @@
 class BikePart < ActiveRecord::Base
   belongs_to :bike
   belongs_to :part
+  has_many :services
 
   def name
     part.name
