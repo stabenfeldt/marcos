@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
   before_action :set_bike, only: [:new, :show, :create]
+  before_action :set_part, only: [:new, :show, :create]
 
   http_basic_authenticate_with name: "bike", password: "lover"
 
@@ -86,6 +87,10 @@ class ServicesController < ApplicationController
 
     def set_bike
       @bike = Bike.find(params[:bike_id])
+    end
+
+    def set_part
+      @part = Part.find(params[:part_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
