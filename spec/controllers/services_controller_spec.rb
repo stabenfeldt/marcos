@@ -53,8 +53,14 @@ RSpec.describe ServicesController, :type => :controller do
   end
 
   describe "GET new" do
+    before :each do
+      @bike = Fabricate(:bike)
+      @part = Fabricate(:part)
+      @bike.parts << @part
+      @bike.save
+    end
     it "assigns a new service as @service" do
-      get :new, {}, valid_session
+      get :new, {bike_id: @bike.id, part_id: @part.id}, valid_session
       expect(assigns(:service)).to be_a_new(Service)
     end
   end
