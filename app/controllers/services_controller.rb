@@ -36,7 +36,7 @@ class ServicesController < ApplicationController
     @service.bike = @bike
 
     respond_to do |format|
-      if @service.save!
+      if @service.save
         $mixpanel.track('Admin', 'Registered a service')
         format.html { redirect_to [@bike.customer, @bike],
                       notice: 'Service was successfully created.' }
@@ -89,7 +89,7 @@ class ServicesController < ApplicationController
     end
 
     def set_part
-      @part = Part.find(params[:part_id])
+      @part = BikePart.find(params[:part_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
