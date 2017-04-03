@@ -1,7 +1,6 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
-  before_action :set_bike, only: [:new, :show, :create]
-  before_action :set_part, only: [:new, :show, :create]
+  before_action :set_bike_part, only: [:new, :show, :create]
 
 
   # GET /services
@@ -84,17 +83,14 @@ class ServicesController < ApplicationController
       @service = Service.find(params[:id])
     end
 
-    def set_bike
-      @bike = Bike.find(params[:bike_id])
-    end
-
-    def set_part
-      @part = BikePart.find(params[:part_id])
+    def set_bike_part
+      @bike_part = BikePart.find(params[:bike_part_id])
+      @bike = @bike_part.bike
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
       params.require(:service).permit(:description, :log, :due_date, :bike_id,
-                                      :user_id, :completed)
+                                      :user_id, :completed, :bike_part_id)
     end
 end
