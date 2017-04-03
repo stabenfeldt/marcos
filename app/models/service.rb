@@ -14,6 +14,7 @@
 
 class Service < ActiveRecord::Base
   belongs_to :bike
+  belongs_to :bike_part
 
   scope :in_progress, -> { where(completed: false) }
   scope :completed,   -> { where(completed: true)  }
@@ -22,6 +23,6 @@ class Service < ActiveRecord::Base
     completed
   end
 
-  validates :description, :due_date, :bike,
+  validates :description, :due_date, :bike_part,
     presence: true
 end
