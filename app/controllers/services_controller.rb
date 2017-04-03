@@ -25,7 +25,7 @@ class ServicesController < ApplicationController
     @bike = @service.bike
   end
 
-  def find_customer
+  def find_user
   end
 
   # POST /services
@@ -33,11 +33,13 @@ class ServicesController < ApplicationController
   def create
     @service = Service.new(service_params)
     @service.bike = @bike
+    @service.bike_part = @bike_part
+    @bike_part.service_done_at_bike_distance = @bike.distance
 
     respond_to do |format|
       if @service.save
         $mixpanel.track('Admin', 'Registered a service')
-        format.html { redirect_to [@bike.customer, @bike],
+        format.html { redirect_to [@bike.user, @bike],
                       notice: 'Service was successfully created.' }
         format.json { render :show, status: :created, location: @service }
       else
@@ -58,7 +60,7 @@ class ServicesController < ApplicationController
         $mixpanel.track('Admin', 'Service completed') if completed
 
         notice = @service.completed? ? 'Service marked as complete'  : 'Updated'
-        format.html { redirect_to @service.bike.customer, notice: notice }
+        format.html { redirect_to @service.bike.user, notice: notice }
         format.json { render :show, status: :ok, location: @service }
       else
         format.html { render :edit }
