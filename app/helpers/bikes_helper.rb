@@ -1,16 +1,17 @@
 module BikesHelper
 
-  def km_until_next_service(part)
-    until_next = part.km_until_next_service
+  include ActionView::Helpers::NumberHelper
 
-    if until_next == 0
+
+  def km_until_next_service(km_untill_next)
+
+    if km_untill_next == 0
       return "NOW"
-    elsif (until_next < 0)
-      return "Overdue by #{until_next}"
-    elsif (until_next > 0)
-      return "In #{until_next} kilometers"
+    elsif (km_untill_next < 0)
+      return "Overdue by #{number_to_human(km_untill_next, unit: :distance)}"
+    elsif (km_untill_next > 0)
+      return "In #{number_to_human(km_untill_next, unit: :distance)}"
     end
-
 
   end
 end

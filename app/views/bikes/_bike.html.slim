@@ -28,10 +28,10 @@
       th Antall km til neste service
     - @bike.bike_parts.each do |part|
       tr
-        td = part.kind
+        td = link_to part.kind, new_bike_part_service_path(part)
         // td = part.name
-        td(align="right") = part.service_interval.to_i
-        td(align="right") = km_until_next_service(part)
+        td(align="right") = part.service_interval
+        td(align="right") = km_until_next_service(part.km_until_next_service)
 
   br
   br
