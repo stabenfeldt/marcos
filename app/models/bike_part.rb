@@ -17,7 +17,11 @@ class BikePart < ActiveRecord::Base
 
   def km_until_next_service
     next_service = service_done_at_bike_distance + part.service_interval
-    next_service - bike.distance
+    (next_service - bike.distance) / 1000
+  end
+
+  def service_due?
+    km_until_next_service <= 0
   end
 
   ##=
