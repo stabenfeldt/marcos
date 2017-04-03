@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe BikePart, :type => :model do
   before :each do
-    @bike_part = Fabricate(:bike_part)
+    @part = Fabricate(:part, kind: 'rear break', service_interval: 1000)
+    @bike_part = Fabricate(:bike_part, part: @part)
     @bike = @bike_part.bike
   end
 

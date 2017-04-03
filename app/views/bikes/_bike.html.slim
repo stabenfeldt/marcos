@@ -15,23 +15,30 @@
           = image_tag(bike.image_url, width: '400')
 
 
-  .alert.alert-info
-    | Vi har lagt til de vanligste delene for deg. Om du søker opp riktig merke og modell så får du mer presise service instruksjoner.
-      Når du har gjort det vil du få beskjed om nå de forskjellige serviceintervallene er.
+  /.alert.alert-info
+    | Vi har lagt til de vanligste delene for deg.
+      Om du søker opp riktig merke og modell så får du mer presise
+      serviceinstruksjoner. Når du har gjort det vil du få beskjed om nå de
+      forskjellige serviceintervallene er.
     br
 
-  table
-    tr
-      th Del
-      //th Merke
-      th Service intervall
-      th Antall km til neste service
-    - @bike.bike_parts.each do |part|
+  = form_tag new_bike_service_path(@bike) do
+    table
       tr
-        td = link_to part.kind, new_bike_part_service_path(part)
-        // td = part.name
-        td(align="right") = part.service_interval
-        td(align="right") = km_until_next_service(part.km_until_next_service)
+        th Del
+        //th Merke
+        th Service intervall
+        th Antall km til neste service
+      - @bike.bike_parts.each do |part|
+        tr
+          td = link_to part.kind, new_bike_part_service_path(part)
+          // td = part.name
+          td(align="right") = part.service_interval
+          td(align="right") = km_until_next_service(part.km_until_next_service)
+          td = check_box_tag 'bike_part_id', part.id, false
+
+    = submit_tag 'registrer en service'
+
 
   br
   br

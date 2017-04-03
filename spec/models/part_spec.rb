@@ -46,6 +46,11 @@ RSpec.describe Part, :type => :model do
       expect(@suspension.km_until_next_service).to eq 50
     end
 
+    it 'Each part can tell if it´s due for service' do
+      @bike.update_attribute(:distance, 50)
+      expect(@suspension.service_due?).to be false
+    end
+
     it 'Recalculates after a service has been made' do
       @bike.update_attribute(:distance, 200)
       @suspension.update_attribute(:service_done_at_bike_distance, 100)

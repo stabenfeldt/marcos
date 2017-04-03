@@ -19,9 +19,9 @@
 
 
   - unless body_id == 'bikes_show'
-    h2= link_to service.bike.name, [service.bike.customer, service.bike]
+    h2= link_to service.bike.name, [service.bike.user, service.bike]
     p.text-muted
-      = link_to service.bike.customer.name, service.bike.customer
+      = link_to service.bike.user.name, service.bike.user
     hr
     - if service.bike.image?
       .row
@@ -29,7 +29,8 @@
           .img-responsive.thumbnail
             = image_tag(service.bike.image_url, width: '400')
 
-  strong Description
+  strong= service.bike_part.part.kind
+  br
   br
   = simple_format service.description
 
