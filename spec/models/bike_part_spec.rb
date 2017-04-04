@@ -13,6 +13,9 @@ RSpec.describe BikePart, :type => :model do
 
   it 'can have one or more services' do
     @service = @bike_part.services.new(log: 'washed and oiled')
+    @service = @bike_part.services.new(log: 'changed cassette')
+    @service.save
+    expect(@service.bike_parts.size).to eq 2
   end
 
 end

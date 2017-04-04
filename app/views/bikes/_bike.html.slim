@@ -22,7 +22,7 @@
       forskjellige serviceintervallene er.
     br
 
-  = form_tag new_bike_service_path(@bike) do
+  = form_tag bike_services_path(@bike) do
     table
       tr
         th Del
@@ -31,8 +31,7 @@
         th Antall km til neste service
       - @bike.bike_parts.each do |part|
         tr
-          td = link_to part.kind, new_bike_part_service_path(part)
-          // td = part.name
+          td = part.kind
           td(align="right") = part.service_interval
           td(align="right") = km_until_next_service(part.km_until_next_service)
           td = check_box_tag 'bike_part_id', part.id, false

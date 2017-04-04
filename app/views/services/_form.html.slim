@@ -1,7 +1,7 @@
 = render partial: 'layouts/form_error_messages', locals: { form_object: @service }
 
 .form-horizontal
-  = form_for [@bike_part, @service] do |f|
+  = form_for [@bike, @service] do |f|
     - @part = @bike_part
 
 

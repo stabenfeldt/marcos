@@ -60,7 +60,7 @@ RSpec.describe ServicesController, :type => :controller do
       @bike.save
       @bike_part = @bike.parts.first
     end
-    it "assigns a new service as @service" do
+    it "services are based on a @service, which holds many bike parts" do
       get :new, {bike_id: @bike.id, bike_part_id: @bike_part.id}, valid_session
       expect(assigns(:service)).to be_a_new(Service)
     end
