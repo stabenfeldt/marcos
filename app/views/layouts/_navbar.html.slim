@@ -13,7 +13,7 @@ nav.navbar.navbar-inverse
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        = link_to 'Til reparasjon', bike_services_path(@bike, @service), class: 'navbar-brand'
+        = link_to 'Til reparasjon', services_path(), class: 'navbar-brand'
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav
           - if current_user.admin?
