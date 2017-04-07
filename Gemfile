@@ -7,15 +7,7 @@ gem 'omniauth-openid', github: 'intridea/omniauth-openid'
 gem 'omniauth-twitter'
 gem 'omniauth-strava'
 gem 'strava-api-v3'
-
-
-
 gem 'httparty'
-
-
-
-
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 gem 'pg'
@@ -53,6 +45,7 @@ gem 'brakeman', :require => false
 gem 'react-rails', '~> 1.4.0'
 gem 'carrierwave'
 gem 'fog'
+gem 'faker'
 
 gem 'mixpanel-ruby'
 gem 'mini_magick'
