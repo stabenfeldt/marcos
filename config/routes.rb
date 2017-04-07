@@ -14,8 +14,8 @@ Rails.application.routes.draw do
 
   get '/parts/search:q' => 'parts#search'
 
-  #resources :services do
-  #end
+  resources :services do
+  end
 
   resources :bikes do
     resources :services
