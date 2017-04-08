@@ -13,8 +13,8 @@
 #
 
 Fabricator(:service) do
-  description "MyString"
-  log         "MyString"
+  description "Must fix the quirking"
+  log         "I oiled it"
   due_date    "2015-11-12"
-  bike_part  { Fabricate(:bike_part) }
+  #bike_part  { Fabricate(:bike_part) }
 end
