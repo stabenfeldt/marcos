@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: bike_parts
+#
+#  id                            :integer          not null, primary key
+#  bike_id                       :integer
+#  part_id                       :integer
+#  service_done_at_bike_distance :float            default(0.0)
+#  created_at                    :datetime         not null
+#  updated_at                    :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe BikePart, :type => :model do

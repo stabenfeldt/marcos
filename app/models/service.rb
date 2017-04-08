@@ -2,14 +2,15 @@
 #
 # Table name: services
 #
-#  id          :integer          not null, primary key
-#  description :string
-#  log         :string
-#  due_date    :datetime
-#  bike_id     :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  completed   :boolean          default(FALSE)
+#  id           :integer          not null, primary key
+#  description  :string
+#  log          :string
+#  due_date     :datetime
+#  bike_id      :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  completed    :boolean          default(FALSE)
+#  bike_part_id :integer
 #
 
 class Service < ActiveRecord::Base
