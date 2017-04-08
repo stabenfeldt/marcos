@@ -13,8 +13,13 @@
 #
 
 class Service < ActiveRecord::Base
-  belongs_to :bike
-  belongs_to :bike_part
+
+  has_many :bike_parts
+  has_one :bike, :through => :bike_parts
+
+
+  validates :description, :due_date, presence: true
+
 
   scope :in_progress, -> { where(completed: false) }
   scope :completed,   -> { where(completed: true)  }
@@ -23,6 +28,5 @@ class Service < ActiveRecord::Base
     completed
   end
 
-  validates :description, :due_date, :bike_part,
-    presence: true
+
 end
