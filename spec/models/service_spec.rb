@@ -23,4 +23,14 @@ RSpec.describe Service, :type => :model do
   it 'is valid from the fabric' do
     expect(@service).to be_valid
   end
+
+  it 'one service can include many parts' do
+    cassette_part = Fabricate(:part, kind: 'cassette' )
+    chain_part   = Fabricate(:part, kind: 'chain')
+    @chain = Fabricate(:bike_part, part: chain_part)
+    @cassette = Fabricate(:bike_part, part: cassette_part)
+    @service.bike_parts << @chain
+    @service.bike_parts << @cassette
+    expect(@service.bike_parts.size).to eq 2
+  end
 end

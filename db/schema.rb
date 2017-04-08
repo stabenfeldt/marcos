@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327130452) do
+ActiveRecord::Schema.define(version: 20170408051907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20170327130452) do
     t.float    "service_done_at_bike_distance", default: 0.0
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
+    t.integer  "service_id"
   end
 
   add_index "bike_parts", ["bike_id"], name: "index_bike_parts_on_bike_id", using: :btree
