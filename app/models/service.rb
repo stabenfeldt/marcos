@@ -16,10 +16,10 @@
 class Service < ActiveRecord::Base
 
   has_many :bike_parts
-  has_one :bike, :through => :bike_parts
+  belongs_to :bike
 
 
-  validates :description, :due_date, presence: true
+  #validates :description, :due_date, presence: true
 
 
   scope :in_progress, -> { where(completed: false) }

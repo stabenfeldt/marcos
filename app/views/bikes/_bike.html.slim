@@ -34,12 +34,9 @@
           td = part.kind
           td(align="right") = part.service_interval
           td(align="right") = km_until_next_service(part.km_until_next_service)
-          td = check_box_tag 'bike_part_id', part.id, false
+          td = check_box_tag 'bike_part_id[]', part.id, false
+
 
     = submit_tag 'registrer en service'
 
-
-  br
-  br
-  = link_to 'Legg til eller fjern deler', user_bike_parts_path(bike.user, bike), class: 'btn btn-primary'
 
