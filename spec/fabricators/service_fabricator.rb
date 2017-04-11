@@ -17,5 +17,7 @@ Fabricator(:service) do
   description "Must fix the quirking"
   log         "I oiled it"
   due_date    "2015-11-12"
-  #bike_part  { Fabricate(:bike_part) }
+  bike        { Fabricate(:bike) }
+  bike_parts(count: 2)
+
 end

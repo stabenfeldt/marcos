@@ -31,6 +31,6 @@ RSpec.describe Service, :type => :model do
     @cassette = Fabricate(:bike_part, part: cassette_part)
     @service.bike_parts << @chain
     @service.bike_parts << @cassette
-    expect(@service.bike_parts.size).to eq 2
+    expect(@service.bike_parts.size).to eq 4
   end
 end
