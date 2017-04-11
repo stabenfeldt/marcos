@@ -30,6 +30,9 @@ class ServicesController < ApplicationController
 
   # POST /services
   # POST /services.json
+  #
+  # Creating a new service requires a bike and the parts that are involved.
+  #
   def create
     @service = Service.new(service_params)
     @service.bike = @bike

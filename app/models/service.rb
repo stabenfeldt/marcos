@@ -19,6 +19,7 @@ class Service < ActiveRecord::Base
   belongs_to :bike
 
 
+  validates :bike_parts, :bike, presence: true
   #validates :description, :due_date, presence: true
 
 
