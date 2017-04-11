@@ -27,7 +27,9 @@ RSpec.describe ServicesController, :type => :controller do
     {
       description: "Must fix the quirking",
       log:         "I oiled it",
-      due_date:    "2015-11-12"
+      due_date:    "2015-11-12",
+      bike_part_ids: [@bike_part.id],
+      bike_id: @bike.id,
     }
   }
 
@@ -43,7 +45,8 @@ RSpec.describe ServicesController, :type => :controller do
   # ServicesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
    before :each do
-      @bike = Fabricate(:bike)
+      @user = Fabricate(:user)
+      @bike = Fabricate(:bike, user: @user)
       @part = Fabricate(:part, kind: 'cassette', brand: 'generic')
       @bike.parts << @part
       @bike.save
@@ -63,7 +66,7 @@ RSpec.describe ServicesController, :type => :controller do
   describe "GET show" do
     it "assigns the requested service as @service" do
       service = Service.create! valid_attributes
-      get :show, {:id => service.to_param, bike_part_id: bp.id}, valid_session
+      get :show, {:id => service.to_param, bike_part_id: @bike_part.id}, valid_session
       expect(assigns(:service)).to eq(service)
     end
   end
@@ -93,7 +96,7 @@ RSpec.describe ServicesController, :type => :controller do
              valid_session }.to change(Service, :count).by(1)
       end
 
-      it "assigns a newly created service as @service", focus: true do
+      it "assigns a newly created service as @service" do
         post :create, {:service => valid_attributes,
               bike_part_id: [@bike_part.id]}, valid_session
         expect(assigns(:service)).to be_a(Service)
@@ -102,8 +105,8 @@ RSpec.describe ServicesController, :type => :controller do
 
       it "redirects to the created service" do
         post :create, {:service => valid_attributes,
-                       :bike_part_id => @bike_part.id}, valid_session
-        expect(response).to redirect_to(Service.last)
+                       :bike_part_id => [@bike_part.id]}, valid_session
+        expect(response).to redirect_to(user_bike_path(@user, @bike))
       end
     end
 
@@ -142,7 +145,7 @@ RSpec.describe ServicesController, :type => :controller do
       it "redirects to the service" do
         service = Service.create! valid_attributes
         put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
-        expect(response).to redirect_to(service)
+        expect(response).to redirect_to(services_path)
       end
     end
 

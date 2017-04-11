@@ -34,17 +34,19 @@ class ServicesController < ApplicationController
   # Creating a new service requires a bike and the parts that are involved.
   #
   def create
-    @service = Service.new(service_params)
-    @service.bike = @bike
+    @service            = Service.new(service_params)
+    @service.bike       = @bike
     @service.bike_parts = @bike_parts
 
     respond_to do |format|
       if @service.save!
+        Rails.logger.debug "SERVICES SAVED"
         $mixpanel.track('Admin', 'Registered a service')
         format.html { redirect_to [@bike.user, @bike],
                       notice: 'Service was successfully created.' }
         format.json { render :show, status: :created, location: @service }
       else
+        Rails.logger.debug "SERVICES ==NOT== SAVED"
         format.html { render :new }
         format.json { render json: @service.errors, status: :unprocessable_entity }
       end
@@ -107,7 +109,6 @@ class ServicesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
       params.permit(:description, :log, :due_date, :bike_id,
-                    :user_id, :completed, :bike_part_id)
-      params.require(:bike_part_id)
+                    :user_id, :completed, bike_part_id: [])
     end
 end
