@@ -3,6 +3,8 @@
     .text-right
       span Service nr:
       h4.label.label-info = service.id
+      = link_to 'destroy', bike_service_path(service.bike, service),
+        data: { confirm: "Are you sure?" }, method: :delete
     br
     - if service.completed?
       span.label.label-success Completed
