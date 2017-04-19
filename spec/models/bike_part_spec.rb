@@ -8,6 +8,7 @@
 #  service_done_at_bike_distance :float            default(0.0)
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
+#  service_id                    :integer
 #
 
 require 'rails_helper'
@@ -27,6 +28,11 @@ RSpec.describe BikePart, :type => :model do
     @bike_part.services.create(log: 'washed and oiled')
     @bike_part.services.create(log: 'changed cassette')
     expect(@bike_part.services.size).to eq 2
+  end
+
+  it 'can tell if it´s in for service' do
+    @bike_part.services.create!(due_date: DateTime.now)
+    expect(@bike_part.in_for_service?).to eq true
   end
 
 end
