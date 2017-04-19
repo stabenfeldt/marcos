@@ -37,9 +37,24 @@ class ServicesController < ApplicationController
   # POST /services
   # POST /services.json
   def create
-    @service = Service.new(service_params)
-    @service.bike = @bike
-    @service.bike_parts = @bike_parts
+    @service = []
+    year  = params["service"]["due_date(1i)"]
+    day   = params["service"]["due_date(3i)"]
+    month = params["service"]["due_date(2i)"]
+    hour  = params["service"]["due_date(4i)"]
+    min   = params["service"]["due_date(5i)"]
+    due_date = DateTime.parse "#{year}.#{month}.#{day} #{hour}:#{min}"
+
+    description = params["service_description"]
+
+    bike_parts = BikePart.find(params[:bike_part_id])
+    bike_parts.each_with_index do |bike_part,i|
+      @service = bike_part.services.create!(due_date: due_date,
+                                            description: description[i])
+    end
+    # @service = Service.new(service_params)
+    # @service.bike = @bike
+    # @service.bike_parts = @bike_parts
 
     respond_to do |format|
       if @service.save
@@ -85,7 +100,7 @@ class ServicesController < ApplicationController
   def destroy
     @service.destroy
     respond_to do |format|
-      format.html { redirect_to users_url(@service.bike.user),
+      format.html { redirect_to user_bike_url(@service.bike.user, @service.bike),
                     notice: 'Service was successfully destroyed.' }
       format.json { head :no_content }
     end
