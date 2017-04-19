@@ -12,9 +12,11 @@
       strong = l service.due_date.to_date, format: :short
     - elsif service.due_date
       - if DateTime.now < service.due_date
-        strong= "Hentes om #{distance_of_time_in_words(DateTime.now, service.due_date)}"
+        strong= "Hentes om #{distance_of_time_in_words(DateTime.now,
+                service.due_date)}"
       - else
-        strong= "Skulle vært ferdig for #{distance_of_time_in_words(DateTime.now, service.due_date)} siden"
+        strong= "Skulle vært ferdig for \
+          #{distance_of_time_in_words(DateTime.now, service.due_date)} siden"
       br
       .pull-right.em.text-muted= l(service.due_date)
       hr
