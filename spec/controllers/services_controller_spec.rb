@@ -27,7 +27,11 @@ RSpec.describe ServicesController, :type => :controller do
     {
         description: "Must fix the quirking",
         log:         "I oiled it",
-        due_date:    "2015-11-12"
+        "due_date(3i)"=>"19",
+        "due_date(2i)"=>"4",
+        "due_date(1i)"=>"2017",
+        "due_date(4i)"=>"20",
+        "due_date(5i)"=>"34"
     }
   }
 
@@ -86,12 +90,14 @@ RSpec.describe ServicesController, :type => :controller do
     end
   end
 
-  describe "POST create", focus: true do
+  describe "POST create" do
     describe "with valid params" do
-      it "creates a new Service" do
+      it "creates a new Service", focus: true do
         expect {
           post :create, { bike_id: @bike.id, service: valid_attributes,
-                          bike_part_id: [@bike_part.id]},
+                          bike_part_id: [@bike_part.id],
+                          service_description: ['fix chain', 'fix headset'],
+                        },
              valid_session }.to change(Service, :count).by(1)
       end
 
