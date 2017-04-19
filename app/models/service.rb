@@ -15,12 +15,11 @@
 
 class Service < ActiveRecord::Base
 
-  has_many :bike_parts
   belongs_to :bike
+  has_many :bike_parts
+  accepts_nested_attributes_for :bike_parts
 
-
-  #validates :description, :due_date, presence: true
-
+  validates :due_date, presence: true
 
   scope :in_progress, -> { where(completed: false) }
   scope :completed,   -> { where(completed: true)  }
