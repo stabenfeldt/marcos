@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
-  before_action :set_bike_part, only: [:new, :create]
+  before_action :set_bike_part, only: [:new, :create, :new_with_parts_selected]
+  before_action :set_bike, only: [:new_with_parts_selected]
 
 
   # GET /services
@@ -28,6 +29,11 @@ class ServicesController < ApplicationController
   def find_user
   end
 
+  def new_with_parts_selected
+    @parts = BikePart.find(params[:bike_part_id])
+    @service = @bike.services.new
+  end
+
   # POST /services
   # POST /services.json
   def create
@@ -36,7 +42,7 @@ class ServicesController < ApplicationController
     @service.bike_parts = @bike_parts
 
     respond_to do |format|
-      if @service.save!
+      if @service.save
         $mixpanel.track('Admin', 'Registered a service')
         format.html { redirect_to [@bike.user, @bike],
                       notice: 'Service was successfully created.' }
@@ -79,7 +85,8 @@ class ServicesController < ApplicationController
   def destroy
     @service.destroy
     respond_to do |format|
-      format.html { redirect_to users_url(@service.bike.user), notice: 'Service was successfully destroyed.' }
+      format.html { redirect_to users_url(@service.bike.user),
+                    notice: 'Service was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -90,21 +97,21 @@ class ServicesController < ApplicationController
       @service = Service.find(params[:id])
     end
 
+    def set_bike
+      @bike = Bike.find(params[:bike_id])
+    end
+
     def set_bike_part
       Rails.logger.debug "params is: #{params}"
-      @bike_parts = BikePart.find(params[:bike_part_id])
-
-      if @bike_parts.class == Array
-        @bike = @bike_parts.first.bike
-      else
-        @bike = @bike_parts.bike
-      end
+      @bike_parts = []
+      @bike_parts << BikePart.find(params[:bike_part_id])
+      @bike_parts.flatten!
+      @bike = @bike_parts.first.bike
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.permit(:description, :log, :due_date, :bike_id,
-                    :user_id, :completed, :bike_part_id)
-      params.require(:bike_part_id)
+      params.require(:service).permit(:description, :log, :due_date, :bike_id,
+                    :user_id, :completed, bike_part_id: [])
     end
 end

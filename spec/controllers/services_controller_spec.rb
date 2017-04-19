@@ -25,11 +25,13 @@ RSpec.describe ServicesController, :type => :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
-      description: "Must fix the quirking",
-      log:         "I oiled it",
-      due_date:    "2015-11-12"
+        description: "Must fix the quirking",
+        log:         "I oiled it",
+        due_date:    "2015-11-12"
     }
   }
+
+
 
   let(:invalid_attributes) {
     {
@@ -84,26 +86,26 @@ RSpec.describe ServicesController, :type => :controller do
     end
   end
 
-  describe "POST create" do
+  describe "POST create", focus: true do
     describe "with valid params" do
       it "creates a new Service" do
         expect {
-          post :create, { service: valid_attributes,
+          post :create, { bike_id: @bike.id, service: valid_attributes,
                           bike_part_id: [@bike_part.id]},
              valid_session }.to change(Service, :count).by(1)
       end
 
-      it "assigns a newly created service as @service", focus: true do
-        post :create, {:service => valid_attributes,
+      it "assigns a newly created service as @service" do
+        post :create, {bike_id: @bike.id, :service => valid_attributes,
               bike_part_id: [@bike_part.id]}, valid_session
         expect(assigns(:service)).to be_a(Service)
         expect(assigns(:service)).to be_persisted
       end
 
       it "redirects to the created service" do
-        post :create, {:service => valid_attributes,
+        post :create, {bike_id: @bike.id, :service => valid_attributes,
                        :bike_part_id => @bike_part.id}, valid_session
-        expect(response).to redirect_to(Service.last)
+        expect(response).to redirect_to([@bike.user, @bike])
       end
     end
 
