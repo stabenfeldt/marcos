@@ -22,7 +22,8 @@
       forskjellige serviceintervallene er.
     br
 
-  = form_tag bike_services_path(@bike) do
+  /= form_tag new_service_with_parts_selected_path(@bike)
+  = form_for [@bike, @service], url: new_service_with_parts_selected_path(@bike) do |f|
     table
       tr
         th Del

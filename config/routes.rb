@@ -14,16 +14,21 @@ Rails.application.routes.draw do
 
   get '/parts/search:q' => 'parts#search'
 
-  resources :services do
-  end
 
   resources :bikes do
     resources :services
   end
+  get '/services/new_with_parts_selected/:bike_id' \
+        => 'services#new_with_parts_selected', as: :get_new_service_with_parts_selected
+  post '/services/new_with_parts_selected/:bike_id' \
+        => 'services#new_with_parts_selected', as: :new_service_with_parts_selected
 
   #resources :bike_parts do
   #  resources :services
   #end
+
+  resources :services do
+  end
 
   resources :users do
     get 'fetch_bikes_from_strava' => 'users#fetch_bikes_from_strava'
