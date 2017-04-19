@@ -19,6 +19,10 @@ class BikePart < ActiveRecord::Base
     part.name
   end
 
+  def service_description
+    part.service_description
+  end
+
   def kind
     part.kind
   end
