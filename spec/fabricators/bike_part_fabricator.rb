@@ -8,6 +8,7 @@
 #  service_done_at_bike_distance :float            default(0.0)
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
+#  service_id                    :integer
 #
 
 Fabricator(:bike_part) do

@@ -25,13 +25,17 @@ RSpec.describe ServicesController, :type => :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
-      description: "Must fix the quirking",
-      log:         "I oiled it",
-      due_date:    "2015-11-12",
-      bike_part_ids: [@bike_part.id],
-      bike_id: @bike.id,
+        description: "Must fix the quirking",
+        log:         "I oiled it",
+        "due_date(3i)"=>"19",
+        "due_date(2i)"=>"4",
+        "due_date(1i)"=>"2017",
+        "due_date(4i)"=>"20",
+        "due_date(5i)"=>"34"
     }
   }
+
+
 
   let(:invalid_attributes) {
     {
@@ -89,24 +93,26 @@ RSpec.describe ServicesController, :type => :controller do
 
   describe "POST create" do
     describe "with valid params" do
-      it "creates a new Service" do
+      it "creates a new Service", focus: true do
         expect {
-          post :create, { service: valid_attributes,
-                          bike_part_id: [@bike_part.id]},
+          post :create, { bike_id: @bike.id, service: valid_attributes,
+                          bike_part_id: [@bike_part.id],
+                          service_description: ['fix chain', 'fix headset'],
+                        },
              valid_session }.to change(Service, :count).by(1)
       end
 
       it "assigns a newly created service as @service" do
-        post :create, {:service => valid_attributes,
+        post :create, {bike_id: @bike.id, :service => valid_attributes,
               bike_part_id: [@bike_part.id]}, valid_session
         expect(assigns(:service)).to be_a(Service)
         expect(assigns(:service)).to be_persisted
       end
 
       it "redirects to the created service" do
-        post :create, {:service => valid_attributes,
-                       :bike_part_id => [@bike_part.id]}, valid_session
-        expect(response).to redirect_to(user_bike_path(@user, @bike))
+        post :create, {bike_id: @bike.id, :service => valid_attributes,
+                       :bike_part_id => @bike_part.id}, valid_session
+        expect(response).to redirect_to([@bike.user, @bike])
       end
     end
 

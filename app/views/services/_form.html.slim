@@ -1,27 +1,26 @@
-= render partial: 'layouts/form_error_messages', locals: { form_object: @service }
+= render partial: 'layouts/form_error_messages',
+  locals: { form_object: @service }
 
 .form-horizontal
   = form_for [@bike, @service] do |f|
     - @part = @bike_part
 
 
-    - if @part.present?
-      h2 = "Ny service for #{@part.kind}"
-      br
-      br
-      .well
-        - if @part.service_due?
-          h4 På tide med ny service
-          p
-            = "Denne delen bør ha service hver #{@part.service_interval} km"
-            br
-            = "Siste service på #{@part.kind} ble gjort da sykkelen hadde gått"
-            em = " #{@part.service_done_at_bike_distance} km"
-        /= collection_select(:service, :bike_part_id, @bike.bike_parts.all,
-          :id, :kind, prompt: true, selected: @part.id )
+    - @bike_parts.each do |p|
+      .form-group
+        h3 = p.kind
+        = text_field_tag("bike_part_id[]", p.id, class: 'hidden')
+        em Hva må fikses?
+        br
+        = text_area_tag("service_description[]",
+          (p.service_description || 'Placeholder: Oil and replace worn parts'),
+          size: "100x10", class: '')
+        br
+      /= f.fields_for :bike_part_service do |bike_part_service|
+        em bike_part_service
+        = bike_part_service.description :description
 
-
-    .form-group
+    /.form-group
       = f.label :description
       = f.text_area :description, class: 'form-control', rows: 6,
         placeholder: "- What does the customer want us to help with? \n" \

@@ -8,6 +8,7 @@
 #  service_done_at_bike_distance :float            default(0.0)
 #  created_at                    :datetime         not null
 #  updated_at                    :datetime         not null
+#  service_id                    :integer
 #
 
 class BikePart < ActiveRecord::Base
@@ -19,12 +20,20 @@ class BikePart < ActiveRecord::Base
     part.name
   end
 
+  def service_description
+    part.service_description
+  end
+
   def kind
     part.kind
   end
 
   def service_interval
     part.service_interval
+  end
+
+  def in_for_service?
+    services.where(completed: false).present?
   end
 
   def km_until_next_service

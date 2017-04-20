@@ -1,0 +1,11 @@
+- content_for :breadcrumb do
+  li= link_to 'Customers', users_path
+  li= link_to @bike.user.name, @bike.user
+  li= link_to @bike.name, @bike
+  li
+    strong Register new service
+
+
+== render 'form'
+
+= link_to 'Back', bike_services_path

@@ -19,5 +19,4 @@ Fabricator(:service) do
   due_date    "2015-11-12"
   bike        { Fabricate(:bike) }
   bike_parts(count: 2)
-
 end

@@ -22,21 +22,23 @@
       forskjellige serviceintervallene er.
     br
 
-  = form_tag bike_services_path(@bike) do
-    table
-      tr
-        th Del
-        //th Merke
-        th Service intervall
-        th Antall km til neste service
-      - @bike.bike_parts.each do |part|
+  = form_for [@bike, @service], url: new_bike_service_path(@bike, @service),
+    method: :get do |f|
+      table
         tr
-          td = part.kind
-          td(align="right") = part.service_interval
-          td(align="right") = km_until_next_service(part.km_until_next_service)
-          td = check_box_tag 'bike_part_id[]', part.id, false
+          th Del
+          //th Merke
+          th Service intervall
+          th Antall km til neste service
+        - @bike.bike_parts.each do |bike_part|
+          tr
+            td = bike_part.kind
+            td(align="right") = bike_part.service_interval
+            td(align="right") = km_until_next_service(bike_part)
+            - unless bike_part.in_for_service?
+              td = check_box_tag 'bike_part_id[]', bike_part.id, false
 
 
-    = submit_tag 'registrer en service'
+      = submit_tag 'registrer en service'
 
 
