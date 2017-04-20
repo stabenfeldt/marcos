@@ -35,7 +35,8 @@
             td = bike_part.kind
             td(align="right") = bike_part.service_interval
             td(align="right") = km_until_next_service(bike_part)
-            td = check_box_tag 'bike_part_id[]', bike_part.id, false
+            - unless bike_part.in_for_service?
+              td = check_box_tag 'bike_part_id[]', bike_part.id, false
 
 
       = submit_tag 'registrer en service'
