@@ -16,8 +16,9 @@
 require 'rails_helper'
 
 RSpec.describe Service, :type => :model do
-  before :all do
-    @service = Fabricate(:service)
+  before :each do
+    @bike = Fabricate(:bike)
+    @service = Fabricate(:service, bike: @bike)
   end
 
   it 'is valid from the fabric' do
@@ -25,12 +26,29 @@ RSpec.describe Service, :type => :model do
   end
 
   it 'one service can include many parts' do
-    cassette_part = Fabricate(:part, kind: 'cassette' )
-    chain_part   = Fabricate(:part, kind: 'chain')
-    @chain = Fabricate(:bike_part, part: chain_part)
-    @cassette = Fabricate(:bike_part, part: cassette_part)
-    @service.bike_parts << @chain
-    @service.bike_parts << @cassette
-    expect(@service.bike_parts.size).to eq 4
+    # Create parts
+    cassette_part = Fabricate(:part, kind: 'cassette')
+    chain_part    = Fabricate(:part, kind: 'chain')
+    @chain = Fabricate(:bike_part, part: chain_part, bike: @bike)
+    @cassette = Fabricate(:bike_part, part: cassette_part, bike: @bike)
+
+    # Create a service for each of the parts
+    @cassette_service = @cassette.services.create!(
+      due_date: Time.now+100, description: 'replace this rusty one', bike: @bike
+    )
+    @chain_service = @chain.services.create!(
+      due_date: Time.now+100, description: 'worn out, replace'
+    )
+
+    # The bike knows if any of it´s parts is in for service
+    expect(@bike.in_for_service?).to eq true
+    expect(@bike.services).to include(@cassette_service, @chain_service)
+
+
+    #@service.bike_parts << @chain
+    #@service.bike_parts << @cassette
+    #expect(@service.bike_parts.size).to eq 4
   end
+
+
 end

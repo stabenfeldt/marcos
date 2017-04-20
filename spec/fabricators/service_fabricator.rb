@@ -18,5 +18,5 @@ Fabricator(:service) do
   log         "I oiled it"
   due_date    "2015-11-12"
   bike        { Fabricate(:bike) }
-  bike_parts(count: 2)
+  bike_part   { Fabricate(:bike_part) }
 end

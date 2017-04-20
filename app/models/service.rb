@@ -20,7 +20,7 @@ class Service < ActiveRecord::Base
   accepts_nested_attributes_for :bike_parts
 
 
-  #validates :bike_part_id, :due_date, presence: true
+  validates :bike_part_id, :due_date, presence: true
   validates :due_date, presence: true
 
   scope :in_progress, -> { where(completed: false) }
