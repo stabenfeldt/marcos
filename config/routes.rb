@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
 
   resources :bikes do
-    resources :services
+    resources :bike_services
   end
   get '/services/new_with_parts_selected/:bike_id' \
         => 'services#new_with_parts_selected', as: :get_new_service_with_parts_selected
