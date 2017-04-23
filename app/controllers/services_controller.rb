@@ -36,6 +36,9 @@ class ServicesController < ApplicationController
 
   # POST /services
   # POST /services.json
+  #
+  # Creating a new service requires a bike and the parts that are involved.
+  #
   def create
     @service = []
     year  = params["service"]["due_date(1i)"]
@@ -49,8 +52,7 @@ class ServicesController < ApplicationController
 
     bike_parts = BikePart.find(params[:bike_part_id])
     bike_parts.each_with_index do |bike_part,i|
-      @service = bike_part.services.create!(due_date: due_date,
-                                            description: description[i])
+      @service = bike_part.services.create!(due_date: due_date, description: description[i])
     end
     # @service = BikeService.new(service_params)
     # @service.bike = @bike
@@ -63,6 +65,7 @@ class ServicesController < ApplicationController
                       notice: 'Service was successfully created.' }
         format.json { render :show, status: :created, location: @service }
       else
+        Rails.logger.debug "SERVICES ==NOT== SAVED"
         format.html { render :new }
         format.json { render json: @service.errors, status: :unprocessable_entity }
       end

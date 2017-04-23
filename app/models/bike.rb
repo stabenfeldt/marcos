@@ -26,6 +26,12 @@ class Bike < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  scope :services_in_progress,   -> { services.where(completed: false)  }
+
+  def in_for_service?
+    services.where(completed: false).present?
+  end
+
   def parts_due_for_service
     bike_parts.map { |p|
       km_since_last = distance - p.service_done_at_bike_distance

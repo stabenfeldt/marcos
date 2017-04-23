@@ -49,7 +49,8 @@ RSpec.describe ServicesController, :type => :controller do
   # ServiceController. Be sure to keep this updated too.
   let(:valid_session) { {} }
    before :each do
-      @bike = Fabricate(:bike)
+      @user = Fabricate(:user)
+      @bike = Fabricate(:bike, user: @user)
       @part = Fabricate(:part, kind: 'cassette', brand: 'generic')
       @bike.parts << @part
       @bike.save
