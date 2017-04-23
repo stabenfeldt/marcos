@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419085153) do
+ActiveRecord::Schema.define(version: 20170423060806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 20170419085153) do
 
   add_index "bike_parts", ["bike_id"], name: "index_bike_parts_on_bike_id", using: :btree
   add_index "bike_parts", ["part_id"], name: "index_bike_parts_on_part_id", using: :btree
+
+  create_table "bike_services", force: :cascade do |t|
+    t.text     "description"
+    t.text     "log"
+    t.datetime "due_date"
+    t.string   "bike_id"
+    t.boolean  "completed"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "bikes", force: :cascade do |t|
     t.string   "year"
@@ -72,6 +82,19 @@ ActiveRecord::Schema.define(version: 20170419085153) do
   end
 
   add_index "orders", ["product_id"], name: "index_orders_on_product_id", using: :btree
+
+  create_table "part_services", force: :cascade do |t|
+    t.text     "description"
+    t.text     "log"
+    t.integer  "bike_service_id"
+    t.boolean  "completed"
+    t.integer  "service_completed_at_milage"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "bike_part_id"
+  end
+
+  add_index "part_services", ["bike_service_id"], name: "index_part_services_on_bike_service_id", using: :btree
 
   create_table "parts", force: :cascade do |t|
     t.string   "brand"
@@ -122,5 +145,6 @@ ActiveRecord::Schema.define(version: 20170419085153) do
   end
 
   add_foreign_key "orders", "products"
+  add_foreign_key "part_services", "bike_services"
   add_foreign_key "services", "bikes"
 end
