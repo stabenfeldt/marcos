@@ -15,8 +15,8 @@ class BikesController < ApplicationController
   # GET /bikes/1.json
   def show
     @service              = @bike.services.new
-    @services_in_progress = @bike.services.in_progress
-    @service_history      = @bike.services.completed
+    #@services_in_progress = @bike.services.in_progress
+    #@service_history      = @bike.services.completed
   end
 
   def parts

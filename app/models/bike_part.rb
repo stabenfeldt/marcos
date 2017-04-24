@@ -14,7 +14,7 @@
 class BikePart < ActiveRecord::Base
   belongs_to :bike
   belongs_to :part
-  has_many :services
+  has_many :part_services
 
   def name
     part.name
@@ -38,7 +38,7 @@ class BikePart < ActiveRecord::Base
 
   def km_until_next_service
     next_service = service_done_at_bike_distance + part.service_interval
-    (next_service - bike.distance) / 1000
+    next_service - bike.distance
   end
 
   def service_due?
