@@ -16,4 +16,7 @@ class Service < ActiveRecord::Base
   belongs_to :bike
   has_many :part_services, dependent: :destroy
   validates :due_date, presence: true
+
+  scope :in_progress, -> { where(completed: false) }
+  scope :completed, -> { where(completed: true) }
 end
