@@ -59,34 +59,34 @@ RSpec.describe ServicesController, :type => :controller do
     end
 
   describe "GET index" do
-    it "assigns all bike_bike_services as @bike_bike_services" do
-      bike_bike_service = BikeBikeService.create! valid_attributes
+    it "assigns all services as @services" do
+      service = Service.create! valid_attributes
       get :index, {}, valid_session
-      expect(assigns(:bike_bike_services)).to eq([bike_bike_service])
+      expect(assigns(:services)).to eq([service])
     end
   end
 
   describe "GET show" do
-    it "assigns the requested bike_service as @bike_service" do
-      bike_service = BikeService.create! valid_attributes
-      get :show, {:id => bike_service.to_param, bike_part_id: bp.id}, valid_session
-      expect(assigns(:bike_service)).to eq(bike_service)
+    it "assigns the requested service as @service" do
+      service = BikeService.create! valid_attributes
+      get :show, {:id => service.to_param, bike_part_id: bp.id}, valid_session
+      expect(assigns(:service)).to eq(service)
     end
   end
 
   describe "GET new" do
 
-    it "bike_services are based on a @bike_service, which holds many bike parts" do
+    it "services are based on a @service, which holds many bike parts" do
       get :new, {bike_id: @bike.id, bike_part_id: @bike_part.id}, valid_session
-      expect(assigns(:bike_service)).to be_a_new(BikeService)
+      expect(assigns(:service)).to be_a_new(BikeService)
     end
   end
 
   describe "GET edit" do
-    it "assigns the requested bike_service as @bike_service" do
-      bike_service = BikeService.create! valid_attributes
-      get :edit, {:id => bike_service.to_param}, valid_session
-      expect(assigns(:bike_service)).to eq(bike_service)
+    it "assigns the requested service as @service" do
+      service = BikeService.create! valid_attributes
+      get :edit, {:id => service.to_param}, valid_session
+      expect(assigns(:service)).to eq(service)
     end
   end
 
@@ -94,35 +94,35 @@ RSpec.describe ServicesController, :type => :controller do
     describe "with valid params", focus: true  do
       it "creates a new BikeService" do
         expect {
-          post :create, { bike_id: @bike.id, bike_service: valid_attributes,
+          post :create, { bike_id: @bike.id, service: valid_attributes,
                           bike_part_id: [@bike_part.id],
-                          bike_service_description: ['fix chain', 'fix headset'],
+                          service_description: ['fix chain', 'fix headset'],
                         },
              valid_session }.to change(BikeService, :count).by(1)
       end
 
-      it "assigns a newly created bike_service as @bike_service" do
-        post :create, {bike_id: @bike.id, :bike_service => valid_attributes,
+      it "assigns a newly created service as @service" do
+        post :create, {bike_id: @bike.id, :service => valid_attributes,
               bike_part_id: [@bike_part.id]}, valid_session
-        expect(assigns(:bike_service)).to be_a(BikeService)
-        expect(assigns(:bike_service)).to be_persisted
+        expect(assigns(:service)).to be_a(BikeService)
+        expect(assigns(:service)).to be_persisted
       end
 
-      it "redirects to the created bike_service" do
-        post :create, {bike_id: @bike.id, :bike_service => valid_attributes,
+      it "redirects to the created service" do
+        post :create, {bike_id: @bike.id, :service => valid_attributes,
                        :bike_part_id => @bike_part.id}, valid_session
         expect(response).to redirect_to([@bike.user, @bike])
       end
     end
 
     describe "with invalid params" do
-      it "assigns a newly created but unsaved bike_service as @bike_service" do
-        post :create, {:bike_service => invalid_attributes}, valid_session
-        expect(assigns(:bike_service)).to be_a_new(BikeService)
+      it "assigns a newly created but unsaved service as @service" do
+        post :create, {:service => invalid_attributes}, valid_session
+        expect(assigns(:service)).to be_a_new(BikeService)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:bike_service => invalid_attributes}, valid_session
+        post :create, {:service => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
     end
@@ -134,53 +134,53 @@ RSpec.describe ServicesController, :type => :controller do
         skip("Add a hash of attributes valid for your model")
       }
 
-      it "updates the requested bike_service" do
-        bike_service = BikeService.create! valid_attributes
-        put :update, {:id => bike_service.to_param, :bike_service => new_attributes}, valid_session
-        bike_service.reload
+      it "updates the requested service" do
+        service = BikeService.create! valid_attributes
+        put :update, {:id => service.to_param, :service => new_attributes}, valid_session
+        service.reload
         skip("Add assertions for updated state")
       end
 
-      it "assigns the requested bike_service as @bike_service" do
-        bike_service = BikeService.create! valid_attributes
-        put :update, {:id => bike_service.to_param, :bike_service => valid_attributes}, valid_session
-        expect(assigns(:bike_service)).to eq(bike_service)
+      it "assigns the requested service as @service" do
+        service = BikeService.create! valid_attributes
+        put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
+        expect(assigns(:service)).to eq(service)
       end
 
-      it "redirects to the bike_service" do
-        bike_service = BikeService.create! valid_attributes
-        put :update, {:id => bike_service.to_param, :bike_service => valid_attributes}, valid_session
-        expect(response).to redirect_to(bike_service)
+      it "redirects to the service" do
+        service = BikeService.create! valid_attributes
+        put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
+        expect(response).to redirect_to(service)
       end
     end
 
     describe "with invalid params" do
-      it "assigns the bike_service as @bike_service" do
-        bike_service = BikeService.create! valid_attributes
-        put :update, {:id => bike_service.to_param, :bike_service => invalid_attributes}, valid_session
-        expect(assigns(:bike_service)).to eq(bike_service)
+      it "assigns the service as @service" do
+        service = BikeService.create! valid_attributes
+        put :update, {:id => service.to_param, :service => invalid_attributes}, valid_session
+        expect(assigns(:service)).to eq(service)
       end
 
       it "re-renders the 'edit' template" do
-        bike_service = BikeService.create! valid_attributes
-        put :update, {:id => bike_service.to_param, :bike_service => invalid_attributes}, valid_session
+        service = BikeService.create! valid_attributes
+        put :update, {:id => service.to_param, :service => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
     end
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested bike_service" do
-      bike_service = BikeService.create! valid_attributes
+    it "destroys the requested service" do
+      service = BikeService.create! valid_attributes
       expect {
-        delete :destroy, {:id => bike_service.to_param}, valid_session
+        delete :destroy, {:id => service.to_param}, valid_session
       }.to change(BikeService, :count).by(-1)
     end
 
-    it "redirects to the bike_services list" do
-      bike_service = BikeService.create! valid_attributes
-      delete :destroy, {:id => bike_service.to_param}, valid_session
-      expect(response).to redirect_to(bike_services_url)
+    it "redirects to the services list" do
+      service = BikeService.create! valid_attributes
+      delete :destroy, {:id => service.to_param}, valid_session
+      expect(response).to redirect_to(services_url)
     end
   end
 

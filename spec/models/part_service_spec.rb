@@ -1,10 +1,23 @@
+# == Schema Information
+#
+# Table name: part_services
+#
+#  id                          :integer          not null, primary key
+#  description                 :text
+#  log                         :text
+#  service_id                  :integer
+#  bike_part_id                :integer
+#  completed                   :boolean
+#  service_completed_at_milage :integer
+#
+
 require 'rails_helper'
 
 RSpec.describe PartService, :type => :model do
   before :all do
-    @bike_service = Fabricate(:bike_service)
+    @service = Fabricate(:service)
     @part_service = Fabricate(:part_service)
-    @bike_service.part_services << @part_service
+    @service.part_services << @part_service
   end
 
   it 'is valid from the fabric' do

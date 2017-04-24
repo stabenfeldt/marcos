@@ -24,10 +24,10 @@ RSpec.describe BikePart, :type => :model do
     expect(@bike_part).to be_valid
   end
 
-  it 'can have one or more services' do
-    @bike_part.services.create(description: 'fix gears')
-    @bike_part.services.create(description: 'fix breaks')
-    expect(@bike_part.services.size).to eq 2
+  it 'can have one or more services', focus: true do
+    @bike_part.part_services.create(description: 'fix gears')
+    @bike_part.part_services.create(description: 'fix breaks')
+    expect(@bike_part.part_services.size).to eq 2
   end
 
   it 'can tell if it´s in for service' do

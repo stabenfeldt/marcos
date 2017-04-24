@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/parts/search:q' => 'parts#search'
 
 
+  resources :services
   resources :bikes do
     resources :bike_services
   end
