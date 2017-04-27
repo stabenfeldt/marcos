@@ -55,7 +55,6 @@ RSpec.describe ServicesController, :type => :controller do
       @bike.parts << @part
       @bike.save
       @bike_part = @bike.parts.first
-      puts "bike_part id is #{@bike_part.id}"
     end
 
   describe "GET index" do
@@ -91,8 +90,8 @@ RSpec.describe ServicesController, :type => :controller do
   end
 
   describe "POST create"do
-    describe "with valid params"do
-      it "creates a new Service", focus: true   do
+    describe "with valid params", focus: true do
+      it "creates a new Service"  do
         expect {
           post :create, { bike_id: @bike.id, service: valid_attributes,
                           bike_part_id: [@bike_part.id],

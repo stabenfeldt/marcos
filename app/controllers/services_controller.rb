@@ -47,14 +47,17 @@ class ServicesController < ApplicationController
     hour  = params["service"]["due_date(4i)"]
     min   = params["service"]["due_date(5i)"]
     due_date = DateTime.parse "#{year}.#{month}.#{day} #{hour}:#{min}"
-    description = params["service_description"]
+    description = params["service"]["description"]
 
     # Create the Bike Service first
     @service = @bike.services.create(due_date: due_date)
 
     # Then one service for each part
-    bike_parts = BikePart.find(params[:bike_part_id])
-    bike_parts.each_with_index do |bike_part,i|
+    bike_parts = []
+    bike_parts << BikePart.find(params[:bike_part_id])
+    bike_parts.flatten!
+
+    bike_parts.each_with_index do |bike_part, i|
       @service.part_services.create!(description: description[i])
     end
 
