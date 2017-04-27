@@ -107,13 +107,14 @@ ActiveRecord::Schema.define(version: 20170424090639) do
   end
 
   create_table "services", force: :cascade do |t|
+    t.string   "description"
+    t.string   "log"
+    t.datetime "due_date"
     t.integer  "bike_id"
-    t.date     "due_date"
-    t.text     "description"
-    t.text     "log"
-    t.boolean  "completed",   default: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "completed",    default: false
+    t.integer  "bike_part_id"
   end
 
   add_index "services", ["bike_id"], name: "index_services_on_bike_id", using: :btree
