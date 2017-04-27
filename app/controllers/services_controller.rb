@@ -55,7 +55,7 @@ class ServicesController < ApplicationController
     # Then one service for each part
     bike_parts = BikePart.find(params[:bike_part_id])
     bike_parts.each_with_index do |bike_part,i|
-      @service.part_services.create!(due_date: due_date, description: description[i])
+      @service.part_services.create!(description: description[i])
     end
 
     respond_to do |format|

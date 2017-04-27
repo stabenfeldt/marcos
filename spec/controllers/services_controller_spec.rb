@@ -21,7 +21,7 @@ require 'rails_helper'
 RSpec.describe ServicesController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # BikeBikeService. As you add validations to BikeBikeService, be sure to
+  # BikeService. As you add validations to BikeService, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
@@ -68,7 +68,7 @@ RSpec.describe ServicesController, :type => :controller do
 
   describe "GET show" do
     it "assigns the requested service as @service" do
-      service = BikeService.create! valid_attributes
+      service = Service.create! valid_attributes
       get :show, {:id => service.to_param, bike_part_id: bp.id}, valid_session
       expect(assigns(:service)).to eq(service)
     end
@@ -78,33 +78,33 @@ RSpec.describe ServicesController, :type => :controller do
 
     it "services are based on a @service, which holds many bike parts" do
       get :new, {bike_id: @bike.id, bike_part_id: @bike_part.id}, valid_session
-      expect(assigns(:service)).to be_a_new(BikeService)
+      expect(assigns(:service)).to be_a_new(Service)
     end
   end
 
   describe "GET edit" do
     it "assigns the requested service as @service" do
-      service = BikeService.create! valid_attributes
+      service = Service.create! valid_attributes
       get :edit, {:id => service.to_param}, valid_session
       expect(assigns(:service)).to eq(service)
     end
   end
 
   describe "POST create"do
-    describe "with valid params", focus: true  do
-      it "creates a new BikeService" do
+    describe "with valid params"do
+      it "creates a new Service", focus: true   do
         expect {
           post :create, { bike_id: @bike.id, service: valid_attributes,
                           bike_part_id: [@bike_part.id],
                           service_description: ['fix chain', 'fix headset'],
                         },
-             valid_session }.to change(BikeService, :count).by(1)
+             valid_session }.to change(Service, :count).by(1)
       end
 
       it "assigns a newly created service as @service" do
         post :create, {bike_id: @bike.id, :service => valid_attributes,
               bike_part_id: [@bike_part.id]}, valid_session
-        expect(assigns(:service)).to be_a(BikeService)
+        expect(assigns(:service)).to be_a(Service)
         expect(assigns(:service)).to be_persisted
       end
 
@@ -118,7 +118,7 @@ RSpec.describe ServicesController, :type => :controller do
     describe "with invalid params" do
       it "assigns a newly created but unsaved service as @service" do
         post :create, {:service => invalid_attributes}, valid_session
-        expect(assigns(:service)).to be_a_new(BikeService)
+        expect(assigns(:service)).to be_a_new(Service)
       end
 
       it "re-renders the 'new' template" do
@@ -135,20 +135,20 @@ RSpec.describe ServicesController, :type => :controller do
       }
 
       it "updates the requested service" do
-        service = BikeService.create! valid_attributes
+        service = Service.create! valid_attributes
         put :update, {:id => service.to_param, :service => new_attributes}, valid_session
         service.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested service as @service" do
-        service = BikeService.create! valid_attributes
+        service = Service.create! valid_attributes
         put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
         expect(assigns(:service)).to eq(service)
       end
 
       it "redirects to the service" do
-        service = BikeService.create! valid_attributes
+        service = Service.create! valid_attributes
         put :update, {:id => service.to_param, :service => valid_attributes}, valid_session
         expect(response).to redirect_to(service)
       end
@@ -156,13 +156,13 @@ RSpec.describe ServicesController, :type => :controller do
 
     describe "with invalid params" do
       it "assigns the service as @service" do
-        service = BikeService.create! valid_attributes
+        service = Service.create! valid_attributes
         put :update, {:id => service.to_param, :service => invalid_attributes}, valid_session
         expect(assigns(:service)).to eq(service)
       end
 
       it "re-renders the 'edit' template" do
-        service = BikeService.create! valid_attributes
+        service = Service.create! valid_attributes
         put :update, {:id => service.to_param, :service => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
       end
@@ -171,14 +171,14 @@ RSpec.describe ServicesController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested service" do
-      service = BikeService.create! valid_attributes
+      service = Service.create! valid_attributes
       expect {
         delete :destroy, {:id => service.to_param}, valid_session
-      }.to change(BikeService, :count).by(-1)
+      }.to change(Service, :count).by(-1)
     end
 
     it "redirects to the services list" do
-      service = BikeService.create! valid_attributes
+      service = Service.create! valid_attributes
       delete :destroy, {:id => service.to_param}, valid_session
       expect(response).to redirect_to(services_url)
     end
