@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = BikeService.all.in_progress.order(:due_date)
+    @services = Service.all.in_progress.order(:due_date)
   end
 
   # GET /services/1
@@ -18,7 +18,7 @@ class ServicesController < ApplicationController
 
   # GET /services/new
   def new
-    @service = BikeService.new
+    @service = Service.new
   end
 
   # GET /services/1/edit
@@ -47,7 +47,7 @@ class ServicesController < ApplicationController
     hour  = params["service"]["due_date(4i)"]
     min   = params["service"]["due_date(5i)"]
     due_date = DateTime.parse "#{year}.#{month}.#{day} #{hour}:#{min}"
-    description = params["service"]["description"]
+    description = params["service_description"]
 
     # Create the Bike Service first
     @service = @bike.services.create(due_date: due_date)
@@ -115,7 +115,7 @@ class ServicesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_service
-      @service = BikeService.find(params[:id])
+      @service = Service.find(params[:id])
     end
 
     def set_bike

@@ -33,7 +33,7 @@ class BikePart < ActiveRecord::Base
   end
 
   def in_for_service?
-    services.where(completed: false).present?
+    part_services.where(completed: false).present?
   end
 
   def km_until_next_service

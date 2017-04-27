@@ -15,9 +15,9 @@ Rails.application.routes.draw do
   get '/parts/search:q' => 'parts#search'
 
 
-  resources :services
+  #resources :services
   resources :bikes do
-    resources :bike_services
+    resources :services
   end
   get '/services/new_with_parts_selected/:bike_id' \
         => 'services#new_with_parts_selected', as: :get_new_service_with_parts_selected
