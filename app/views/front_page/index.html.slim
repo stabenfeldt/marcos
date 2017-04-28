@@ -1,113 +1,113 @@
 /! Main jumbotron for a primary marketing message or call to action
-//.jumbotron
-  .container
-    h1 Problemfri sykkel hele året
-    ul
-      li
-        strong &#9733 Med serviceavtale hos Oslo Sykkel Compagniet blir sykkelen din som ny, hele året.
-      li
-        strong &#9733 Få prioritert service innen 24 timer
-      li
-        strong &#9733 Ingen uforutsette utgifter. Du betaler en fast pris for hele sesongen
-    p
-      a.btn.btn-primary.btn-lg href="#service-booklet" role="button"  Se flere fordeler &raquo;
+.jumbotron
+.container
+  h1 Problemfri sykkel hele året
+  ul
+    li
+      strong &#9733 Med serviceavtale hos Oslo Sykkel Compagniet blir sykkelen din som ny, hele året.
+    li
+      strong &#9733 Få prioritert service innen 24 timer
+    li
+      strong &#9733 Ingen uforutsette utgifter. Du betaler en fast pris for hele sesongen
+  p
+    a.btn.btn-primary.btn-lg href="#service-booklet" role="button"  Se flere fordeler &raquo;
 
 
-//#service-booklet.container
-  .row.text-align-center
-      h1 Digitalt servicehefte
-      p.text-align-left
-        | Alle syklene i vårt system får et eget digital servicehefte. Her kan du selv følge med på hva som er gjort når på de forskjellige delene.
-        br
-        |  Du vil også kunne se hva serviceintervallene er og hva du kan gjøre selv.
-      hr
-
-  #products.row
-    .col-md-4
-      h2 Diamant
-      p
-        ul
-         li Sykkelen er ferdig i løpet av 8 timer.
-         li Vi henter og bringer sykkelen til der du er.
-         li Ring oss 24 timer i døgnet for assistanse.
-         li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-      p
-        a.btn.btn-default href="#products" role="button" onClick="selectOrder('Diamant')" Bestill
-
-    .col-md-4
-      h2 Gull
-      p
-        ul
-          li Sykkelen er ferdig i løpet av 12 timer.
-          li Vi henter og bringer sykkelen til der du er.
-          li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-          br
-      p
-        a.btn.btn-default href="#products" role="button" onClick="selectOrder('Gull')" Bestill
-
-    .col-md-4
-      h2 Sølv
-      p
-        ul
-          li Sykkelen er ferdig i løpet av 24 timer.
-          li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-          br
-          br
-      p
-        a.btn.btn-default href="#products" role="button" onClick="selectOrder('Sølv')" Bestill
-
-  #order
+#service-booklet.container
+.row.text-align-center
+    h1 Digitalt servicehefte
+    p.text-align-left
+      | Alle syklene i vårt system får et eget digital servicehefte. Her kan du selv følge med på hva som er gjort når på de forskjellige delene.
+      br
+      |  Du vil også kunne se hva serviceintervallene er og hva du kan gjøre selv.
     hr
-    h2.text-align-center Bestill her
 
-    = form_tag contact_form_path, class: 'form form-horizontal' do
-      .form-group
-        - @products.blank?
-          .alert.alert-warning
-            You need to add some products to the database.
+#products.row
+  .col-md-4
+    h2 Diamant
+    p
+      ul
+       li Sykkelen er ferdig i løpet av 8 timer.
+       li Vi henter og bringer sykkelen til der du er.
+       li Ring oss 24 timer i døgnet for assistanse.
+       li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+    p
+      a.btn.btn-default href="#products" role="button" onClick="selectOrder('Diamant')" Bestill
 
-        - @products.each do |product|
-          .col-lg-10
-            .radio
-              label
-                = radio_button_tag(:product_id, product.id, false, class: product.name )
-                = product.name
+  .col-md-4
+    h2 Gull
+    p
+      ul
+        li Sykkelen er ferdig i løpet av 12 timer.
+        li Vi henter og bringer sykkelen til der du er.
+        li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+        br
+    p
+      a.btn.btn-default href="#products" role="button" onClick="selectOrder('Gull')" Bestill
 
-      br
+  .col-md-4
+    h2 Sølv
+    p
+      ul
+        li Sykkelen er ferdig i løpet av 24 timer.
+        li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+        br
+        br
+    p
+      a.btn.btn-default href="#products" role="button" onClick="selectOrder('Sølv')" Bestill
 
-      br
-      .form-group
-        = label_tag 'name', nil, class: 'control-label col-lg-1'
+#order
+  hr
+  h2.text-align-center Bestill her
+
+  = form_tag contact_form_path, class: 'form form-horizontal' do
+    .form-group
+      - @products.blank?
+        .alert.alert-warning
+          You need to add some products to the database.
+
+      - @products.each do |product|
         .col-lg-10
-          = text_field_tag(:name, nil, placeholder: 'Ditt navn')
+          .radio
+            label
+              = radio_button_tag(:product_id, product.id, false, class: product.name )
+              = product.name
 
-      br
-      .form-group
-        = label_tag 'email', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:email, nil, placeholder: 'Epost')
+    br
 
-      br
-      .form-group
-        = label_tag 'phone', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:phone, nil, placeholder: 'Telefonnummer')
+    br
+    .form-group
+      = label_tag 'name', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:name, nil, placeholder: 'Ditt navn')
 
-      br
-      .form-group
-        = label_tag 'bike_brand', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:bike_brand, nil, placeholder: 'Sykkelmerke')
+    br
+    .form-group
+      = label_tag 'email', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:email, nil, placeholder: 'Epost')
 
-      br
-      .form-group
-        = label_tag 'bike_model', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:bike_model, nil, placeholder: 'Sykkelmodell')
+    br
+    .form-group
+      = label_tag 'phone', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:phone, nil, placeholder: 'Telefonnummer')
 
-      .form-group
-        .col-lg-offset-2.col-lg-10
-          = submit_tag('Bestill', class:'input-grp')
+    br
+    .form-group
+      = label_tag 'bike_brand', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:bike_brand, nil, placeholder: 'Sykkelmerke')
 
-  hr/
+    br
+    .form-group
+      = label_tag 'bike_model', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:bike_model, nil, placeholder: 'Sykkelmodell')
+
+    .form-group
+      .col-lg-offset-2.col-lg-10
+        = submit_tag('Bestill', class:'input-grp')
+
+hr/
 
