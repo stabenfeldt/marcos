@@ -31,4 +31,9 @@ RSpec.describe Service, :type => :model do
     expect(@service.part_services.size).to eq 2
   end
 
+  it 'can list all bike parts' do
+    expect(@service.bike_parts.size).to eq 2
+    expect(@service.bike_parts.first.class).to be BikePart
+  end
+
 end
