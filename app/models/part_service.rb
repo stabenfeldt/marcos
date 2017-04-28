@@ -14,4 +14,6 @@
 class PartService < ActiveRecord::Base
   belongs_to :service
   belongs_to :bike_part
+
+  validates :bike_part, :service, presence: true
 end

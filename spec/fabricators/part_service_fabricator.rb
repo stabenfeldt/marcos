@@ -14,7 +14,8 @@
 Fabricator(:part_service) do
   description                 "big service"
   log                         "replaced 2 parts"
-  service                { Fabricate(:service) }
+  service                     { Fabricate(:service) }
+  bike_part                   { Fabricate(:bike_part) }
   completed                   false
   service_completed_at_milage 1202
 end
