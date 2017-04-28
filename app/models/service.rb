@@ -19,4 +19,8 @@ class Service < ActiveRecord::Base
 
   scope :in_progress, -> { where(completed: false) }
   scope :completed, -> { where(completed: true) }
+
+  def bike_parts
+    part_services.collect{ |service| service.bike_part }
+  end
 end
