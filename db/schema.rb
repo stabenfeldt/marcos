@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170424090639) do
+ActiveRecord::Schema.define(version: 20170428115338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20170424090639) do
     t.float    "service_done_at_bike_distance", default: 0.0
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
-    t.integer  "service_id"
   end
 
   add_index "bike_parts", ["bike_id"], name: "index_bike_parts_on_bike_id", using: :btree
@@ -78,7 +77,7 @@ ActiveRecord::Schema.define(version: 20170424090639) do
     t.text    "log"
     t.integer "service_id"
     t.integer "bike_part_id"
-    t.boolean "completed"
+    t.boolean "completed",                   default: false
     t.integer "service_completed_at_milage"
   end
 
@@ -107,14 +106,13 @@ ActiveRecord::Schema.define(version: 20170424090639) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.string   "description"
-    t.string   "log"
-    t.datetime "due_date"
     t.integer  "bike_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "completed",    default: false
-    t.integer  "bike_part_id"
+    t.date     "due_date"
+    t.text     "description"
+    t.text     "log"
+    t.boolean  "completed",   default: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   add_index "services", ["bike_id"], name: "index_services_on_bike_id", using: :btree
