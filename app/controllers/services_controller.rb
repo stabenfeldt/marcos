@@ -1,7 +1,10 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
   before_action :set_bike_part, only: [:new, :create, :new_with_parts_selected]
+  before_action :set_bike_part_from_service, only: [:edit]
   before_action :set_bike, only: [:new_with_parts_selected]
+
+
 
 
   # GET /services
@@ -122,8 +125,11 @@ class ServicesController < ApplicationController
       @bike = Bike.find(params[:bike_id])
     end
 
+    def set_bike_part_from_service
+      @bike_parts = @service.bike_parts
+    end
+
     def set_bike_part
-      Rails.logger.debug "params is: #{params}"
       @bike_parts = []
       @bike_parts << BikePart.find(params[:bike_part_id])
       @bike_parts.flatten!
