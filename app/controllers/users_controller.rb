@@ -89,8 +89,13 @@ class UsersController < ApplicationController
     end
 
     def only_admins
-      redirect_to root_url, warning: 'Only for admins' \
+      flash.alert = "You must be logged in"
+      flash.notice = "You must be logged in"
+
+      redirect_to root_url, alert: 'Only for admins' \
         unless current_user.admin? || current_user == @user
+      # redirect_to root_url, alert: 'Only for admins' \
+      #   unless current_user.admin? || current_user == @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
