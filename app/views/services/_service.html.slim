@@ -17,9 +17,8 @@
       - else
         strong= "Skulle vært ferdig for \
           #{distance_of_time_in_words(DateTime.now, service.due_date)} siden"
-      br
-      .pull-right.em.text-muted= l(service.due_date)
-      hr
+        br
+        em.pull-right.em.text-muted= l service.due_date.to_date
 
 
   - unless body_id == 'bikes_show'
@@ -33,24 +32,23 @@
           .img-responsive.thumbnail
             = image_tag(service.bike.image_url, width: '400')
 
-  h3 This services involves these parts
-  = service.bike_parts.each do |part|
-    strong= part.kind
+  - service.part_services.each do |part_service|
+    strong= part_service.bike_part.kind
     br
     br
-  = simple_format part.service.description
+    = simple_format part_service.description
 
-  - if service.log.present?
-    br
-    br
-    p
-      strong Log
+    - if part_service.log.present?
       br
-      = simple_format service.log
+      br
+      p
+        strong Log
+        br
+        = simple_format service.log
 
-  br
-  br
-  br
-  - if service.persisted?
-    .button-group
-      = link_to 'Edit', edit_bike_service_path(service.bike, service), class: 'btn btn-primary'
+    br
+    br
+    br
+    - if service.persisted?
+      .button-group
+        = link_to 'Edit', edit_bike_service_path(service.bike, service), class: 'btn btn-primary'
