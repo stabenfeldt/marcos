@@ -34,8 +34,6 @@
 
   - service.part_services.each do |part_service|
     strong= part_service.bike_part.kind
-    br
-    br
     = simple_format part_service.description
 
     - if part_service.log.present?
@@ -45,10 +43,11 @@
         strong Log
         br
         = simple_format service.log
+    br
 
-    br
-    br
-    br
-    - if service.persisted?
-      .button-group
-        = link_to 'Edit', edit_bike_service_path(service.bike, service), class: 'btn btn-primary'
+  br
+  br
+  br
+  - if service.persisted?
+    .button-group
+      = link_to 'Rediger', edit_bike_service_path(service.bike, service), class: 'btn btn-primary'
