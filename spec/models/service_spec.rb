@@ -39,7 +39,7 @@ RSpec.describe Service, :type => :model do
     expect(@service.bike_parts.first.class).to be BikePart
   end
 
-  it 'mark as complete' do
+  it 'mark all part_services as complete' do
     chain_log    = 'oiled and replaced one link'
     cassette_log = 'replaced outer ring'
     @service.complete!(
@@ -49,6 +49,9 @@ RSpec.describe Service, :type => :model do
       }
     )
     expect(@service.complete?).to eq true
+    expect(@service.part_services.first).to eq @chain_service
+    expect(@service.part_services.first.log).to eq chain_log
+    expect(Service.all.completed).to eq [@service]
   end
 
 end
