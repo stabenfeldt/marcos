@@ -1,8 +1,8 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update, :destroy]
   before_action :set_bike_part, only: [:new, :create, :new_with_parts_selected]
-  before_action :set_bike_part_from_service, only: [:edit]
-  before_action :set_bike, only: [:new_with_parts_selected]
+  before_action :set_bike_part_from_service, only: [:edit, :update]
+  before_action :set_bike, only: [:new_with_parts_selected, :update]
 
 
 
