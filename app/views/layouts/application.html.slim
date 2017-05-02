@@ -6,14 +6,6 @@ html lang="en"
     - if content_for?(:breadcrumb)
       ol.breadcrumb = yield(:breadcrumb)
     #content.container
-      strong FLASH
-      p = flash[:notice]
-      p = flash.inspect
-      - if flash[:notice]
-        p = flash[:notice]
-      - if flash[:warning]
-        p = flash[:warning]
-
       .flash-messages
         = flash_messages
       = yield
