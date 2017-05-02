@@ -41,6 +41,8 @@
               - unless bike_part.in_for_service?
                 td = check_box_tag 'bike_part_id[]', bike_part.id, false
 
-        = submit_tag 'registrer en service'
+        br
+        br
+        = submit_tag 'registrer en service', class: 'btn btn-primary'
 
 
