@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170428115338) do
+ActiveRecord::Schema.define(version: 20170506074212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,14 +107,16 @@ ActiveRecord::Schema.define(version: 20170428115338) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.text     "description"
-    t.text     "log"
-    t.datetime "due_date"
-    t.string   "bike_id"
-    t.boolean  "completed",   default: false
+    t.string   "description"
+    t.string   "log"
+    t.date     "due_date"
+    t.integer  "bike_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.boolean  "completed",   default: false
   end
+
+  add_index "services", ["bike_id"], name: "index_services_on_bike_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
@@ -132,4 +134,5 @@ ActiveRecord::Schema.define(version: 20170428115338) do
 
   add_foreign_key "orders", "products"
   add_foreign_key "part_services", "services"
+  add_foreign_key "services", "bikes"
 end

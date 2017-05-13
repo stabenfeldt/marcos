@@ -14,6 +14,7 @@ class BikesController < ApplicationController
   # GET /bikes/1
   # GET /bikes/1.json
   def show
+    flash[:notice] = service_registered_but_not_delivered
     @service              = @bike.services.new
     #@services_in_progress = @bike.services.in_progress
     #@service_history      = @bike.services.completed
@@ -108,5 +109,16 @@ class BikesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def bike_params
       params.require(:bike).permit(:brand, :model, :year, :image)
+    end
+
+    def service_registered_but_not_delivered
+      @service = current_user.services.in_progress.first
+      msg = "Hei," \
+            "<br/>" \
+            "Print ut kvitteringen du finner på  "\
+            "#{view_context.link_to('denne siden ',
+              receipt_for_new_service_path(@bike) )}" \
+            "og ta den med deg til verkstedet. "
+      return msg
     end
 end

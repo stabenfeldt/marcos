@@ -16,9 +16,12 @@ Rails.application.routes.draw do
 
 
   #resources :services
+  get 'receipt_for_new_service/:bike_id' => 'services#receipt_for_new_service',
+    as: :receipt_for_new_service
   resources :bikes do
     resources :services
   end
+
   get '/services/new_with_parts_selected/:bike_id' \
         => 'services#new_with_parts_selected', as: :get_new_service_with_parts_selected
   post '/services/new_with_parts_selected/:bike_id' \
