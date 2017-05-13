@@ -7,14 +7,14 @@
 
 
 ul.nav.nav-tabs
-  li.active role="presentation"
+  /li.active role="presentation"
     a href="#bike"  data-toggle="tab" Sykkelen
 
-  li role="presentation"
-    - if @services_in_progress.present?
-      a href="#this_service"  data-toggle="tab" Denne servicen
-    - else
-      a href="#new_service"  data-toggle="tab" Ny service
+  /li role="presentation"
+    /- if @services_in_progress.present?
+    /  a href="#this_service"  data-toggle="tab" Denne servicen
+    /- else
+    /  a href="#new_service"  data-toggle="tab" Ny service
 
   - if @service_history.present?
     li role="presentation"

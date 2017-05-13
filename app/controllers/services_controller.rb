@@ -1,8 +1,9 @@
 class ServicesController < ApplicationController
-  before_action :set_service, only: [:show, :edit, :update, :destroy]
+  before_action :set_service, only: [:show, :edit, :update,
+                                     :destroy, :receipt_for_new_service]
   before_action :set_bike_part, only: [:new, :create, :new_with_parts_selected]
-  before_action :set_bike_part_from_service, only: [:edit]
-  before_action :set_bike, only: [:new_with_parts_selected]
+  before_action :set_bike_part_from_service, only: [:edit, :update]
+  before_action :set_bike, only: [:new_with_parts_selected, :update]
 
 
 
@@ -30,6 +31,12 @@ class ServicesController < ApplicationController
   end
 
   def find_user
+  end
+
+  # This page displays information regarding the service the user has ordered.
+  # The user should print this and bring it with his bike.
+  def receipt_for_new_service
+
   end
 
   def new_with_parts_selected

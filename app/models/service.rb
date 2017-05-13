@@ -23,4 +23,14 @@ class Service < ActiveRecord::Base
   def bike_parts
     part_services.collect{ |service| service.bike_part }
   end
+
+  def complete!(part_services_with_log)
+    part_services_with_log.each do |part_service, log|
+      part_service.update(completed: true, log: log)
+    end
+  end
+
+  def complete?
+    !part_services.select{ |ps| ps.completed == false }.present?
+  end
 end
