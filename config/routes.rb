@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
 
   #resources :services
-  get 'receipt_for_new_service/:bike_id' => 'services#receipt_for_new_service',
+  get 'receipt_for_new_service/:id' => 'services#receipt_for_new_service',
     as: :receipt_for_new_service
   resources :bikes do
     resources :services

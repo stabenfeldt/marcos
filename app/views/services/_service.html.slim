@@ -48,6 +48,12 @@
   br
   br
   br
-  - if service.persisted?
+  - if service.persisted? && admin?
     .button-group
-      = link_to 'Rediger', edit_bike_service_path(service.bike, service), class: 'btn btn-primary'
+      = link_to 'Rediger', edit_bike_service_path(service.bike, service),
+        class: 'btn btn-primary'
+  - if admin?
+    em Debug info
+    p = "State: #{@service.state}"
+
+

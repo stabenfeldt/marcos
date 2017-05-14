@@ -30,5 +30,7 @@ nav.navbar.navbar-inverse
           li
             p
               = "Hei #{current_user.first_name}"
+              br
+              = "Role #{current_user.role}"
               = link_to 'Din side', user_path(current_user)
               = link_to 'Logg ut', '/logout/'
