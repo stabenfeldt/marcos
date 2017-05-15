@@ -78,7 +78,10 @@ class ServicesController < ApplicationController
     bike_parts.flatten!
 
     bike_parts.each_with_index do |bike_part, i|
-      @service.part_services.create!(description: description[i], bike_part: bike_part)
+      distance = @bike.distance
+      @service.part_services.create!(description: description[i],
+                                     bike_part: bike_part,
+                                     service_completed_at_milage: distance)
     end
 
     respond_to do |format|
