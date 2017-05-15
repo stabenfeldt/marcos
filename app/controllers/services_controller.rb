@@ -104,11 +104,10 @@ class ServicesController < ApplicationController
 
         if completed
           $mixpanel.track('Admin', 'Service completed') if completed
-          @service.complete!(part_services_with_log)
-          }
+          @service.complete!(params[:bike_part_id], params[:log])
         end
 
-        notice = @service.completed? ? 'Service marked as complete'  : 'Updated'
+        notice = @service.completed? ? 'Service marked as complete' : 'Updated'
         format.html { redirect_to services_path, notice: notice }
         format.json { render :show, status: :ok, location: @service }
       else
