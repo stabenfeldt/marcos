@@ -18,6 +18,7 @@ class Service < ActiveRecord::Base
   validates :due_date, presence: true
 
   scope :in_progress, -> { where(completed: false) }
+  scope :delivered_to_service, -> { where(completed: false) }
   scope :completed, -> { where(completed: true) }
 
   def bike_parts
@@ -25,7 +26,10 @@ class Service < ActiveRecord::Base
   end
 
   def complete!(part_services_with_log)
+    self.update(completed: true)
     part_services_with_log.each do |part_service, log|
+      distance = part_service.bike_part.bike.distance
+      part_service.bike_part.update(service_done_at_bike_distance: distance)
       part_service.update(completed: true, log: log)
     end
   end

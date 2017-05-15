@@ -103,11 +103,8 @@ class ServicesController < ApplicationController
         completed = params[:service][:completed] ? true : false
 
         if completed
-          @service.update_attribute(:completed, completed)
           $mixpanel.track('Admin', 'Service completed') if completed
-
-          @bike_parts.each { |bp|
-            bp.update_attribute(:service_done_at_bike_distance, @bike.distance)
+          @service.complete!(part_services_with_log)
           }
         end
 

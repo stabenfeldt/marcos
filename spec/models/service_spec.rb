@@ -16,7 +16,7 @@ require 'rails_helper'
 
 RSpec.describe Service, :type => :model do
   before :all do
-    @bike = Fabricate(:bike)
+    @bike = Fabricate(:bike, distance: 1001)
     @service = @bike.services.create!(due_date: Time.now)
 
     @chain_service    = Fabricate(:part_service, service: @service)
@@ -50,6 +50,7 @@ RSpec.describe Service, :type => :model do
     )
     expect(@service.complete?).to eq true
     expect(@service.part_services.first).to eq @chain_service
+    expect(@service.part_services.first.bike_part.service_done_at_bike_distance).to eq 1001.0
     expect(@service.part_services.first.log).to eq chain_log
     expect(Service.all.completed).to eq [@service]
   end
