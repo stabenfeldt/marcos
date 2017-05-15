@@ -1,13 +1,20 @@
 .box-shadow
+  .pull-right
+    .alert.alert-warning
+      = part_service.service.state
   strong Kilometerstand ved service
+  br
   em = part_service.service_completed_at_milage
+  br
   br
 
   strong Beskrivelse
   em = simple_format part_service.description
   br
-
-  strong Log
-  em = simple_format part_service.log
   br
+
+  - if part_service.completed
+    strong Logg
+    em = simple_format part_service.log
+    br
 
