@@ -53,7 +53,8 @@
       = link_to 'Rediger', edit_bike_service_path(service.bike, service),
         class: 'btn btn-primary'
   - if admin?
-    em Debug info
-    p = "State: #{@service.state}"
+    - if @service.present?
+      em Debug info
+      p = "State: #{@service.state}"
 
 
