@@ -16,4 +16,5 @@
 Fabricator(:bike) do
   name "Avid BB7"
   user { Fabricate(:user) }
+  distance { 1001 }
 end
