@@ -35,9 +35,11 @@ class Service < ActiveRecord::Base
     self.update(completed: true)
     distance = BikePart.find(bike_part_ids.first).bike.distance
     BikePart.find(bike_part_ids).each_with_index do |bp,i|
+      bp.update(service_done_at_bike_distance: distance)
       bike_part_service = bp.part_services.last
-      bike_part_service.bike_part.update(service_done_at_bike_distance: distance)
-      bike_part_service.update!(completed: true, log: service_logs[i])
+      bike_part_service.update!(completed: true,
+                                log: service_logs[i],
+                                service_completed_at_milage: distance)
     end
   end
 
