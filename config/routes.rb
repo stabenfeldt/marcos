@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+  get 'bike_parts/:id', to: 'bike_parts#show', as: :show_bike_part
+
   resources :orders
   post 'payment_received/:id', to: 'orders#payment_received', as: :payment_received
 

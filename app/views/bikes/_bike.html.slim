@@ -35,7 +35,7 @@
             th Antall km til neste service
           - @bike.bike_parts.each do |bike_part|
             tr
-              td = bike_part.kind
+              td = link_to bike_part.kind, show_bike_part_path(bike_part)
               td(align="right") = bike_part.service_interval
               td(align="right") = km_until_next_service(bike_part)
               - unless bike_part.in_for_service?
