@@ -6,9 +6,11 @@
 #  description                 :text
 #  log                         :text
 #  service_id                  :integer
-#  bike_part_id                :integer
-#  completed                   :boolean
+#  completed                   :boolean          default(FALSE)
 #  service_completed_at_milage :integer
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  bike_part_id                :integer
 #
 
 require 'rails_helper'
