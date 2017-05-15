@@ -7,11 +7,21 @@ class ServicesController < ApplicationController
 
 
 
+  # This page shows the receipt the customer tapes to his bike before delivering it
+  def registered
+    set_service
+  end
+
+  def register_bike_in
+    set_service
+    @service.update(:delivered_to_service, true)
+  end
+
 
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all.in_progress.order(:due_date)
+    @services = Service.all.in_progress.delivered_to_service.order(:due_date)
   end
 
   # GET /services/1
