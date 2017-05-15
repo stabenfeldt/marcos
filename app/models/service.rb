@@ -22,16 +22,21 @@ class Service < ActiveRecord::Base
   scope :delivered_to_service, -> { where(completed: false) }
   scope :completed, -> { where(completed: true) }
 
+  def state
+    if delivered_to_service
+      return "Levert til service"
+    elsif completed
+      return "Ferdig"
+    else
+      return "Venter på at sykkelen blir levert inn"
+    end
+
+  end
+
   def bike_parts
     part_services.collect{ |service| service.bike_part }
   end
 
-  # Vi vet bike parts, log og desvription
-  # part_services_with_log =
-  # [
-  #   {
-  #      }
-  # ]
   def complete!(bike_part_ids, service_logs)
     self.update(completed: true)
     distance = BikePart.find(bike_part_ids.first).bike.distance
@@ -39,8 +44,7 @@ class Service < ActiveRecord::Base
       bp.update(service_done_at_bike_distance: distance)
       bike_part_service = bp.part_services.last
       bike_part_service.update!(completed: true,
-                                log: service_logs[i],
-                                service_completed_at_milage: distance)
+                                log: service_logs[i])
     end
   end
 
