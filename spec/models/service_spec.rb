@@ -19,8 +19,12 @@ RSpec.describe Service, :type => :model do
     @bike = Fabricate(:bike, distance: 1001)
     @service = @bike.services.create!(due_date: Time.now)
 
-    @chain_service    = Fabricate(:part_service, service: @service)
-    @cassette_service = Fabricate(:part_service, service: @service)
+    @chain_part       = Fabricate(:part, kind: 'chain')
+    @cassette_part    = Fabricate(:part, kind: 'cassette')
+    @chain            = Fabricate(:bike_part, part: @chain_part,    bike: @bike)
+    @cassette         = Fabricate(:bike_part, part: @cassette_part, bike: @bike)
+    @chain_service    = Fabricate(:part_service, service: @service, bike_part: @chain)
+    @cassette_service = Fabricate(:part_service, service: @service, bike_part: @cassette)
 
     @service.part_services << @chain_service
     @service.part_services << @cassette_service
@@ -42,12 +46,12 @@ RSpec.describe Service, :type => :model do
   it 'mark all part_services as complete' do
     chain_log    = 'oiled and replaced one link'
     cassette_log = 'replaced outer ring'
-    @service.complete!(
-      {
-        @chain_service => chain_log,
-        @cassette_service => cassette_log,
-      }
-    )
+    bike_part_ids = [ @chain.id, @cassette.id ]
+    service_logs = [ chain_log, cassette_log ]
+
+    @service.complete!( bike_part_ids, service_logs )
+    @service.reload
+    expect(@service.completed).to eq true
     expect(@service.complete?).to eq true
     expect(@service.part_services.first).to eq @chain_service
     expect(@service.part_services.first.bike_part.service_done_at_bike_distance).to eq 1001.0

@@ -25,16 +25,23 @@ class Service < ActiveRecord::Base
     part_services.collect{ |service| service.bike_part }
   end
 
-  def complete!(part_services_with_log)
+  # Vi vet bike parts, log og desvription
+  # part_services_with_log =
+  # [
+  #   {
+  #      }
+  # ]
+  def complete!(bike_part_ids, service_logs)
     self.update(completed: true)
-    part_services_with_log.each do |part_service, log|
-      distance = part_service.bike_part.bike.distance
-      part_service.bike_part.update(service_done_at_bike_distance: distance)
-      part_service.update(completed: true, log: log)
+    distance = BikePart.find(bike_part_ids.first).bike.distance
+    BikePart.find(bike_part_ids).each_with_index do |bp,i|
+      bike_part_service = bp.part_services.last
+      bike_part_service.bike_part.update(service_done_at_bike_distance: distance)
+      bike_part_service.update!(completed: true, log: service_logs[i])
     end
   end
 
   def complete?
-    !part_services.select{ |ps| ps.completed == false }.present?
+    part_services.detect{ |ps| ps.completed == false }.blank?
   end
 end
