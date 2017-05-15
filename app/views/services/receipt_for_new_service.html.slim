@@ -1,3 +1,10 @@
+- content_for :breadcrumb do
+  - if admin?
+    li= link_to 'Kunder', users_path
+  li= link_to current_user.name, current_user
+  li
+    strong Følgelapp
+
 h3 Følgelapp for service
 
 
