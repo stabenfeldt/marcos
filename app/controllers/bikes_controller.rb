@@ -3,7 +3,11 @@ class BikesController < ApplicationController
   before_action :set_bike_from_id, only: [:parts, :add_part, :remove_part]
   before_action :set_user #, only: [:new, :create, :show]
 
-  #http_basic_authenticate_with name: "bike", password: "lover"
+  before_action :only_admins, except: [:show, :edit, :update]
+
+  def only_admins
+    redirect_to root_url, alert: 'Only for admins'
+  end
 
   # GET /bikes
   # GET /bikes.json
@@ -26,7 +30,6 @@ class BikesController < ApplicationController
   end
 
   def add_part
-    # Parameters: {"user_id"=>"1", "bike_id"=>"1", "id"=>"1"}
     @part = Part.find params[:id]
     @bike.parts << @part
     @bike.save!
