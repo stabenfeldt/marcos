@@ -1,13 +1,14 @@
 .box-shadow
-  .pull-right
-    .text-right
-      span Service nr:
-      h4.label.label-info = service.id
-      = link_to 'destroy', bike_service_path(service.bike, service),
-        data: { confirm: "Are you sure?" }, method: :delete
+  .pull-right.text-right
+    span Service nr:
+    h4.label.label-info = service.id
+    - if service.present?
+      p.alert.text-underline= "#{service.state}"
+
+
     br
     - if service.completed?
-      span.label.label-success Completed
+      span.label.label-success Ferdig
       br
       strong = l service.due_date.to_date, format: :short
     - elsif service.due_date
@@ -23,7 +24,7 @@
 
   - unless body_id == 'bikes_show'
     h2= link_to service.bike.name, [service.bike.user, service.bike]
-    p.text-muted
+    p.text-muted.clearfix
       = link_to service.bike.user.name, service.bike.user
     hr
     - if service.bike.image?
@@ -48,13 +49,13 @@
   br
   br
   br
-  - if service.persisted? && admin?
-    .button-group
+  .button-group
+    - if service.persisted? && admin?
       = link_to 'Rediger', edit_bike_service_path(service.bike, service),
         class: 'btn btn-primary'
-  - if admin?
-    - if @service.present?
-      em Debug info
-      p = "State: #{@service.state}"
+    - if (( service.bike.user == current_user ) || service.state.blank?) || admin?
+      = link_to 'Slett', bike_service_path(service.bike, service),
+        data: { confirm: "Are you sure?" }, method: :delete,
+        class: 'btn btn-warning pull-right'
 
 
