@@ -1,22 +1,25 @@
-h1 Payed orders
-- if @payed.blank?
-  span.alert.alert-info None of our orders are payed for.
+h1 Orders
 
-- if @payed.present?
-  = render "list", collection: @payed
+- if Order.all.size > 1
+  - if @payed.blank?
+    span.alert.alert-info None of our orders are payed for.
 
-hr
-br
-br
-br
-h1 Not payed
+  - if @payed.present?
+    = render "list", collection: @payed
 
-- if @not_payed.blank?
-  span.alert.alert-info We don't have any new orders
+  hr
+  br
+  br
+  br
+  h1 Not payed
 
-- if @not_payed.present?
-  = render "list", collection: @not_payed
+  - if @not_payed.blank?
+    span.alert.alert-info We don't have any new orders
 
+  - if @not_payed.present?
+    = render "list", collection: @not_payed
+- else
+  span We don't have any orders yet
 br
 br
 br

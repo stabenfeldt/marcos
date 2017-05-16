@@ -15,6 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
+    return unless signed_in?
     current_user.role == 'admin'
   end
 
