@@ -18,9 +18,10 @@ Rails.application.routes.draw do
   get '/parts/search:q' => 'parts#search'
 
 
-  #resources :services
+  get 'delivered_to_service/:id' => 'services#delivered_to_service', as: :delivered_to_service
   get 'receipt_for_new_service/:id' => 'services#receipt_for_new_service',
     as: :receipt_for_new_service
+
   resources :bikes do
     resources :services
   end
