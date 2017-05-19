@@ -53,9 +53,11 @@
     - if service.persisted? && admin?
       = link_to 'Rediger', edit_bike_service_path(service.bike, service),
         class: 'btn btn-primary'
+      = link_to 'Merk som innlevert', delivered_to_service_path(service),
+        class: 'btn btn-success'
     - if (( service.bike.user == current_user ) || service.state.blank?) || admin?
       = link_to 'Slett', bike_service_path(service.bike, service),
-        data: { confirm: "Are you sure?" }, method: :delete,
+        data: { confirm: "Sikker?" }, method: :delete,
         class: 'btn btn-warning pull-right'
 
 
