@@ -19,8 +19,18 @@ class Service < ActiveRecord::Base
   validates :due_date, presence: true
 
   scope :in_progress, -> { where(completed: false) }
-  scope :delivered_to_service, -> { where(completed: false) }
+  scope :delivered_to_service, -> { where(delivered_to_service: true) }
   scope :completed, -> { where(completed: true) }
+
+  def state_class
+    if delivered_to_service
+      return "alert alert-success delivered_to_service"
+    elsif completed
+      return "alert alert-info completed"
+    else
+      return "alert alert-warning awaiting_delivery"
+    end
+  end
 
   def state
     if delivered_to_service
