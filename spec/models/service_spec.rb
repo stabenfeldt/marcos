@@ -60,4 +60,23 @@ RSpec.describe Service, :type => :model do
     expect(Service.all.completed).to eq [@service]
   end
 
+
+  describe "States" do
+
+    before :each do
+      @service = Fabricate(:service)
+    end
+
+    it 'the default state' do
+      expect(@service.delivered_to_service).to be false
+      expect(@service.completed).to be false
+    end
+
+    it 'delivered_to_service!' do
+      @service.delivered_to_service!
+      expect(@service.delivered_to_service).to be true
+      expect(@service.completed).to be false
+    end
+
+  end
 end

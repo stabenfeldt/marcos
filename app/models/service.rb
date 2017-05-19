@@ -40,7 +40,12 @@ class Service < ActiveRecord::Base
     else
       return "Venter på at sykkelen blir levert inn"
     end
+  end
 
+  def delivered_to_service!
+    self.update(delivered_to_service: true)
+    self.update(completed: false)
+    self.save!
   end
 
   def bike_parts
