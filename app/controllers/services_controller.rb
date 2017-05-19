@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
   before_action :set_service, only: [:show, :edit, :update,
-                                     :destroy, :receipt_for_new_service]
+                                     :destroy, :receipt_for_new_service, :delivered_to_service]
   before_action :set_bike_part, only: [:new, :create, :new_with_parts_selected]
   before_action :set_bike_part_from_service, only: [:edit, :update]
   before_action :set_bike, only: [:new_with_parts_selected, :update]
@@ -21,7 +21,7 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all.in_progress.delivered_to_service.order(:due_date)
+    @services = Service.all.delivered_to_service.order(:due_date)
   end
 
   # GET /services/1
@@ -129,6 +129,11 @@ class ServicesController < ApplicationController
                     notice: 'Service was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def delivered_to_service
+    @service.delivered_to_service!
+    redirect_to @service.bike.user, notice: "Innlevert"
   end
 
   private
