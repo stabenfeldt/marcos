@@ -21,7 +21,7 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all.delivered_to_service.order(:due_date)
+    @services = Service.all.delivered_to_service.not_completed.order(:created_at)
   end
 
   # GET /services/1
@@ -64,7 +64,7 @@ class ServicesController < ApplicationController
     description = params["service_description"]
 
     # Create the Bike Service first
-    @service = @bike.services.create!
+    @service = @bike.services.create
 
     # Then one service for each part
     bike_parts = []
