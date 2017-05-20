@@ -16,27 +16,27 @@
 class Service < ActiveRecord::Base
   belongs_to :bike
   has_many :part_services, dependent: :destroy
-  validates :due_date, presence: true
 
   scope :in_progress, -> { where(completed: false) }
   scope :delivered_to_service, -> { where(delivered_to_service: true) }
+  scope :not_completed, -> { where(completed: false) }
   scope :completed, -> { where(completed: true) }
 
   def state_class
-    if delivered_to_service
-      return "alert alert-success delivered_to_service"
-    elsif completed
-      return "alert alert-info completed"
+    if completed
+      return "alert alert-success completed"
+    elsif delivered_to_service
+      return "alert alert-info delivered_to_service"
     else
       return "alert alert-warning awaiting_delivery"
     end
   end
 
   def state
-    if delivered_to_service
-      return "Levert til service"
-    elsif completed
+    if completed
       return "Ferdig"
+    elsif delivered_to_service
+      return "Levert til service"
     else
       return "Venter på at sykkelen blir levert inn"
     end
