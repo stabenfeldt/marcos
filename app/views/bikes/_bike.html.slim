@@ -3,6 +3,7 @@
     = link_to 'Rediger', edit_user_bike_path(@bike.user,@bike), class: 'btn '
     = link_to 'Slett', user_bike_path(@bike.user, @bike), method: :delete,
       data: { confirm: "Virkelig slette?" }, class: 'btn'
+
   h2= bike.name
   br
   em= "Kilometerstand: #{number_with_precision((bike.distance / 1000), locale: 'nb', presition: 2 )}"
