@@ -1,7 +1,6 @@
 .box-shadow
   .pull-right
-    .alert.alert-warning
-      = part_service.service.state
+    p(class= "#{part_service.service.state_class}") = part_service.service.state
   strong Kilometerstand ved service
   br
   em = part_service.service_completed_at_milage
