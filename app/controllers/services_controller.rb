@@ -61,16 +61,10 @@ class ServicesController < ApplicationController
   #
   def create
     @service = []
-    year  = params["service"]["due_date(1i)"]
-    day   = params["service"]["due_date(3i)"]
-    month = params["service"]["due_date(2i)"]
-    hour  = params["service"]["due_date(4i)"]
-    min   = params["service"]["due_date(5i)"]
-    due_date = DateTime.parse "#{year}.#{month}.#{day} #{hour}:#{min}"
     description = params["service_description"]
 
     # Create the Bike Service first
-    @service = @bike.services.create(due_date: due_date)
+    @service = @bike.services.create!
 
     # Then one service for each part
     bike_parts = []
