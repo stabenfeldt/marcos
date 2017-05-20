@@ -33,7 +33,7 @@
         "- Anything we should check up and call the customer about?"
 
 
-    .form-group
+    /.form-group
       = f.label :due_date
       br
       = f.datetime_select :due_date, start_year: Time.now.year,
@@ -49,5 +49,5 @@
 
 
     .form-group
-        = f.submit :class => 'btn btn-primary', value: 'Save'
-        = link_to 'tilbake', :back, class: 'btn'
+        = f.submit :class => 'btn btn-primary', value: 'Lagre'
+        = link_to 'Tilbake', :back, class: 'btn'

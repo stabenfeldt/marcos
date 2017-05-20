@@ -26,7 +26,7 @@
     h2= link_to service.bike.name, [service.bike.user, service.bike]
     p.text-muted.clearfix
       = link_to service.bike.user.name, service.bike.user
-    hr
+
     - if service.bike.image?
       .row
         .col-sm-6.col-md-4
@@ -34,17 +34,21 @@
             = image_tag(service.bike.image_url, width: '400')
 
   - service.part_services.each do |part_service|
-    strong= part_service.bike_part.kind
-    = simple_format part_service.description
+    .well
+      h3= part_service.bike_part.kind
+      hr
 
-    - if part_service.log.present?
+      strong Beskrivelse av service
       br
-      br
-      p
-        strong Log
+      = simple_format part_service.description
+
+      - if part_service.log.present?
         br
-        = simple_format service.log
-    br
+        br
+        p
+          strong Log
+          = simple_format part_service.log
+      br
 
   br
   br
@@ -54,7 +58,7 @@
       = link_to 'Rediger', edit_bike_service_path(service.bike, service),
         class: 'btn btn-primary'
       = link_to 'Merk som innlevert', delivered_to_service_path(service),
-        class: 'btn btn-success'
+        class: 'btn btn-success' unless service.delivered_to_service
     - if (( service.bike.user == current_user ) || service.state.blank?) || admin?
       = link_to 'Slett', bike_service_path(service.bike, service),
         data: { confirm: "Sikker?" }, method: :delete,

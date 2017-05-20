@@ -2,6 +2,17 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy]
   before_action :set_order_by_order_id, only: [:payment_received]
 
+  before_action :only_admins
+
+
+  def only_admins
+    unless signed_in?
+      redirect_to root_url, notice:'Logg inn først'
+    else
+      redirect_to root_url, notice:'only admins' unless admin?
+    end
+  end
+
   http_basic_authenticate_with name: "bike", password: "lover"
 
   # GET /orders
