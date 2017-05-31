@@ -1,6 +1,10 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:show, :edit, :update, :destroy]
-  http_basic_authenticate_with name: "bike", password: "lover"
+  before_action :only_admins
+
+  def only_admins
+    redirect_to root_path, notice: 'Kun for admin' unless admin?
+  end
 
   # GET /parts
   # GET /parts.json
