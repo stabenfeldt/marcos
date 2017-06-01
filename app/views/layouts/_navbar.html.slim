@@ -26,7 +26,7 @@ nav.navbar.navbar-inverse
             li(class="#{ body_id == 'orders_index' ? 'active' : nil }")
               = link_to 'Bestillinger av servicepakken', orders_path
           li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
-            = link_to 'Forsiden', fp_path
+            = link_to 'Forsiden', root_path
           li(class="#{ body_id == 'users_show' ? 'active' : nil }")
             = link_to 'Din side', user_path(current_user)
         .pull-right
