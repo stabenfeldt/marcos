@@ -1,7 +1,113 @@
-doctype html
-html lang="en"
-  = render "layouts/head"
-  body(id=body_id )
-    = flash_messages
-    = yield
+/doctype html
+/html lang="en"
+/  = render "layouts/head"
+/  body(id=body_id )
+/    = flash_messages
+/    = yield
 
+
+
+doctype html
+html[lang="en"]
+  head
+    meta[charset="utf-8"]
+    meta[http-equiv="X-UA-Compatible" content="IE=edge"]
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    meta[name="description" content=""]
+    meta[name="author" content=""]
+    title
+      | Marcos Bike Repair
+    link[href="/bootstrap/css/bootstrap.min.css" rel="stylesheet"]
+    link[href="/bootstrap/css/business-frontpage.css" rel="stylesheet"]
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top[role="navigation"]
+      .container
+        .navbar-header
+          button.navbar-toggle[type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"]
+            span.sr-only
+              | Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand[href="#"]
+            | Marcos Sykkelverksted
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li
+              a[href="#"]
+                | About
+            li
+              a[href="#"]
+                | Services
+            li
+              a[href="#"]
+                | Contact
+    header.business-header
+      .container
+        .row
+          .col-lg-12
+            h1.tagline
+              | Marcos Sykkelverksted
+    .container
+      hr
+      .row
+        .col-sm-8
+          h2
+            | Problemfri sykkel hele året
+          p
+
+          ul
+            li
+              |  Med serviceavtale hos Marco blir sykkelen din som ny, hele året.
+            li
+              |  Få prioritert service innen 24 timer
+            li
+              |  Ingen uforutsette utgifter. Du betaler en fast pris for hele sesongen
+          a.btn.btn-default.btn-lg[href="#"]
+            | Les mer »
+        .col-sm-4
+          h2
+            | Kontakt oss
+          address
+            strong
+              | Birksport Alnabru
+            br
+            |  Smalvollveien 63, 0667 Oslo
+            br
+          address
+            abbr[title="Phone"]
+              | P:
+            |  464 49 152
+            br
+            abbr[title="Email"]
+              | E:
+            a[href="mailto:alnabru@birk.no"]
+              | Alnabru@birk.no
+      hr
+      .row
+        .col-sm-4
+          img.img-circle.img-responsive.img-center[src="http://placehold.it/300x300" alt=""]
+          h2
+            | Marketing Box #1
+          p
+            | These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.
+        .col-sm-4
+          img.img-circle.img-responsive.img-center[src="http://placehold.it/300x300" alt=""]
+          h2
+            | Marketing Box #2
+          p
+            | The images are set to be circular and responsive. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+        .col-sm-4
+          img.img-circle.img-responsive.img-center[src="http://placehold.it/300x300" alt=""]
+          h2
+            | Marketing Box #3
+          p
+            | Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+      hr
+      footer
+        .row
+          .col-lg-12
+            p
+              | Copyright © Your Website 2014
+    script[src="/bootstrap/js/jquery.js"]
+    script[src="/bootstrap/js/bootstrap.min.js"]
