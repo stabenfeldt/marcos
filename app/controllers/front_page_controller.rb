@@ -1,7 +1,10 @@
 class FrontPageController < ApplicationController
-  layout "application"
+  layout "frontpage"
 
   def index
+  end
+
+  def order
     @products = Product.all
   end
 

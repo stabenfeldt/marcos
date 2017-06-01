@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   end
 
 
-  get '/fp' => 'front_page#index'
+  get '/order' => 'front_page#order'
   post '/contact_form' => 'front_page#contact_form'
 
 
