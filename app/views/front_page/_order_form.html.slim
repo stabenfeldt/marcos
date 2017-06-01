@@ -1,0 +1,52 @@
+#order
+  hr
+  h2.text-align-center Bestill her
+
+  = form_tag contact_form_path, class: 'form form-horizontal' do
+    .form-group
+      - @products.blank?
+        .alert.alert-warning
+          You need to add some products to the database.
+
+      - @products.each do |product|
+        .col-lg-10
+          .radio
+            label
+              = radio_button_tag(:product_id, product.id, false, class: product.name )
+              = product.name
+
+    br
+
+    br
+    .form-group
+      = label_tag 'name', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:name, nil, placeholder: 'Ditt navn')
+
+    br
+    .form-group
+      = label_tag 'email', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:email, nil, placeholder: 'Epost')
+
+    br
+    .form-group
+      = label_tag 'phone', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:phone, nil, placeholder: 'Telefonnummer')
+
+    br
+    .form-group
+      = label_tag 'bike_brand', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:bike_brand, nil, placeholder: 'Sykkelmerke')
+
+    br
+    .form-group
+      = label_tag 'bike_model', nil, class: 'control-label col-lg-1'
+      .col-lg-10
+        = text_field_tag(:bike_model, nil, placeholder: 'Sykkelmodell')
+
+    .form-group
+      .col-lg-offset-2.col-lg-10
+        = submit_tag('Bestill', class:'input-grp')
