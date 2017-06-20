@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
 
   get '/order' => 'front_page#order'
+  get '/service_booklet' => 'front_page#service_booklet'
   post '/contact_form' => 'front_page#contact_form'
 
 
