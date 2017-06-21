@@ -8,6 +8,9 @@ class FrontPageController < ApplicationController
     @products = Product.all
   end
 
+  def service_booklet
+  end
+
   def contact_form
     @order = Order.create!(
       name: params[:name],
