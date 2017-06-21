@@ -41,8 +41,8 @@ Rails.application.routes.draw do
   resources :users do
     get 'fetch_bikes_from_strava' => 'users#fetch_bikes_from_strava'
     resources :bikes do
-      get '/parts' => 'bikes#parts'
-      post '/:id' => 'bikes#add_part'
+      get '/parts'  => 'bikes#parts'
+      post '/:id'   => 'bikes#add_part'
       delete '/:id' => 'bikes#remove_part'
     end
   end
