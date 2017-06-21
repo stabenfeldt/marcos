@@ -29,10 +29,11 @@
               th Service intervall
               th Antall km til neste service
             - @bike.bike_parts.each do |bike_part|
+              - text, klass =  km_until_next_service(bike_part)
               tr
                 td = link_to bike_part.kind, show_bike_part_path(bike_part)
                 td(align="right") = bike_part.service_interval
-                td(align="right") = km_until_next_service(bike_part)
+                td(align="right" class=klass) = text
                 - unless bike_part.in_for_service?
                   td = check_box_tag 'bike_part_id[]', bike_part.id, false
 
