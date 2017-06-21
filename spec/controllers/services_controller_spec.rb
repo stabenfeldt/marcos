@@ -101,6 +101,7 @@ RSpec.describe ServicesController, :type => :controller do
       end
 
       it "assigns a newly created service as @service" do
+        pending
         post :create, {bike_id: @bike.id, :service => valid_attributes,
               bike_part_id: [@bike_part.id]}, valid_session
         expect(assigns(:service)).to be_a(Service)
@@ -108,6 +109,7 @@ RSpec.describe ServicesController, :type => :controller do
       end
 
       it "redirects to the created service" do
+        pending
         post :create, {bike_id: @bike.id, :service => valid_attributes,
                        :bike_part_id => @bike_part.id}, valid_session
         expect(response).to redirect_to([@bike.user, @bike])
