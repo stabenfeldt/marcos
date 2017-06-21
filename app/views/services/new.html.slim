@@ -1,12 +1,9 @@
 - content_for :breadcrumb do
-  li= link_to 'Customers', customers_path
-  li= link_to @bike.customer.name, @bike.customer
-  li= link_to @bike.name, @bike.customer
+  li= link_to 'Customers', users_path
+  li= link_to @bike.user.name, @bike.user
+  li= link_to @bike.name, @bike
   li
     strong Register new service
 
-h1 New service
 
 == render 'form'
-
-= link_to 'Back', services_path

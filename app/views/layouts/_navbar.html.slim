@@ -1,22 +1,25 @@
-/- return if body_id == 'front_page_index'
-
 nav.navbar.navbar-inverse
+  ul.nav.navbar-nav
+    li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
+      = link_to 'Forsiden', root_url
   - if !signed_in?
     .container-fluid
-      = link_to 'Logg inn', '/auth/strava/'
+      .pull-right
+        ul.nav.navbar-nav
+         li = link_to 'Logg inn', '/auth/strava/'
   - if signed_in?
     .container-fluid
       /! Brand and toggle get grouped for better mobile display
       .navbar-header
-        button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        = link_to 'Til reparasjon', services_path, class: 'navbar-brand'
+        button.navbar-toggle.collapsed(aria-expanded="false"
+          data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button")
+            span.sr-only Toggle navigation
+            span.icon-bar
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav
-          - if current_user.admin?
+          - if admin?
+            li(class="#{ body_id == 'services_index' ? 'active' : nil }")
+              = link_to 'Til reparasjon', services_path()
             li(class="#{ body_id == 'parts_index' ? 'active' : nil }")
               = link_to 'Deler', parts_path
             li(class="#{ body_id == 'users_index' ? 'active' : nil }")
@@ -25,10 +28,9 @@ nav.navbar.navbar-inverse
               = link_to 'Produkter til forsiden', products_path
             li(class="#{ body_id == 'orders_index' ? 'active' : nil }")
               = link_to 'Bestillinger av servicepakken', orders_path
-          li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
-            = link_to 'Forsiden', fp_path
-          li
-            p
-              = "Hei #{current_user.first_name}"
-              = link_to 'Din side', user_path(current_user)
-              = link_to 'Logg ut', '/logout/'
+          li(class="#{ body_id == 'users_show' ? 'active' : nil }")
+            = link_to 'Din side', user_path(current_user)
+        .pull-right
+            ul.nav.navbar-nav
+              li = link_to 'Logg ut', '/logout/'
+            = "#{current_user.first_name} = #{current_user.role}"

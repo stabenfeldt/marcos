@@ -1,8 +1,14 @@
 class FrontPageController < ApplicationController
-  layout "application"
+  layout "frontpage"
 
   def index
+  end
+
+  def order
     @products = Product.all
+  end
+
+  def service_booklet
   end
 
   def contact_form

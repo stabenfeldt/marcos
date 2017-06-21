@@ -6,8 +6,8 @@ html lang="en"
     - if content_for?(:breadcrumb)
       ol.breadcrumb = yield(:breadcrumb)
     #content.container
-
-      = flash_messages
+      .flash-messages
+        = flash_messages
       = yield
 
-      = render "layouts/footer"
+    = render "layouts/footer"

@@ -1,0 +1,19 @@
+- content_for :businessheader do
+  .row.rounded.main-message
+
+    .col-sm-6
+      h2 Digitalt servicehefte
+      p
+        | Se når det er på tide med service og les historikken online.
+        br
+        | Les serviceinstruksene og reparer selv,
+        br
+        | eller bestill time på verkstedet rett fra nett.
+
+      br
+      br
+      a.btn.btn-danger.btn-lg[href="/order"] Lag en gratis konto »
+    .col-sm-6
+      .image-box
+        = image_tag 'small_service_booklet.png', class: 'img-thumbnail'
+

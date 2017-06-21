@@ -1,5 +1,6 @@
 - content_for :breadcrumb do
-  li= link_to 'Kunder', users_path
+  - if admin?
+    li= link_to 'Kunder', users_path
   li
     strong= @user.name
 

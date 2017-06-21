@@ -1,113 +1,61 @@
-/! Main jumbotron for a primary marketing message or call to action
-//.jumbotron
-  .container
-    h1 Problemfri sykkel hele året
-    ul
-      li
-        strong &#9733 Med serviceavtale hos Oslo Sykkel Compagniet blir sykkelen din som ny, hele året.
-      li
-        strong &#9733 Få prioritert service innen 24 timer
-      li
-        strong &#9733 Ingen uforutsette utgifter. Du betaler en fast pris for hele sesongen
-    p
-      a.btn.btn-primary.btn-lg href="#service-booklet" role="button"  Se flere fordeler &raquo;
+- content_for :businessheader do
+  .row.rounded.main-message
 
-
-//#service-booklet.container
-  .row.text-align-center
-      h1 Digitalt servicehefte
-      p.text-align-left
-        | Alle syklene i vårt system får et eget digital servicehefte. Her kan du selv følge med på hva som er gjort når på de forskjellige delene.
+    .col-sm-6
+      h2 Problemfri sykkel hele året
+      p
+        ul
+          li Med serviceavtale hos Marco blir sykkelen din som ny, hele året.
+          li Få prioritert service innen 24 timer
+          li Ingen uforutsette utgifter. Du betaler en fast pris for hele sesongen
         br
-        |  Du vil også kunne se hva serviceintervallene er og hva du kan gjøre selv.
-      hr
+        a.btn.btn-danger.btn-lg[href="/order"] Les mer »
 
-  #products.row
-    .col-md-4
-      h2 Diamant
+    .col-sm-6
+      h2 Digitalt Servicehefte
       p
         ul
-         li Sykkelen er ferdig i løpet av 8 timer.
-         li Vi henter og bringer sykkelen til der du er.
-         li Ring oss 24 timer i døgnet for assistanse.
-         li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-      p
-        a.btn.btn-default href="#products" role="button" onClick="selectOrder('Diamant')" Bestill
+          li Alle syklene i vårt system får et eget digital servicehefte. Her kan du selv følge med på hva som er gjort når på de forskjellige delene.
+          li Du ser også hva serviceintervallene er og hva du kan gjøre selv.
 
-    .col-md-4
-      h2 Gull
-      p
-        ul
-          li Sykkelen er ferdig i løpet av 12 timer.
-          li Vi henter og bringer sykkelen til der du er.
-          li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-          br
-      p
-        a.btn.btn-default href="#products" role="button" onClick="selectOrder('Gull')" Bestill
+        br
+        = link_to "Les mer", service_booklet_path, class: 'btn btn-danger btn-lg'
 
-    .col-md-4
-      h2 Sølv
-      p
-        ul
-          li Sykkelen er ferdig i løpet av 24 timer.
-          li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-          br
-          br
-      p
-        a.btn.btn-default href="#products" role="button" onClick="selectOrder('Sølv')" Bestill
 
-  #order
-    hr
-    h2.text-align-center Bestill her
+br
+br
+br
+.col-sm-4.product-description
+  img.img-circle.img-responsive.img-left  width="200" alt="" src="https://skihaussteamboat.com/wp-content/uploads/2013/05/13_repair_shop_tools.jpg" /
+  h2 Diamant
+  ul
+   li Sykkelen er ferdig i løpet av 8 timer.
+   li Vi henter og bringer sykkelen til der du er.
+   li Ring oss 24 timer i døgnet for assistanse.
+   li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+  p
+    a.btn.btn-danger href="#products" role="button" onClick="selectOrder('Diamant')" Les mer
 
-    = form_tag contact_form_path, class: 'form form-horizontal' do
-      .form-group
-        - @products.blank?
-          .alert.alert-warning
-            You need to add some products to the database.
+.col-sm-4.product-description
+  img.img-circle.img-responsive.img-left  width="200" alt="" src="http://www.johnstonefitness.com/wp-content/uploads/2011/08/Bike-repair-shop-update_IMG_7640-Edit.jpg" /
+  h2 Gull
+  ul
+    li Sykkelen er ferdig i løpet av 12 timer.
+    li Vi henter og bringer sykkelen til der du er.
+    li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+  br
+  p
+    a.btn.btn-danger href="#products" role="button" onClick="selectOrder('Gull')" Les mer
 
-        - @products.each do |product|
-          .col-lg-10
-            .radio
-              label
-                = radio_button_tag(:product_id, product.id, false, class: product.name )
-                = product.name
-
-      br
-
-      br
-      .form-group
-        = label_tag 'name', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:name, nil, placeholder: 'Ditt navn')
-
-      br
-      .form-group
-        = label_tag 'email', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:email, nil, placeholder: 'Epost')
-
-      br
-      .form-group
-        = label_tag 'phone', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:phone, nil, placeholder: 'Telefonnummer')
-
-      br
-      .form-group
-        = label_tag 'bike_brand', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:bike_brand, nil, placeholder: 'Sykkelmerke')
-
-      br
-      .form-group
-        = label_tag 'bike_model', nil, class: 'control-label col-lg-1'
-        .col-lg-10
-          = text_field_tag(:bike_model, nil, placeholder: 'Sykkelmodell')
-
-      .form-group
-        .col-lg-offset-2.col-lg-10
-          = submit_tag('Bestill', class:'input-grp')
-
-  hr/
+.col-sm-4.product-description
+  img.img-circle.img-responsive.img-left( width="200"
+    src="https://static1.squarespace.com/static/546f1509e4b04f2b5f5e838e/t/590e1ad09f745610d37e7a7b/1494096600068/")
+  h2 Sølv
+  ul
+    li Sykkelen er ferdig i løpet av 24 timer.
+    li Vi henter og bringer sykkelen til der du er.
+    li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+  br
+  p
+    a.btn.btn-danger href="#products" role="button" onClick="selectOrder('Sølv')" Les mer
 

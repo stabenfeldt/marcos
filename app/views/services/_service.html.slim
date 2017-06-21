@@ -1,49 +1,52 @@
 .box-shadow
-  .pull-right
-    .text-right
-      span Service nr:
-      h4.label.label-info = service.id
-    br
-    - if service.completed?
-      span.label.label-success Completed
-      br
-      strong = l service.due_date.to_date, format: :short
-    - else
-      - if DateTime.now < service.due_date
-        strong= "Hentes om #{distance_of_time_in_words(DateTime.now, service.due_date)}"
-      - else
-        strong= "Skulle vært ferdig for #{distance_of_time_in_words(DateTime.now, service.due_date)} siden"
-      br
-      .pull-right.em.text-muted= l(service.due_date)
-      hr
+  .pull-right.text-right
+    span Service nr:
+    h4.label.label-info = service.id
+    - if service.present?
+      p(class= "#{service.state_class}") = service.state
 
+    br
 
   - unless body_id == 'bikes_show'
-    h2= link_to service.bike.name, [service.bike.customer, service.bike]
-    p.text-muted
-      = link_to service.bike.customer.name, service.bike.customer
-    hr
+    h2= link_to service.bike.name, [service.bike.user, service.bike]
+    p.text-muted.clearfix
+      = link_to service.bike.user.name, service.bike.user
+
     - if service.bike.image?
       .row
         .col-sm-6.col-md-4
           .img-responsive.thumbnail
             = image_tag(service.bike.image_url, width: '400')
 
-  strong Description
-  br
-  = simple_format service.description
+  - service.part_services.each do |part_service|
+    .well
+      h3= part_service.bike_part.kind
+      hr
 
-  - if service.log.present?
-    br
-    br
-    p
-      strong Log
+      strong Beskrivelse av service
       br
-      = simple_format service.log
+      = simple_format part_service.description
+
+      - if part_service.log.present?
+        br
+        br
+        p
+          strong Log
+          = simple_format part_service.log
+      br
 
   br
   br
   br
-  - if service.persisted?
-    .button-group
-      = link_to 'Edit', edit_service_path(service), class: 'btn btn-primary'
+  .button-group
+    - if service.persisted? && admin?
+      = link_to 'Rediger', edit_bike_service_path(service.bike, service),
+        class: 'btn btn-primary'
+      = link_to 'Merk som innlevert', delivered_to_service_path(service),
+        class: 'btn btn-success' unless service.delivered_to_service
+    - if (( service.bike.user == current_user ) || service.state.blank?) || admin?
+      = link_to 'Slett', bike_service_path(service.bike, service),
+        data: { confirm: "Sikker?" }, method: :delete,
+        class: 'btn btn-warning pull-right'
+
+

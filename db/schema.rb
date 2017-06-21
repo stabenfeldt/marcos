@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327130452) do
+ActiveRecord::Schema.define(version: 20170511063824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,16 +72,30 @@ ActiveRecord::Schema.define(version: 20170327130452) do
 
   add_index "orders", ["product_id"], name: "index_orders_on_product_id", using: :btree
 
+  create_table "part_services", force: :cascade do |t|
+    t.text     "description"
+    t.text     "log"
+    t.integer  "service_id"
+    t.boolean  "completed",                   default: false
+    t.integer  "service_completed_at_milage"
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.integer  "bike_part_id"
+  end
+
+  add_index "part_services", ["service_id"], name: "index_part_services_on_service_id", using: :btree
+
   create_table "parts", force: :cascade do |t|
     t.string   "brand"
     t.string   "model"
     t.integer  "year"
     t.text     "note"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.string   "tech_doc"
     t.float    "service_interval"
     t.string   "kind"
+    t.text     "service_description"
   end
 
   create_table "products", force: :cascade do |t|
@@ -95,12 +109,12 @@ ActiveRecord::Schema.define(version: 20170327130452) do
   create_table "services", force: :cascade do |t|
     t.string   "description"
     t.string   "log"
-    t.datetime "due_date"
+    t.date     "due_date"
     t.integer  "bike_id"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "completed",    default: false
-    t.integer  "bike_part_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+    t.boolean  "completed",            default: false
+    t.boolean  "delivered_to_service", default: false
   end
 
   add_index "services", ["bike_id"], name: "index_services_on_bike_id", using: :btree
@@ -120,5 +134,6 @@ ActiveRecord::Schema.define(version: 20170327130452) do
   end
 
   add_foreign_key "orders", "products"
+  add_foreign_key "part_services", "services"
   add_foreign_key "services", "bikes"
 end

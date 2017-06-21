@@ -10,8 +10,7 @@ class Part extends React.Component {
                   <a href={'parts/'+this.props.id} data-method="delete"> Slett </a>
                 </div>
 
-                <h4> {this.props.brand} - {this.props.model} </h4>
-                <em> {this.props.year} </em>
+                <h4> {this.props.kind} </h4>
                 <span>{this.props.note}</span>
 
             </div>

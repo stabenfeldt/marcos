@@ -2,16 +2,17 @@
 #
 # Table name: parts
 #
-#  id               :integer          not null, primary key
-#  brand            :string
-#  model            :string
-#  year             :integer
-#  note             :text
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  tech_doc         :string
-#  service_interval :integer
-#  kind             :string
+#  id                  :integer          not null, primary key
+#  brand               :string
+#  model               :string
+#  year                :integer
+#  note                :text
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  tech_doc            :string
+#  service_interval    :float
+#  kind                :string
+#  service_description :text
 #
 
 require 'rails_helper'
@@ -44,6 +45,11 @@ RSpec.describe Part, :type => :model do
     it 'Each part knows how long until next service' do
       @bike.update_attribute(:distance, 50)
       expect(@suspension.km_until_next_service).to eq 50
+    end
+
+    it 'Each part can tell if it´s due for service' do
+      @bike.update_attribute(:distance, 50)
+      expect(@suspension.service_due?).to be false
     end
 
     it 'Recalculates after a service has been made' do

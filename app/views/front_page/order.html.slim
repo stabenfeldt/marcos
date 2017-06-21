@@ -1,0 +1,24 @@
+- content_for :businessheader do
+  .row.rounded.main-message
+
+    h3 Lag en konto
+    p
+      | Logg på med Strava slik at vi automatisk kan legge til sykkelene dine.
+      br
+      | Vi ser ikke hvor du sykler, men hvor langt.
+      |  Da kan vi gi beskjed når det er på tide med ny service.
+
+    br
+    br
+    a.btn.btn-danger.btn-lg[href="/auth/strava"] Logg på med Strava »
+
+
+    /h3 Lag egen konto
+    /p
+      | Om du ikke bruker Strava kan du lage en konto og legge inn syklene dine manuelt.
+      | Du må manuelt oppdatere kilometerstanden for at vi kan varsle om
+      br
+      em
+        | (Trenger vi dette?)
+
+    /= render "order_form"

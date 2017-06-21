@@ -1,8 +1,11 @@
-h1 Editing user
+- content_for :breadcrumb do
+  - if admin?
+    li= link_to 'Kunder', users_path
+  li= link_to @user.name, @user
+  li
+    strong Rediger
+
+h1 Rediger profil
 
 == render 'form'
-
-= link_to 'Show', @user
-'|
-= link_to 'Back', users_path
 

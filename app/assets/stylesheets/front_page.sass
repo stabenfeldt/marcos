@@ -1,26 +1,45 @@
-// Place all the styles related to the FrontPage controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
 #front_page_index
-  .jumbotron
-    //background: url('http://thebicyclelibrary.com/wp-content/uploads/2015/10/o-BIKE-WINNERS-facebook.jpg')
-    height: 600px
-    .container
-      margin-top: 80px
-
-  form
-  input[type=radio]
-    margin-right: 10px
-
+  h2
+    padding-top: 26px
+    padding-bottom: 10px
   ul
-    margin-left: -35px
-    line-height: 20px
+    padding-bottom: 25px
 
-  h1
-    margin-bottom: 25px
-    font-size: 3em
 
-  .btn-primary
-    margin-top: 20px
-    color: white
+  .product-description
+    &>
+      img
+        width: 200px
+        height: 140px
+    height: 400px
+    a.button
+      margin-top: 10px
+
+.business-header
+  //margin-top: 40px
+  height: 600px
+  background: url('/assets/top.jpg') center center no-repeat scroll
+  -webkit-background-size: cover
+  -moz-background-size: cover
+  background-size: cover
+  -o-background-size: cover
+
+/* Customize the text color and shadow color and to optimize text legibility.
+
+.tagline
+  text-shadow: 0 0 10px #000
+  color: #fff
+
+.img-center
+  margin: 0 auto
+
+footer
+  margin: 50px 0
+
+.main-message
+  background-color: white
+  padding: 0 0 15px 0
+
+  -webkit-border-radius: 10px
+  -moz-border-radius: 10px
+  border-radius: 10px

@@ -1,0 +1,10 @@
+h1 = @bike_part.kind
+
+- if @bike_part.part_services.blank?
+  strong Det er ikke registrert noe på denne delen.
+- else
+  = render @bike_part.part_services
+
+br
+br
+= link_to 'Tilbake', @bike_part.bike, class: 'btn btn-default'

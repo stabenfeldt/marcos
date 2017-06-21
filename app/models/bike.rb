@@ -18,13 +18,19 @@ class Bike < ActiveRecord::Base
   has_many :bike_parts, dependent: :destroy
   has_many :parts, through: :bike_parts
 
-  has_many :services
+  has_many :services, dependent: :destroy
   validates :name, :user, presence: true
   belongs_to :user
 
   after_create :add_default_parts, on: :create
 
   mount_uploader :image, ImageUploader
+
+  scope :services_in_progress,   -> { services.where(completed: false)  }
+
+  def in_for_service?
+    services.where(completed: false).present?
+  end
 
   def parts_due_for_service
     bike_parts.map { |p|

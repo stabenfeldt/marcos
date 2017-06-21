@@ -21,20 +21,41 @@ require 'rails_helper'
 RSpec.describe ServicesController, :type => :controller do
 
   # This should return the minimal set of attributes required to create a valid
-  # Service. As you add validations to Service, be sure to
+  # BikeService. As you add validations to BikeService, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    {
+        description: "Must fix the quirking",
+        log:         "I oiled it",
+        "due_date(3i)"=>"19",
+        "due_date(2i)"=>"4",
+        "due_date(1i)"=>"2017",
+        "due_date(4i)"=>"20",
+        "due_date(5i)"=>"34"
+    }
   }
 
+
+
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    {
+      log:         "I oiled it",
+      due_date:    "2015-11-12"
+    }
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # ServicesController. Be sure to keep this updated too.
+  # ServiceController. Be sure to keep this updated too.
   let(:valid_session) { {} }
+   before :each do
+      @user = Fabricate(:user)
+      @bike = Fabricate(:bike, user: @user)
+      @part = Fabricate(:part, kind: 'cassette', brand: 'generic')
+      @bike.parts << @part
+      @bike.save
+      @bike_part = @bike.parts.first
+    end
 
   describe "GET index" do
     it "assigns all services as @services" do
@@ -47,20 +68,15 @@ RSpec.describe ServicesController, :type => :controller do
   describe "GET show" do
     it "assigns the requested service as @service" do
       service = Service.create! valid_attributes
-      get :show, {:id => service.to_param}, valid_session
+      get :show, {:id => service.to_param, bike_part_id: bp.id}, valid_session
       expect(assigns(:service)).to eq(service)
     end
   end
 
   describe "GET new" do
-    before :each do
-      @bike = Fabricate(:bike)
-      @part = Fabricate(:part)
-      @bike.parts << @part
-      @bike.save
-    end
-    it "assigns a new service as @service" do
-      get :new, {bike_id: @bike.id, part_id: @part.id}, valid_session
+
+    it "services are based on a @service, which holds many bike parts" do
+      get :new, {bike_id: @bike.id, bike_part_id: @bike_part.id}, valid_session
       expect(assigns(:service)).to be_a_new(Service)
     end
   end
@@ -73,23 +89,30 @@ RSpec.describe ServicesController, :type => :controller do
     end
   end
 
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Service" do
+  describe "POST create"do
+    describe "with valid params", focus: true do
+      it "creates a new Service"  do
         expect {
-          post :create, {:service => valid_attributes}, valid_session
-        }.to change(Service, :count).by(1)
+          post :create, { bike_id: @bike.id, service: valid_attributes,
+                          bike_part_id: [@bike_part.id],
+                          service_description: ['fix chain', 'fix headset'],
+                        },
+             valid_session }.to change(Service, :count).by(1)
       end
 
       it "assigns a newly created service as @service" do
-        post :create, {:service => valid_attributes}, valid_session
+        pending
+        post :create, {bike_id: @bike.id, :service => valid_attributes,
+              bike_part_id: [@bike_part.id]}, valid_session
         expect(assigns(:service)).to be_a(Service)
         expect(assigns(:service)).to be_persisted
       end
 
       it "redirects to the created service" do
-        post :create, {:service => valid_attributes}, valid_session
-        expect(response).to redirect_to(Service.last)
+        pending
+        post :create, {bike_id: @bike.id, :service => valid_attributes,
+                       :bike_part_id => @bike_part.id}, valid_session
+        expect(response).to redirect_to([@bike.user, @bike])
       end
     end
 

@@ -19,7 +19,7 @@
 # The User class is used for authenication for the system.
 class User < ActiveRecord::Base
 
-  has_many :bikes
+  has_many :bikes, dependent: :destroy
   has_many :services, through: :bikes
   validates :first_name, :last_name, presence: true
   validates :mobile, :email, uniqueness: true, allow_blank: true

@@ -1,13 +1,27 @@
 class ServicesController < ApplicationController
-  before_action :set_service, only: [:show, :edit, :update, :destroy]
-  before_action :set_bike, only: [:new, :show, :create]
-  before_action :set_part, only: [:new, :show, :create]
+  before_action :set_service, only: [:show, :edit, :update,
+                                     :destroy, :receipt_for_new_service, :delivered_to_service]
+  before_action :set_bike_part, only: [:new, :create, :new_with_parts_selected]
+  before_action :set_bike_part_from_service, only: [:edit, :update]
+  before_action :set_bike, only: [:new_with_parts_selected, :update]
+
+
+
+  # This page shows the receipt the customer tapes to his bike before delivering it
+  def registered
+    set_service
+  end
+
+  def register_bike_in
+    set_service
+    @service.update(:delivered_to_service, true)
+  end
 
 
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all.in_progress.order(:due_date)
+    @services = Service.all.delivered_to_service.not_completed.order(:created_at)
   end
 
   # GET /services/1
@@ -26,22 +40,52 @@ class ServicesController < ApplicationController
     @bike = @service.bike
   end
 
-  def find_customer
+  def find_user
+  end
+
+  # This page displays information regarding the service the user has ordered.
+  # The user should print this and bring it with his bike.
+  def receipt_for_new_service
+
+  end
+
+  def new_with_parts_selected
+    @parts = BikePart.find(params[:bike_part_id])
+    @service = @bike.services.new
   end
 
   # POST /services
   # POST /services.json
+  #
+  # Creating a new service requires a bike and the parts that are involved.
+  #
   def create
-    @service = Service.new(service_params)
-    @service.bike = @bike
+    @service = []
+    description = params["service_description"]
+
+    # Create the Bike Service first
+    @service = @bike.services.create
+
+    # Then one service for each part
+    bike_parts = []
+    bike_parts << BikePart.find(params[:bike_part_id])
+    bike_parts.flatten!
+
+    bike_parts.each_with_index do |bike_part, i|
+      distance = @bike.distance
+      @service.part_services.create!(description: description[i],
+                                     bike_part: bike_part,
+                                     service_completed_at_milage: distance)
+    end
 
     respond_to do |format|
       if @service.save
         $mixpanel.track('Admin', 'Registered a service')
-        format.html { redirect_to [@bike.customer, @bike],
+        format.html { redirect_to [@bike.user, @bike],
                       notice: 'Service was successfully created.' }
         format.json { render :show, status: :created, location: @service }
       else
+        Rails.logger.debug "SERVICES ==NOT== SAVED"
         format.html { render :new }
         format.json { render json: @service.errors, status: :unprocessable_entity }
       end
@@ -54,12 +98,14 @@ class ServicesController < ApplicationController
     respond_to do |format|
       if @service.update!(service_params)
         completed = params[:service][:completed] ? true : false
-        @service.update_attribute(:completed, completed)
 
-        $mixpanel.track('Admin', 'Service completed') if completed
+        if completed
+          $mixpanel.track('Admin', 'Service completed') if completed
+          @service.complete!(params[:bike_part_id], params[:log])
+        end
 
-        notice = @service.completed? ? 'Service marked as complete'  : 'Updated'
-        format.html { redirect_to @service.bike.customer, notice: notice }
+        notice = @service.completed? ? 'Service marked as complete' : 'Updated'
+        format.html { redirect_to services_path, notice: notice }
         format.json { render :show, status: :ok, location: @service }
       else
         format.html { render :edit }
@@ -73,9 +119,15 @@ class ServicesController < ApplicationController
   def destroy
     @service.destroy
     respond_to do |format|
-      format.html { redirect_to services_url, notice: 'Service was successfully destroyed.' }
+      format.html { redirect_to user_bike_url(@service.bike.user, @service.bike),
+                    notice: 'Service was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def delivered_to_service
+    @service.delivered_to_service!
+    redirect_to @service.bike.user, notice: "Innlevert"
   end
 
   private
@@ -88,13 +140,20 @@ class ServicesController < ApplicationController
       @bike = Bike.find(params[:bike_id])
     end
 
-    def set_part
-      @part = BikePart.find(params[:part_id])
+    def set_bike_part_from_service
+      @bike_parts = @service.bike_parts
+    end
+
+    def set_bike_part
+      @bike_parts = []
+      @bike_parts << BikePart.find(params[:bike_part_id])
+      @bike_parts.flatten!
+      @bike = @bike_parts.first.bike
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
       params.require(:service).permit(:description, :log, :due_date, :bike_id,
-                                      :user_id, :completed)
+                    :user_id, :completed, bike_part_id: [])
     end
 end

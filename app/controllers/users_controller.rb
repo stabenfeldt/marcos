@@ -89,7 +89,7 @@ class UsersController < ApplicationController
     end
 
     def only_admins
-      redirect_to root_url, warning: 'Only for admins' \
+      redirect_to root_url, :flash => { notice: 'Only for admins' } \
         unless current_user.admin? || current_user == @user
     end
 

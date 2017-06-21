@@ -1,39 +1,44 @@
 .wellX
   .pull-right
-    = link_to 'Rediger', edit_user_bike_path(@bike.user,@bike), class: 'btn '
+    = link_to 'Rediger', edit_user_bike_path(@bike.user,@bike), class: 'btn btn-primary btm-xs'
     = link_to 'Slett', user_bike_path(@bike.user, @bike), method: :delete,
-      data: { confirm: "Virkelig slette?" }, class: 'btn'
+      data: { confirm: "Virkelig slette?" }, class: 'btn btn-warning'
+
   h2= bike.name
-  span= bike.year
+  br
   em= "Kilometerstand: #{number_with_precision((bike.distance / 1000), locale: 'nb', presition: 2 )}"
   br
   br
   - if bike.image?
     .row
       .col-sm-6.col-md-4
-        .img-responsive.thumbnail
-          = image_tag(bike.image_url, width: '400')
+          = image_tag(bike.image_url, width: '400', class: 'img-responsive thumbnail')
 
 
-  .alert.alert-info
-    | Vi har lagt til de vanligste delene for deg. Om du søker opp riktig merke og modell så får du mer presise service instruksjoner.
-      Når du har gjort det vil du få beskjed om nå de forskjellige serviceintervallene er.
-    br
 
-  table
-    tr
-      th Del
-      //th Merke
-      th Service intervall
-      th Antall km til neste service
-    - @bike.bike_parts.each do |part|
-      tr
-        td = part.kind
-        // td = part.name
-        td(align="right") = part.service_interval.to_i
-        td(align="right") = km_until_next_service(part)
+  - if @bike.bike_parts.empty?
+    em Det er ikke lagt inn noen sykkeldeler enda.
+  - else
+    .box-shadow
+      = form_for [@bike, @service], url: new_bike_service_path(@bike, @service),
+        method: :get do |f|
+          table
+            tr
+              th Del
+              //th Merke
+              th Service intervall
+              th Antall km til neste service
+            - @bike.bike_parts.each do |bike_part|
+              - text, klass =  km_until_next_service(bike_part)
+              tr
+                td = link_to bike_part.kind, show_bike_part_path(bike_part)
+                td(align="right") = bike_part.service_interval
+                td(align="right" class=klass) = text
+                - unless bike_part.in_for_service?
+                  td = check_box_tag 'bike_part_id[]', bike_part.id, false
 
-  br
-  br
-  = link_to 'Legg til eller fjern deler', user_bike_parts_path(bike.user, bike), class: 'btn btn-primary'
+          br
+          br
+          = submit_tag 'Bestill service på valgte deler', class: 'btn btn-primary btm-xs'
+
 

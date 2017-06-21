@@ -3,7 +3,12 @@ class BikesController < ApplicationController
   before_action :set_bike_from_id, only: [:parts, :add_part, :remove_part]
   before_action :set_user #, only: [:new, :create, :show]
 
-  #http_basic_authenticate_with name: "bike", password: "lover"
+  before_action :only_admins, except: [:show, :edit, :update]
+
+  def only_admins
+    return if @bike.user == current_user
+    redirect_to root_url, alert: 'Only for admins'
+  end
 
   # GET /bikes
   # GET /bikes.json
@@ -15,8 +20,9 @@ class BikesController < ApplicationController
   # GET /bikes/1.json
   def show
     @service              = @bike.services.new
-    @services_in_progress = @bike.services.in_progress
-    @service_history      = @bike.services.completed
+    service_registered_but_not_delivered
+    #@services_in_progress = @bike.services.in_progress
+    #@service_history      = @bike.services.completed
   end
 
   def parts
@@ -25,7 +31,6 @@ class BikesController < ApplicationController
   end
 
   def add_part
-    # Parameters: {"user_id"=>"1", "bike_id"=>"1", "id"=>"1"}
     @part = Part.find params[:id]
     @bike.parts << @part
     @bike.save!
@@ -101,12 +106,24 @@ class BikesController < ApplicationController
     end
 
     def set_user
-      @user = User.find(params[:user_id])
+      @user = current_user # User.find(params[:user_id])
     end
 
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bike_params
       params.require(:bike).permit(:brand, :model, :year, :image)
+    end
+
+    def service_registered_but_not_delivered
+      return unless @service.delivered_to_service
+      @service = current_user.services.in_progress.first
+      msg = "Hei," \
+            "<br/>" \
+            "Print ut kvitteringen du finner på  "\
+            "#{view_context.link_to('denne siden ',
+              receipt_for_new_service_path(@bike) )}" \
+            "og ta den med deg til verkstedet. "
+      flash[:notice] = msg
     end
 end

@@ -1,22 +1,39 @@
-/= render partial: 'layouts/form_error_messages', locals: { form_object: @service }
+= render partial: 'layouts/form_error_messages',
+  locals: { form_object: @service }
 
 .form-horizontal
   = form_for [@bike, @service] do |f|
 
-    .form-group
+    - @bike_parts.each do |p|
+      h3= p.kind
+      = text_field_tag("bike_part_id[]", p.id, class: 'hidden')
+      br
+      .form-group
+        label(for="service_description[]") Beskrivelse
+        = text_area_tag("service_description[]",
+          (p.service_description || 'Placeholder: Oil and replace worn parts'),
+           rows: 5, class: 'form-control')
+      - unless @service.new_record?
+        .form-group
+          label(for="log[]") Log
+          = text_area_tag("log[]",
+            (p.service_description || 'Placeholder: What has been done'),
+            rows: 5, class: 'form-control')
+      br
+      hr
+      /= f.fields_for :bike_part_service do |bike_part_service|
+        em bike_part_service
+        = bike_part_service.description :description
+
+    /.form-group
       = f.label :description
       = f.text_area :description, class: 'form-control', rows: 6,
         placeholder: "- What does the customer want us to help with? \n" \
         "- Have we agreed upon a price? \n" \
         "- Anything we should check up and call the customer about?"
 
-    - unless @service.new_record?
-      .form-group
-        = f.label :log
-        = f.text_area :log, class: 'form-control', rows: 6,
-          placeholder: "Describe what's done.."
 
-    .form-group
+    /.form-group
       = f.label :due_date
       br
       = f.datetime_select :due_date, start_year: Time.now.year,
@@ -32,5 +49,5 @@
 
 
     .form-group
-        = f.submit :class => 'btn btn-primary', value: 'Save'
-        = link_to 'tilbake', :back, class: 'btn'
+        = f.submit :class => 'btn btn-primary', value: 'Lagre'
+        = link_to 'Tilbake', :back, class: 'btn'
