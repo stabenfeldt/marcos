@@ -1,9 +1,12 @@
-/- return if body_id == 'front_page_index'
-
 nav.navbar.navbar-inverse
+  ul.nav.navbar-nav
+    li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
+      = link_to 'Forsiden', root_url
   - if !signed_in?
     .container-fluid
-      = link_to 'Logg inn', '/auth/strava/'
+      .pull-right
+        ul.nav.navbar-nav
+         li = link_to 'Logg inn', '/auth/strava/'
   - if signed_in?
     .container-fluid
       /! Brand and toggle get grouped for better mobile display
@@ -25,13 +28,9 @@ nav.navbar.navbar-inverse
               = link_to 'Produkter til forsiden', products_path
             li(class="#{ body_id == 'orders_index' ? 'active' : nil }")
               = link_to 'Bestillinger av servicepakken', orders_path
-          li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
-            = link_to 'Forsiden', root_path
           li(class="#{ body_id == 'users_show' ? 'active' : nil }")
             = link_to 'Din side', user_path(current_user)
         .pull-right
-          p
-            = "Hei #{current_user.first_name}"
-            br
-            = "Role #{current_user.role}"
-            = link_to 'Logg ut', '/logout/'
+            ul.nav.navbar-nav
+              li = link_to 'Logg ut', '/logout/'
+            = "#{current_user.first_name} = #{current_user.role}"
