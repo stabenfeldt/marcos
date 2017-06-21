@@ -1,8 +1,8 @@
 .wellX
   .pull-right
-    = link_to 'Rediger', edit_user_bike_path(@bike.user,@bike), class: 'btn '
+    = link_to 'Rediger', edit_user_bike_path(@bike.user,@bike), class: 'btn btn-primary btm-xs'
     = link_to 'Slett', user_bike_path(@bike.user, @bike), method: :delete,
-      data: { confirm: "Virkelig slette?" }, class: 'btn'
+      data: { confirm: "Virkelig slette?" }, class: 'btn btn-warning'
 
   h2= bike.name
   br
@@ -12,8 +12,8 @@
   - if bike.image?
     .row
       .col-sm-6.col-md-4
-        .img-responsive.thumbnail
-          = image_tag(bike.image_url, width: '400')
+          = image_tag(bike.image_url, width: '400', class: 'img-responsive thumbnail')
+
 
 
   - if @bike.bike_parts.empty?
@@ -39,6 +39,6 @@
 
           br
           br
-          = submit_tag 'Bestill service på valgte deler', class: 'btn btn-primary'
+          = submit_tag 'Bestill service på valgte deler', class: 'btn btn-primary btm-xs'
 
 
