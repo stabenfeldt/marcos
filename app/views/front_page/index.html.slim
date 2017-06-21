@@ -8,7 +8,8 @@
           li Med serviceavtale hos Marco blir sykkelen din som ny, hele året.
           li Få prioritert service innen 24 timer
           li Ingen uforutsette utgifter. Du betaler en fast pris for hele sesongen
-        a.btn.btn-default.btn-lg[href="/order"] Les mer »
+        br
+        a.btn.btn-danger.btn-lg[href="/order"] Les mer »
 
     .col-sm-6
       h2 Digitalt Servicehefte
@@ -17,61 +18,44 @@
           li Alle syklene i vårt system får et eget digital servicehefte. Her kan du selv følge med på hva som er gjort når på de forskjellige delene.
           li Du ser også hva serviceintervallene er og hva du kan gjøre selv.
 
-        a.btn.btn-default.btn-lg[href="/order"]
-          | Les mer »
+        br
+        = link_to "Les mer", service_booklet_path, class: 'btn btn-danger btn-lg'
 
-
-/.row
-  .col-sm-4
-    img.img-circle.img-responsive.img-center alt="" src="http://placehold.it/300x300" /
-    h2 Marketing Box #1
-    p These marketing boxes are a great place to put some information. These can contain summaries of what the company does, promotional information, or anything else that is relevant to the company. These will usually be below-the-fold.
-  .col-sm-4
-    img.img-circle.img-responsive.img-center alt="" src="http://placehold.it/300x300" /
-    h2 Marketing Box #2
-    p The images are set to be circular and responsive. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-  .col-sm-4
-    img.img-circle.img-responsive.img-center alt="" src="http://placehold.it/300x300" /
-    h2 Marketing Box #3
-    p Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-/! /.row
 
 br
 br
 br
-.row
-  .col-sm-4
-    img.img-circle.img-responsive.img-left  width="200" alt="" src="https://skihaussteamboat.com/wp-content/uploads/2013/05/13_repair_shop_tools.jpg" /
-    h2 Diamant
-    p
-      ul
-       li Sykkelen er ferdig i løpet av 8 timer.
-       li Vi henter og bringer sykkelen til der du er.
-       li Ring oss 24 timer i døgnet for assistanse.
-       li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-    p
-      a.btn.btn-default href="#products" role="button" onClick="selectOrder('Diamant')" Bestill
+.col-sm-4.product-description
+  img.img-circle.img-responsive.img-left  width="200" alt="" src="https://skihaussteamboat.com/wp-content/uploads/2013/05/13_repair_shop_tools.jpg" /
+  h2 Diamant
+  ul
+   li Sykkelen er ferdig i løpet av 8 timer.
+   li Vi henter og bringer sykkelen til der du er.
+   li Ring oss 24 timer i døgnet for assistanse.
+   li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+  p
+    a.btn.btn-danger href="#products" role="button" onClick="selectOrder('Diamant')" Les mer
 
-  .col-sm-4
-    img.img-circle.img-responsive.img-left  width="200" alt="" src="http://www.johnstonefitness.com/wp-content/uploads/2011/08/Bike-repair-shop-update_IMG_7640-Edit.jpg" /
-    h2 Gull
-    p
-      ul
-        li Sykkelen er ferdig i løpet av 12 timer.
-        li Vi henter og bringer sykkelen til der du er.
-        li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-        br
-    p
-      a.btn.btn-default href="#products" role="button" onClick="selectOrder('Gull')" Bestill
+.col-sm-4.product-description
+  img.img-circle.img-responsive.img-left  width="200" alt="" src="http://www.johnstonefitness.com/wp-content/uploads/2011/08/Bike-repair-shop-update_IMG_7640-Edit.jpg" /
+  h2 Gull
+  ul
+    li Sykkelen er ferdig i løpet av 12 timer.
+    li Vi henter og bringer sykkelen til der du er.
+    li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+  br
+  p
+    a.btn.btn-danger href="#products" role="button" onClick="selectOrder('Gull')" Les mer
 
-  .col-sm-4
-    img.img-circle.img-responsive.img-left  width="200" alt="" src="https://static1.squarespace.com/static/546f1509e4b04f2b5f5e838e/t/590e1ad09f745610d37e7a7b/1494096600068/" /
-    h2 Sølv
-    p
-      ul
-        li Sykkelen er ferdig i løpet av 24 timer.
-        li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
-        br
-        br
-    p
-      a.btn.btn-default href="#products" role="button" onClick="selectOrder('Sølv')" Bestill
+.col-sm-4.product-description
+  img.img-circle.img-responsive.img-left( width="200"
+    src="https://static1.squarespace.com/static/546f1509e4b04f2b5f5e838e/t/590e1ad09f745610d37e7a7b/1494096600068/")
+  h2 Sølv
+  ul
+    li Sykkelen er ferdig i løpet av 24 timer.
+    li Vi henter og bringer sykkelen til der du er.
+    li Bikefitting. Unngå slitasjeskader og få mer ut av sykkelen med spesialtilpassing.
+  br
+  p
+    a.btn.btn-danger href="#products" role="button" onClick="selectOrder('Sølv')" Les mer
+
