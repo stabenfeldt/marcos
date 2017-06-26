@@ -11,6 +11,13 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def toggle_admin
+    return unless admin?
+    session[:admin_menu] = !session[:admin_menu]
+    redirect_to root_url
+  end
+
+
   def search
     first,last = params[:q].split if params[:q].present?
     if params[:q]
