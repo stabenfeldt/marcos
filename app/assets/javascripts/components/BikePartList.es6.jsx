@@ -50,6 +50,7 @@ class BikePartList extends React.Component {
 
         // Add to list of available
         updatedAvailableParts.push(part)
+
         // Remove from available
         updatedUsedParts = _.without(this.state.usedParts, _.findWhere(this.state.usedParts, part));
 

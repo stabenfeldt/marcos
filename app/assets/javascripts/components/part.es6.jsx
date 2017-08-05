@@ -12,6 +12,8 @@ class Part extends React.Component {
 
                 <h4> {this.props.kind} </h4>
                 <span>{this.props.note}</span>
+                <bold>{this.props.brand} </bold>
+                <bold>{this.props.model} </bold>
 
             </div>
         );
