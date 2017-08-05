@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
   end
 
   def self.create_from_omniauth(user_data)
-		user_object = OpenStruct.new(user_data["athlete"])
+		user_object              = OpenStruct.new(user_data["athlete"])
     user_object.access_token = user_data["access_token"]
     create! do |user|
       user.access_token = user_object.access_token
