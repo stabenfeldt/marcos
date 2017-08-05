@@ -31,14 +31,17 @@ class User < ActiveRecord::Base
   end
 
   def fetch_bikes_from_strava
-    user_data = User.fetch_user_data(strava_omniauth_code)
-    user_data["athlete"]["bikes"].each do |b|
-      puts "IMPORTING #{b.inspect}"
-      puts "find_or_create_by #{b['id']}"
+    user_data = fetch_athlete_from_strava
+    user_data["bikes"].each do |b|
       bike = self.bikes.find_or_create_by(strava_id: b['id'])
       bike.update_attributes(name: b["name"], distance: b["distance"])
-      puts "BIKE saved: #{bike.inspect}"
     end
+  end
+
+
+  def fetch_athlete_from_strava
+    HTTParty.get( "https://www.strava.com/api/v3/athlete",
+                   headers: {"Authorization" => "Bearer #{access_token}"} )
   end
 
   def self.fetch_user_data(code)
@@ -72,10 +75,5 @@ class User < ActiveRecord::Base
   def admin?
     role.to_sym == :admin
   end
-
-  private
-
-
-
 
 end
