@@ -51,24 +51,29 @@ class User < ActiveRecord::Base
                    "client_id=#{client_id}" +
                    "&client_secret=#{client_secret}" +
                    "&code=#{code}")
-	end
+  end
+
 
   def self.from_strava_omniauth(code)
     user_data = fetch_user_data(code)
     username = user_data.parsed_response["athlete"]["username"]
-    user = where( { username: username, provider: :strava }).first || create_from_omniauth(user_data)
+    user = where( { username: username, provider: :strava })
+      .first || create_from_omniauth(user_data)
+
     user.update_attribute(:strava_omniauth_code,  code)
     user
   end
 
   def self.create_from_omniauth(user_data)
 		user_object = OpenStruct.new(user_data["athlete"])
+    user_object.access_token = user_data["access_token"]
     create! do |user|
-      user.email      = user_object.email
-      user.first_name = user_object.firstname
-      user.last_name  = user_object.lastname
-      user.provider   = :strava
-      user.username   = user_object.username
+      user.access_token = user_object.access_token
+      user.email        = user_object.email
+      user.first_name   = user_object.firstname
+      user.last_name    = user_object.lastname
+      user.provider     = :strava
+      user.username     = user_object.username
     end
   end
 
