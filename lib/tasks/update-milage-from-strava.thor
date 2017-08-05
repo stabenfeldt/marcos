@@ -1,8 +1,8 @@
 class Bikes < Thor
 
-  desc "update_milage", "Update milage for all bikes from strava"
+  desc "update_distance", "Update distance for all bikes from strava"
 
-  def update_milage
+  def update_distance
     puts "Loading Rails environment..."
     require File.expand_path('config/environment.rb')
 
