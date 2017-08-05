@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def toggle_admin
     return unless admin?
     session[:admin_menu] = !session[:admin_menu]
-    redirect_to root_url
+    redirect_to :back
   end
 
 
