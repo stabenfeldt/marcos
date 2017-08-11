@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170805115343) do
+ActiveRecord::Schema.define(version: 20170811191737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,14 +124,23 @@ ActiveRecord::Schema.define(version: 20170805115343) do
     t.string   "last_name"
     t.string   "email"
     t.string   "mobile"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "provider"
     t.string   "uid"
     t.string   "username"
-    t.string   "role",                 default: "normal"
+    t.string   "role",                   default: "normal"
     t.string   "strava_omniauth_code"
     t.string   "access_token"
+    t.string   "encrypted_password",     default: "",       null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,        null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
   end
 
   add_foreign_key "orders", "products"

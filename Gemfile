@@ -2,10 +2,13 @@ source 'https://rubygems.org'
 
 ruby '2.2.3'
 
+gem 'devise'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'omniauth-openid', github: 'intridea/omniauth-openid'
 gem 'omniauth-twitter'
 gem 'omniauth-strava'
+gem 'omniauth-google'
+
 gem 'strava-api-v3'
 gem 'httparty'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
