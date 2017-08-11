@@ -11,6 +11,9 @@ Rails.application.routes.draw do
 
 	post '/toggle_admin', to: 'users#toggle_admin'
 
+  #devise_for :users, controllers: {
+  #        sessions: 'users/sessions'
+  #      }
 
 
   resources :products
