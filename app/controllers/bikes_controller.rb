@@ -6,7 +6,6 @@ class BikesController < ApplicationController
   before_action :only_admins, except: [:show, :edit, :update]
 
   def only_admins
-    return if @bike.user == current_user
     redirect_to root_url, alert: 'Only for admins'
   end
 
