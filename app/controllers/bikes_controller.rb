@@ -110,9 +110,10 @@ class BikesController < ApplicationController
     end
 
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only allow the white
+    # list through.
     def bike_params
-      params.require(:bike).permit(:brand, :model, :year, :image)
+      params.require(:bike).permit(:brand, :model, :year, :image, :name)
     end
 
     def service_registered_but_not_delivered
