@@ -11,8 +11,7 @@ EXPOSE 80
 
 ADD . /app
 WORKDIR /app
-RUN gem install rdoc
-RUN gem install bundler
+RUN gem install rdoc bundler
 RUN bundler install
 RUN rake db:seed
 
