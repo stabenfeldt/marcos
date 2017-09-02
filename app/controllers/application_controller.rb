@@ -5,14 +5,16 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def after_sign_in_path_for(resource)
+    request.env['omniauth.origin'] ||
+    stored_location_for(resource) ||
+    @current_user
+  end
+
 
   protect_from_forgery with: :null_session,
     only: Proc.new { |c| c.request.format.json? },
     prepend: true
-
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
 
   def signed_in?
     !!current_user
