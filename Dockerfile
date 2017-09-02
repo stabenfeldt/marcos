@@ -1,19 +1,27 @@
-FROM alpine:3.3
+FROM shortcutno/ubuntu-for-rails:0.2
+LABEL maintainer="Martin Stabenfeldt <martin.stabenfeldt@shortcut.no>"
 
-ADD .gemrc ~/.gemrc
-RUN apk add --no-cache ruby
-RUN apk add --no-cache curl
-RUN curl -o `ruby -ropenssl -e 'p OpenSSL::X509::DEFAULT_CERT_FILE' |tr -d \"` http://curl.haxx.se/ca/cacert.pem
+ENV INSTALL_PATH /app
+WORKDIR $INSTALL_PATH
 
-RUN "Ruby version: `ruby --version`"
+# Hack for cacheing the bundle install step
+COPY Gemfile* $INSTALL_PATH/
+ENV BUNDLE_GEMFILE=$INSTALL_PATH/Gemfile \
+    BUNDLE_JOBS=4
+#BUNDLE_PATH=/bundle
 
-EXPOSE 80
-
-ADD . /app
-WORKDIR /app
-RUN gem install rdoc
 RUN gem install bundler
-RUN bundler install
-RUN rake db:seed
+RUN bundle config git.allow_insecure true
+RUN bundle install
 
+COPY . $INSTALL_PATH
 
+WORKDIR $INSTALL_PATH
+ENV RAILS_ENV development
+RUN rake db:reset
+RUN rake db:create
+RUN rake db:migrate
+
+EXPOSE 3000
+
+ENTRYPOINT bundle exec puma -p 3000 -b 0.0.0.0

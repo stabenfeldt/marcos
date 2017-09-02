@@ -1,11 +1,18 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
+ruby '2.4.1'
 
+
+gem 'rake', '< 11.0'
+
+gem 'devise'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'omniauth-openid', github: 'intridea/omniauth-openid'
 gem 'omniauth-twitter'
 gem 'omniauth-strava'
+gem 'omniauth-google'
+
+gem 'puma'
 gem 'strava-api-v3'
 gem 'httparty'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -44,7 +51,7 @@ gem 'fabrication'
 gem 'brakeman', :require => false
 gem 'react-rails', '~> 1.4.0'
 gem 'carrierwave'
-gem 'fog'
+gem 'fog-aws'
 gem 'faker'
 
 gem 'mixpanel-ruby'

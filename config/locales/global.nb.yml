@@ -1,0 +1,4 @@
+nb:
+  errors:
+    messages:
+      not_saved: "Kunne ikke lagre"

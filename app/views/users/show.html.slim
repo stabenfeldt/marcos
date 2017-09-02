@@ -41,4 +41,6 @@ ul.nav.nav-tabs role='tablist'
             li = link_to b.name, [@user, b]
   br
   = link_to 'Legg til sykkel', new_user_bike_path(@user), class: 'btn btn-primary'
-  = link_to 'Hent sykler fra Strava', user_fetch_bikes_from_strava_path(@user), class: 'btn btn-primary'
+  - if @user.provider == 'strava'
+    = link_to 'Hent sykler fra Strava',
+      user_fetch_bikes_from_strava_path(@user), class: 'btn btn-primary'

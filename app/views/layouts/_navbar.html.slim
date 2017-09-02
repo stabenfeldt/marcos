@@ -10,13 +10,15 @@ nav.navbar.navbar-inverse
     .container-fluid
       .pull-right
         ul.nav.navbar-nav
-         li = link_to 'Logg inn', '/auth/strava/'
+         li = link_to 'Logg inn', '/order'
   - if signed_in?
     .container-fluid
       /! Brand and toggle get grouped for better mobile display
       .navbar-header
         button.navbar-toggle.collapsed(aria-expanded="false"
-          data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button")
+          data-target="#bs-example-navbar-collapse-1"
+          data-toggle="collapse"
+          type="button")
             span.sr-only Toggle navigation
             span.icon-bar
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
@@ -37,6 +39,8 @@ nav.navbar.navbar-inverse
         .pull-right
             ul.nav.navbar-nav
               li = link_to 'Logg ut', '/logout/'
-              li = link_to('Bytt til Admin modus', toggle_admin_path, method: :post) if !admin_menu?
-              li = link_to('Bytt til Normal modus', toggle_admin_path, method: :post) if admin_menu?
-            = "#{current_user.first_name} = #{current_user.role}"
+              li = link_to('Bytt til Admin modus', toggle_admin_path,
+                    method: :post) if !admin_menu?
+              li = link_to('Bytt til Normal modus', toggle_admin_path,
+                      method: :post) if admin_menu?
+            /= "#{current_user.first_name} = #{current_user.role}"
