@@ -9,6 +9,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-strava'
 gem 'omniauth-google'
 
+gem 'puma'
 gem 'strava-api-v3'
 gem 'httparty'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
