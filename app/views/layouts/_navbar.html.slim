@@ -6,11 +6,13 @@ nav.navbar.navbar-inverse
       - else
         = link_to 'Forsiden', root_url
 
+  br
+  h3 style="color: white;" = "user: #{@current_user.inspect}"
   - if !signed_in?
     .container-fluid
       .pull-right
         ul.nav.navbar-nav
-         li = link_to 'Logg inn', '/auth/strava/'
+         li = link_to 'Logg inn', '/order'
   - if signed_in?
     .container-fluid
       /! Brand and toggle get grouped for better mobile display
