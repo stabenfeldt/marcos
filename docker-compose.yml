@@ -1,16 +1,32 @@
-postgres:
-  hostname: postgres
-  image: postgres:9.4.5
-  environment:
-    - POSTGRES_PASSWORD=secret
-    - POSTGRES_USER=user
-  ports:
-    - 5432:5432
-  security_opt:
-    - label:user:user
-    - label:role:user
+version: '2'
+
+services:
+  postgres:
+    image: 'postgres:9.5'
+    environment:
+      - POSTGRES_USER=numbers
+      - POSTGRES_PASSWORD=plusminus
+      - POSTGRES_DB=numbers
+    ports:
+      - '5432:5432'
+    volumes:
+      - 'postgres:/var/lib/postgresql/data'
+
+  website:
+    build: .
+    environment:
+      - GOOGLE_CLIENT_ID
+      - GOOGLE_CLIENT_SECRET
+    depends_on:
+      - 'postgres'
+    ports:
+      - '3000:3000'
+    volumes:
+      - '.:/numbers'
+    stdin_open: true
+    tty: true
 
 
-# Works from console:
-# docker run -it --rm --name pg1 -p 5432:5432 -e POSTGRES_PASSWORD=12345 -e POSTGRES_USER=bob postgres:9.4
 
+volumes:
+  postgres:
