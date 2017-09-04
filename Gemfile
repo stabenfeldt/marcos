@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.3'
+ruby '2.4.1'
 
 gem 'devise'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
