@@ -10,7 +10,10 @@
 
     br
     br
-    a.btn.btn-danger.btn-lg[href="/auth/strava"] Logg på med Strava »
+    a.btn.btn-success.btn-lg[href="/auth/strava"] Logg på med Strava
+
+    /a.btn.btn-success.btn-lg[href="/auth/google"] Registrer deg uten Strava
+    = link_to "Logg på med mailadressen din", new_user_registration_path,  class: 'btn btn-success btn-lg'
 
 
     /h3 Lag egen konto

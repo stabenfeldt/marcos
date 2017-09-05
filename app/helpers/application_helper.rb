@@ -14,6 +14,10 @@ module ApplicationHelper
     current_user.admin?
   end
 
+  def admin_menu?
+    current_user && current_user.admin? && session[:admin_menu]
+  end
+
   def flash_messages(opts = {})
     flash.each do |msg_type, message|
       concat(content_tag(:div, message,

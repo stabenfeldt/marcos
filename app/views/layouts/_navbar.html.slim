@@ -1,23 +1,29 @@
 nav.navbar.navbar-inverse
   ul.nav.navbar-nav
     li(class="#{ body_id == 'front_page_index' ? 'active' : nil }")
-      = link_to 'Forsiden', root_url
+      - if admin_menu?
+        li(class="#{ body_id == 'services_index' ? 'active' : nil }")
+      - else
+        = link_to 'Forsiden', root_url
+
   - if !signed_in?
     .container-fluid
       .pull-right
         ul.nav.navbar-nav
-         li = link_to 'Logg inn', '/auth/strava/'
+         li = link_to 'Logg inn', '/order'
   - if signed_in?
     .container-fluid
       /! Brand and toggle get grouped for better mobile display
       .navbar-header
         button.navbar-toggle.collapsed(aria-expanded="false"
-          data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button")
+          data-target="#bs-example-navbar-collapse-1"
+          data-toggle="collapse"
+          type="button")
             span.sr-only Toggle navigation
             span.icon-bar
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav
-          - if admin?
+          - if admin_menu?
             li(class="#{ body_id == 'services_index' ? 'active' : nil }")
               = link_to 'Til reparasjon', services_path()
             li(class="#{ body_id == 'parts_index' ? 'active' : nil }")
@@ -29,8 +35,12 @@ nav.navbar.navbar-inverse
             li(class="#{ body_id == 'orders_index' ? 'active' : nil }")
               = link_to 'Bestillinger av servicepakken', orders_path
           li(class="#{ body_id == 'users_show' ? 'active' : nil }")
-            = link_to 'Din side', user_path(current_user)
+            = link_to 'Din side', user_path(current_user) unless admin?
         .pull-right
             ul.nav.navbar-nav
               li = link_to 'Logg ut', '/logout/'
-            = "#{current_user.first_name} = #{current_user.role}"
+              li = link_to('Bytt til Admin modus', toggle_admin_path,
+                    method: :post) if !admin_menu?
+              li = link_to('Bytt til Normal modus', toggle_admin_path,
+                      method: :post) if admin_menu?
+            /= "#{current_user.first_name} = #{current_user.role}"
