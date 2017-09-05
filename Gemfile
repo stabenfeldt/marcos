@@ -49,6 +49,7 @@ gem 'react-rails', '~> 1.4.0'
 gem 'carrierwave'
 gem 'fog'
 gem 'faker'
+gem 'therubyracer'
 
 gem 'mixpanel-ruby'
 gem 'mini_magick'
