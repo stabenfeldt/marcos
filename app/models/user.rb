@@ -47,9 +47,12 @@ class User < ActiveRecord::Base
   def fetch_bikes_from_strava
     user_data = fetch_athlete_from_strava
     return if user_data["bikes"].blank?
+
     user_data["bikes"].each do |b|
+      distance_in_km = b["distance"] / 1000
+      puts "Saving distance #{distance_in_km} for b.name"
       bike = self.bikes.find_or_create_by(strava_id: b['id'])
-      bike.update_attributes(name: b["name"], distance: b["distance"])
+      bike.update_attributes(name: b["name"], distance: distance_in_km)
     end
   end
 
