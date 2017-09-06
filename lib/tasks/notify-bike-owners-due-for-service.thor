@@ -6,9 +6,16 @@ class Bikes < Thor
     puts "Loading Rails environment..."
     require File.expand_path('config/environment.rb')
 
-    User.all.each do |u|
-      u.fetch_bikes_from_strava
+    @bikes_due_for_service = Bike.all.map do |b|
+                               b if b.parts_due_for_service.size > 0
+                             end
+    puts "These bikes are due for service: #{@bikes_due_for_service}"
+
+    @bikes_due_for_service.each do |bike|
+      owner = bike.user
+      NotificationMailer.bike_due(owner, bike).deliver_later
     end
+
   end
 
 end
