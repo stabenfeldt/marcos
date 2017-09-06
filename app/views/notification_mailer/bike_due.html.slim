@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+  body
+    h1 = "Hi #{@owner.first_name}, your bike #{@bike.name} is due for a service."
+    p
+      = "The parts that needs to be served is: "
+      ul
+        - @bike.parts_due_for_service.each do |part|
+          li = part.name
+
+    p
+      | To login to the site, just follow this link: <%= @url %>.
+    p Thanks for joining and have a great day!
+
