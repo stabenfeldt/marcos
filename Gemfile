@@ -6,6 +6,8 @@ ruby '2.4.1'
 gem 'rake', '< 11.0'
 
 gem 'devise'
+gem 'devise-i18n'
+
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'omniauth-openid', github: 'intridea/omniauth-openid'
 gem 'omniauth-twitter'
