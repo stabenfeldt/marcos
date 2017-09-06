@@ -10,7 +10,7 @@
 #  user_id    :integer
 #  name       :string
 #  strava_id  :string
-#  distance   :float
+#  distance   :integer          default(0)
 #
 
 Fabricator(:bike) do
