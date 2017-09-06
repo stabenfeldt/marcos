@@ -38,12 +38,10 @@ RSpec.describe Bike, :type => :model do
 
   it 'can tell when some of its parts need service' do
     @bike.update_attribute(:distance, 4000);
-    cassette_bike_part   = @bike.bike_parts.where(part_id: @cassette.id)
-    rear_shock_bike_part = @bike.bike_parts.where(part_id: @cassette.id)
-    # cassette_bike_part belongs to this bike only. The @cassette is the generic part
-    # used by all bikes.
-    expect(@bike.parts_due_for_service.size).to eq 2
-    expect(@bike.parts_due_for_service).to include(cassette_bike_part, rear_shock_bike_part)
+    @cassette_bike_part   = @bike.bike_parts.where(part_id: @cassette.id).first
+    @rear_shock_bike_part = @bike.bike_parts.where(part_id: @rear_shock.id).first
+    expect(@bike.parts_due_for_service).to \
+      include(@cassette_bike_part, @rear_shock_bike_part)
   end
 
 end
