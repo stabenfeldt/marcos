@@ -1,10 +1,10 @@
 class NotificationMailer < ApplicationMailer
 
-  def bike_due(bike:, owner:)
+  def bike_due(bike:, user:)
     @bike = bike
-    @owner = owner
-    @url  = 'http://example.com/login'
-    mail(to: @owner.email, subject: "#{@bike.name.capitalize} needs service")
+    @user = user
+    @url  = user_bike_url(@user, @bike)
+    mail(to: @user.email, subject: "#{@bike.name.capitalize} needs service")
   end
 
 end
