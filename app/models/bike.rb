@@ -33,10 +33,7 @@ class Bike < ActiveRecord::Base
   end
 
   def parts_due_for_service
-    bike_parts.map { |p|
-      km_since_last = distance - p.service_done_at_bike_distance
-      p if km_since_last >= p.service_interval
-    }.compact
+    bike_parts.map { |bp| bp if bp.service_due? }
   end
 
   def add_default_parts
