@@ -3,15 +3,20 @@ html
   head
     meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
   body
-    h1 = "Hi #{@owner.first_name}, your bike #{@bike.name} is due for a service."
+    h1 = "Hi #{@user.first_name}, your bike #{@bike.name} is due for a service."
     p
-      = "The parts that needs to be served is: "
+      h2 The parts that needs to be served is:
+
       ul
-        - @bike.parts_due_for_service.each do |part|
-          li = part.name
+        = @bike.parts_due_for_service.each do |bike_part|
+          - part = bike_part.part
+          li
+            h3 = part.name
+            p
+              strong = part.service_description || "Service description goes here"
+              span =  "Service interval: #{part.service_interval}"
 
     p
-      | To login to the site, just follow this link: <%= @url %>.
-      | Click here to order a service for your bike.
+      = "Click #{link_to 'here', @url} to order a service for your bike."
       | To see details regarding your bike, click here to see your service booklet.
 
