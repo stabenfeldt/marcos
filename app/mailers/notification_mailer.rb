@@ -4,7 +4,7 @@ class NotificationMailer < ApplicationMailer
     @bike = bike
     @owner = owner
     @url  = 'http://example.com/login'
-    mail(to: @owner.email, subject: "Your bike #{@bike.name} needs service")
+    mail(to: @owner.email, subject: "#{@bike.name.capitalize} needs service")
   end
 
 end

@@ -11,8 +11,7 @@ class Bikes < Thor
     puts "These bikes are due for service: #{@bikes_due_for_service}"
 
     @bikes_due_for_service.each do |bike|
-      owner = bike.user
-      NotificationMailer.bike_due(owner, bike).deliver_later
+      NotificationMailer.bike_due(bike: bike, owner: bike.user).deliver_later
     end
 
   end
