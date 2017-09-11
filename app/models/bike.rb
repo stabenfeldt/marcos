@@ -40,11 +40,8 @@ class Bike < ActiveRecord::Base
   end
 
   def add_default_parts
-    puts "adding default parts"
     default_parts.each do |part|
-      puts "Adding part #{part.inspect}"
       next unless part
-      puts "Added #{part.kind}"
       self.parts << part
     end
     save!
@@ -55,5 +52,8 @@ class Bike < ActiveRecord::Base
     Part.where(model: :generic).all
   end
 
+  def self.due_for_service
+    Bike.all.collect { |b| b if (b.parts_due_for_service.size > 0) }
+  end
 
 end
