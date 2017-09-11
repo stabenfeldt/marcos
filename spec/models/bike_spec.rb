@@ -26,14 +26,11 @@ RSpec.describe Bike, :type => :model do
   end
 
   it 'is valid from the fabric' do
-    expect(Part.all.size).to eq 2
     expect(@bike).to be_valid
   end
 
-  it 'has a default set of parts' do
-    nr_of_default_parts = Part.where(brand: 'generic').size
-    @bike.reload
-    expect(@bike.parts.size).to eq nr_of_default_parts
+  it 'is delegated default parts' do
+    expect(@bike.parts.all.size).to eq 2
   end
 
   it 'can tell when some of its parts need service' do
