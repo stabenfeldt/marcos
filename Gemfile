@@ -47,7 +47,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 gem 'slim-rails'
 gem 'slim'
 gem 'sass-rails', '>= 3.2'
-gem "twitter-bootstrap-rails"
+gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'fabrication'
 gem 'brakeman', :require => false
