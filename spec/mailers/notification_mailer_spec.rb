@@ -16,8 +16,8 @@ RSpec.describe NotificationMailer, :type => :mailer do
       expect(email).to have_body_text(bike_part.part.name)
     end
 
-    it "has a late invoice subject" do
-      expect(email).to have_subject(/Late Invoice/)
+    it "has the name of " do
+      expect(email).to have_subject("Your bike #{bike.name} needs service")
     end
 
   end
