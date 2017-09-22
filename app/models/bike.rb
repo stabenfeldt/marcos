@@ -50,7 +50,7 @@ class Bike < ActiveRecord::Base
   end
 
   def self.due_for_service
-    Bike.all.collect { |b| b if (b.parts_due_for_service.size > 0) }
+    Bike.all.collect { |b| b if (b.parts_due_for_service.present?) }
   end
 
 end
