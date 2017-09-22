@@ -10,7 +10,10 @@ nav.navbar.navbar-inverse
     .container-fluid
       .pull-right
         ul.nav.navbar-nav
-         li = link_to 'Logg inn', '/order'
+          - if signed_in?
+            li = link_to 'Logg inn', new_user_session_path
+          - else
+            li = link_to 'Logg out', logout_path
   - if signed_in?
     .container-fluid
       /! Brand and toggle get grouped for better mobile display
