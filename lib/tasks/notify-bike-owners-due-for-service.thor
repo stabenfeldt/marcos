@@ -6,7 +6,7 @@ class Bikes < Thor
     puts "Loading Rails environment..."
     require File.expand_path('config/environment.rb')
 
-    @bikes_due_for_service = Bike.all.map { |b| b if (b.parts_due_for_service.size > 0) }
+    @bikes_due_for_service = Bike.due_for_service
 
     puts "These bikes are due for service: #{@bikes_due_for_service}"
 
