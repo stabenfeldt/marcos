@@ -8,7 +8,7 @@ html
       h2 The parts that needs to be served is:
 
       ul
-        = @bike.parts_due_for_service.each do |bike_part|
+        = @bike.parts_due_for_service.compact.each do |bike_part|
           - part = bike_part.part
           li
             h3 = part.name
