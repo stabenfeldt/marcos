@@ -52,8 +52,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'fabrication'
 gem 'brakeman', :require => false
 gem 'react-rails', '~> 1.6'
-gem 'carrierwave'
-gem 'fog-aws'
 gem 'faker'
 
 gem 'mixpanel-ruby'
@@ -74,6 +72,10 @@ end
 group :test do
   gem 'database_cleaner'
 end
+
+gem 'fog-aws', group: :production
+gem 'carrierwave', '~> 1.0'
+
 
 group :assets do
   gem 'therubyracer'

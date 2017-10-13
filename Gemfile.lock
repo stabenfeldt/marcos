@@ -388,7 +388,7 @@ DEPENDENCIES
   bower-rails (~> 0.10.0)
   brakeman
   byebug
-  carrierwave
+  carrierwave (~> 1.0)
   database_cleaner
   devise
   devise-i18n
