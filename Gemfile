@@ -21,7 +21,6 @@ gem 'httparty'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
 gem 'pg'
-gem 'uglifier', '>= 1.3.0'
 
 # Include 'rails_12factor' gem to enable all platform features
 # See https://devcenter.heroku.com/articles/rails-integration-gems for more information.
@@ -79,7 +78,7 @@ end
 group :assets do
   gem 'therubyracer'
 	gem 'sass-rails', '>= 3.2'
-  gem 'uglifier'
+	gem 'uglifier', '>= 1.3.0'
 end
 
 
