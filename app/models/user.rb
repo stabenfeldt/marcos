@@ -2,18 +2,28 @@
 #
 # Table name: users
 #
-#  id                   :integer          not null, primary key
-#  first_name           :string
-#  last_name            :string
-#  email                :string
-#  mobile               :string
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  provider             :string
-#  uid                  :string
-#  username             :string
-#  role                 :string           default("normal")
-#  strava_omniauth_code :string
+#  id                     :integer          not null, primary key
+#  first_name             :string
+#  last_name              :string
+#  email                  :string
+#  mobile                 :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  provider               :string
+#  uid                    :string
+#  username               :string
+#  role                   :string           default("normal")
+#  strava_omniauth_code   :string
+#  access_token           :string
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  sign_in_count          :integer          default(0), not null
+#  current_sign_in_at     :datetime
+#  last_sign_in_at        :datetime
+#  current_sign_in_ip     :inet
+#  last_sign_in_ip        :inet
 #
 
 # The User class is used for authenication for the system.
@@ -36,9 +46,13 @@ class User < ActiveRecord::Base
 
   def fetch_bikes_from_strava
     user_data = fetch_athlete_from_strava
+    return if user_data["bikes"].blank?
+
     user_data["bikes"].each do |b|
+      distance_in_km = b["distance"] / 1000
+      puts "Saving distance #{distance_in_km} for b.name"
       bike = self.bikes.find_or_create_by(strava_id: b['id'])
-      bike.update_attributes(name: b["name"], distance: b["distance"])
+      bike.update_attributes(name: b["name"], distance: distance_in_km)
     end
   end
 

@@ -10,7 +10,7 @@
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  tech_doc            :string
-#  service_interval    :float
+#  service_interval    :integer
 #  kind                :string
 #  service_description :text
 #

@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     code = auth_params["code"]
     user = User.from_strava_omniauth(code)
     session[:user_id] = user.id
-    redirect_to user, notice: "Welcome"
+    redirect_to user, notice: "Velkommen #{user.first_name}"
   end
 
   def logout

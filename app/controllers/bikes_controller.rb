@@ -6,6 +6,7 @@ class BikesController < ApplicationController
   before_action :only_admins, except: [:show, :edit, :update]
 
   def only_admins
+    return if admin?
     return if @bike.user == current_user
     redirect_to root_url, alert: 'Only for admins'
   end
@@ -60,7 +61,7 @@ class BikesController < ApplicationController
     respond_to do |format|
       if @bike.save
         $mixpanel.track('Admin', 'Created a bike')
-        format.html { redirect_to @bike.user,
+        format.html { redirect_to @bike,
                       notice: 'Bike was successfully created.' }
         format.json { render :show, status: :created, location: @bike }
       else
@@ -113,7 +114,7 @@ class BikesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white
     # list through.
     def bike_params
-      params.require(:bike).permit(:brand, :model, :year, :image, :name)
+      params.require(:bike).permit(:brand, :model, :year, :image, :name, :distance)
     end
 
     def service_registered_but_not_delivered

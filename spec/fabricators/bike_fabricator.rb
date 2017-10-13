@@ -10,11 +10,11 @@
 #  user_id    :integer
 #  name       :string
 #  strava_id  :string
-#  distance   :float
+#  distance   :integer          default(0)
 #
 
 Fabricator(:bike) do
-  name "Avid BB7"
+  name "Poprad Lepmond"
   user { Fabricate(:user) }
   distance { 1001 }
 end

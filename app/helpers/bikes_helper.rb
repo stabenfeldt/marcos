@@ -13,10 +13,10 @@ module BikesHelper
     if km_until_next == 0
       return ["Nå", :now]
     elsif (km_until_next < 0)
-      return [" #{number_to_human( -1* km_until_next/100, unit: :distance, precision: 0)} kilometer siden", :over]
-      #return [" #{km_until_next/100} kilometer siden", :over]
+      return ["#{ ActiveSupport::NumberHelper.number_to_human((km_until_next * -1 ), precision: 0)
+               } km siden", :over]
     elsif (km_until_next > 0)
-      return ["Om #{number_to_human(km_until_next/100, unit: :distance)} kilometer", :soon]
+      return ["Om #{km_until_next.to_i} kilometer", :soon]
     end
 
   end
