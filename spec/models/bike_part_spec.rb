@@ -35,4 +35,9 @@ RSpec.describe BikePart, :type => :model do
     expect(@bike_part.in_for_service?).to eq true
   end
 
+  it 'can tell if it´s TIME for service' do
+    @bike_part.part_services.create!(service: @service)
+    expect(@bike_part.in_for_service?).to eq true
+  end
+
 end

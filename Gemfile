@@ -1,11 +1,13 @@
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+ruby '2.3.3'
 
 
 gem 'rake', '< 11.0'
 
 gem 'devise'
+gem 'devise-i18n'
+
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'omniauth-openid', github: 'intridea/omniauth-openid'
 gem 'omniauth-twitter'
@@ -45,11 +47,11 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 gem 'slim-rails'
 gem 'slim'
 gem 'sass-rails', '>= 3.2'
-gem "twitter-bootstrap-rails"
+gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'fabrication'
 gem 'brakeman', :require => false
-gem 'react-rails', '~> 1.4.0'
+gem 'react-rails', '~> 1.6'
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'faker'
@@ -64,6 +66,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3.0.0'
+  gem 'email_spec'
   gem 'railroady'
   gem 'rubocop'
 end

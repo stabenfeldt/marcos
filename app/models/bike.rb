@@ -10,7 +10,7 @@
 #  user_id    :integer
 #  name       :string
 #  strava_id  :string
-#  distance   :float
+#  distance   :integer          default(0)
 #
 
 class Bike < ActiveRecord::Base
@@ -22,7 +22,7 @@ class Bike < ActiveRecord::Base
   validates :name, :user, presence: true
   belongs_to :user
 
-  after_create :add_default_parts, on: :create
+  after_create :add_default_parts
 
   mount_uploader :image, ImageUploader
 
@@ -33,15 +33,11 @@ class Bike < ActiveRecord::Base
   end
 
   def parts_due_for_service
-    bike_parts.map { |p|
-      km_since_last = distance - p.service_done_at_bike_distance
-      return p if km_since_last >= p.service_interval
-     }
+    bike_parts.map { |bp| bp if bp.service_due? }
   end
 
   def add_default_parts
-    default_parts.each do |kind_of_part|
-      part = Part.where(kind: kind_of_part).first
+    default_parts.each do |part|
       next unless part
       self.parts << part
     end
@@ -49,19 +45,12 @@ class Bike < ActiveRecord::Base
   end
 
   def default_parts
-    [
-      'cassette',
-      'chain',
-      'front break',
-      'front derailleur',
-      'headset',
-      'rear break',
-      'rear derailleur',
-      'rear shock',
-      'shifters',
-      'suspension fork'
-    ]
+    Rails.logger.debug  "Found #{Part.where(model: 'generic').all}.size parts"
+    Part.where(model: :generic).all
   end
 
+  def self.due_for_service
+    Bike.all.collect { |b| b if (b.parts_due_for_service.present?) }
+  end
 
 end
