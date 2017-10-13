@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
     prepend: true
 
   def signed_in?
-    !!current_user
+    current_user.present?
   end
 
   def admin?
