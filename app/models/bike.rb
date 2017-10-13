@@ -33,7 +33,7 @@ class Bike < ActiveRecord::Base
   end
 
   def parts_due_for_service
-    bike_parts.map { |bp| bp if bp.service_due? }.compact!
+    bike_parts.map { |bp| bp if bp.service_due? }
   end
 
   def add_default_parts
