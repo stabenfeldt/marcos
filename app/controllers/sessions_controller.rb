@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < Devise::SessionsController
   def create
     # First receive the user code from Strava
     code = auth_params["code"]
