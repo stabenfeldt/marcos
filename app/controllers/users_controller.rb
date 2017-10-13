@@ -97,7 +97,7 @@ class UsersController < ApplicationController
 
     def only_admins
       redirect_to root_url, :flash => { notice: 'Only for admins' } \
-        unless current_user.admin? || current_user == @user
+        unless current_user && current_user.admin? || current_user == @user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
