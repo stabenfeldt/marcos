@@ -51,7 +51,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 gem 'fabrication'
 gem 'brakeman', :require => false
-gem 'react-rails', '~> 1.4.0'
+gem 'react-rails', '~> 1.6'
 gem 'carrierwave'
 gem 'fog-aws'
 gem 'faker'
