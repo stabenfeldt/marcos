@@ -36,7 +36,7 @@ class PartsController < ApplicationController
     @part = Part.new(part_params)
 
     respond_to do |format|
-      if @part.save
+      if @part.save!
         format.html { redirect_to parts_path, notice: 'Part was successfully created.' }
         format.json { render :show, status: :created, location: @part }
       else
@@ -78,6 +78,6 @@ class PartsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def part_params
-      params.require(:part).permit(:brand, :model, :year, :note)
+      params.require(:part).permit(:brand, :model, :year, :note, :kind, :tech_doc)
     end
 end
