@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def admin_menu?
-    current_user && current_user.admin? && session[:admin_menu]
+    session[:admin_menu]
   end
 
   def flash_messages(opts = {})
