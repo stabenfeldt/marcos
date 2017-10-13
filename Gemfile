@@ -78,7 +78,7 @@ end
 
 group :assets do
   gem 'therubyracer'
-  gem 'sass-rails', "  ~> 3.2"
+	gem 'sass-rails', '>= 3.2'
   gem 'uglifier'
 end
 
