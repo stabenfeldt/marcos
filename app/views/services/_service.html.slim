@@ -3,7 +3,7 @@
     span Service nr:
     h4.label.label-info = service.id
     - if service.present?
-      p(class= "#{service.state_class}") = service.state
+      p(class= "service_status #{service.state_class}") = service.state
 
     br
 
