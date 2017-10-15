@@ -9,8 +9,9 @@ class SessionsController < Devise::SessionsController
   end
 
   def logout
-    Rails.logger.debug "LOGOUT=================="
+    Rails.logger.debug "LOGOUT 1=================="
     reset_session
+    sign_out @current_user
     redirect_to root_url, notice: "You're logged out"
   end
 
