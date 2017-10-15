@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   before_action :only_admins, except: [:show, :fetch_bikes_from_strava]
+  before_action :authenticate_user!
+
 
   #http_basic_authenticate_with name: "bike", password: "lover"
 
