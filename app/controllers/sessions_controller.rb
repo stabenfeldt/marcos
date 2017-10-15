@@ -1,5 +1,6 @@
 class SessionsController < Devise::SessionsController
   def create
+    Rails.logger.debug "create 1=================="
     # First receive the user code from Strava
     code = auth_params["code"]
     user = User.from_strava_omniauth(code)

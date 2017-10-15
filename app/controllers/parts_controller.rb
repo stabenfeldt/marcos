@@ -1,6 +1,8 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:show, :edit, :update, :destroy]
   before_action :only_admins
+  before_action :authenticate_user!
+
 
   def only_admins
     redirect_to root_path, notice: 'Kun for admin' unless admin?
