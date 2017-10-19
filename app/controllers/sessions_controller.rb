@@ -1,6 +1,5 @@
-class SessionsController < Devise::SessionsController
+class SessionsController < ApplicationController
   def create
-    Rails.logger.debug "create 1=================="
     # First receive the user code from Strava
     code = auth_params["code"]
     user = User.from_strava_omniauth(code)
@@ -9,9 +8,8 @@ class SessionsController < Devise::SessionsController
   end
 
   def logout
-    Rails.logger.debug "LOGOUT 1=================="
+    Rails.logger.debug "LOGOUT=================="
     reset_session
-    sign_out @current_user
     redirect_to root_url, notice: "You're logged out"
   end
 

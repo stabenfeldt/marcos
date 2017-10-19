@@ -7,15 +7,13 @@ Rails.application.routes.draw do
   post 'payment_received/:id', to: 'orders#payment_received', as: :payment_received
 
 	get '/auth/:provider/callback', to: 'sessions#create'
-  devise_scope :user do
-      get '/logout', to: 'sessions#logout'
-  end
+	get '/logout', to: 'sessions#logout'
 
 	post '/toggle_admin', to: 'users#toggle_admin'
 
-  # devise_for :users, controllers: {
-  #         sessions: 'users/sessions'
-  # }
+  #devise_for :users, controllers: {
+  #        sessions: 'users/sessions'
+  #      }
 
 
   resources :products
