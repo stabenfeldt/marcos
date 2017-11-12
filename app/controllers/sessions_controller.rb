@@ -1,10 +1,16 @@
-class SessionsController < ApplicationController
+class SessionsController < Devise::SessionsController
+
   def create
     # First receive the user code from Strava
     code = auth_params["code"]
     user = User.from_strava_omniauth(code)
     session[:user_id] = user.id
     redirect_to user, notice: "Welcome"
+  end
+
+  # DELETE /resource/sign_out
+  def destroy
+    super
   end
 
   def logout

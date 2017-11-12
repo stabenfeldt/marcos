@@ -38,7 +38,8 @@ nav.navbar.navbar-inverse
             = link_to 'Din side', user_path(current_user) unless admin?
         .pull-right
             ul.nav.navbar-nav
-              li = link_to 'Logg ut', '/logout/'
+              li = link_to('Logout', destroy_user_session_path,  :method=>'delete')
+
               li = link_to('Bytt til Admin modus', toggle_admin_path,
                     method: :post) if !admin_menu?
               li = link_to('Bytt til Normal modus', toggle_admin_path,

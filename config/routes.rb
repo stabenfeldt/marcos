@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   post 'payment_received/:id', to: 'orders#payment_received', as: :payment_received
 
 	get '/auth/:provider/callback', to: 'sessions#create'
-	get '/logout', to: 'sessions#logout'
 
 	post '/toggle_admin', to: 'users#toggle_admin'
 
