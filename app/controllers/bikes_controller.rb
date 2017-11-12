@@ -3,7 +3,7 @@ class BikesController < ApplicationController
   before_action :set_bike_from_id, only: [:parts, :add_part, :remove_part]
   before_action :set_user #, only: [:new, :create, :show]
 
-  before_action :only_admins, except: [:show, :edit, :update]
+  before_action :only_admins, except: [:new, :create, :show, :edit, :update]
 
   def only_admins
     return if @bike.user == current_user
