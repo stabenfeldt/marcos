@@ -61,7 +61,7 @@ class BikesController < ApplicationController
       if @bike.save
         $mixpanel.track('Admin', 'Created a bike')
         format.html { redirect_to @bike.user,
-                      notice: 'Bike was successfully created.' }
+                      notice: 'Sykkel lagret!' }
         format.json { render :show, status: :created, location: @bike }
       else
         format.html { render :new }
@@ -76,7 +76,7 @@ class BikesController < ApplicationController
     respond_to do |format|
       if @bike.update(bike_params)
         format.html { redirect_to [@user, @bike],
-                      notice: 'Bike was successfully updated.' }
+                      notice: 'Sykkel oppdatert!' }
         format.json { render :show, status: :ok, location: @bike }
       else
         format.html { render :edit }
@@ -90,7 +90,7 @@ class BikesController < ApplicationController
   def destroy
     @bike.destroy
     respond_to do |format|
-      format.html { redirect_to [@bike.user], notice: 'Bike was successfully destroyed.' }
+      format.html { redirect_to [@bike.user], notice: 'Sykkelen ble slettet' }
       format.json { head :no_content }
     end
   end
