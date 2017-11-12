@@ -13,12 +13,6 @@ class SessionsController < Devise::SessionsController
     super
   end
 
-  def logout
-    Rails.logger.debug "LOGOUT=================="
-    reset_session
-    redirect_to root_url, notice: "You're logged out"
-  end
-
   protected
 
 
