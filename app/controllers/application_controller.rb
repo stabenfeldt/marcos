@@ -6,6 +6,10 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_current_user
 
+  def authenticate_user!
+    redirect_to root_url unless @current_user
+  end
+
   def set_current_user
     @current_user ||= current_user
   end

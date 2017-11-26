@@ -1,18 +1,17 @@
-class SessionsController < Devise::SessionsController
-
+class SessionsController < ApplicationController
   def create
     # First receive the user code from Strava
-    code = auth_params["authenticity_token"]
-    Rails.logger.debug "params: #{params}"
-    #code = auth_params["code"]
+    code = auth_params["code"]
     user = User.from_strava_omniauth(code)
     session[:user_id] = user.id
+    @current_user = user
     redirect_to user, notice: "Velkommen #{user.first_name}"
   end
 
-  # DELETE /resource/sign_out
-  def destroy
-    super
+  def logout
+    Rails.logger.debug "LOGOUT=================="
+    reset_session
+    redirect_to root_url, notice: "You're logged out"
   end
 
   protected
@@ -25,17 +24,7 @@ class SessionsController < Devise::SessionsController
   end
 
   def auth_params
-    params.permit(
-      "authenticity_token",
-      "code",
-      "commit",
-      "oauth_token",
-      "oauth_verifier",
-      "provider",
-      "state",
-      "user",
-      "utf8",
-    )
+    params.permit("provider", "state", "code", "oauth_token", "oauth_verifier")
   end
 
 end

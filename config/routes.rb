@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  devise_scope :user do
+    get '/logout', to: 'sessions#logout'
+  end
+
+  devise_for :users
   get 'bike_parts/:id', to: 'bike_parts#show', as: :show_bike_part
 
   resources :orders
@@ -9,9 +14,9 @@ Rails.application.routes.draw do
 
 	post '/toggle_admin', to: 'users#toggle_admin'
 
-  devise_for :users, controllers: {
-          sessions: 'sessions'
-  }
+  #devise_for :users, controllers: {
+  #        sessions: 'users/sessions'
+  #      }
 
 
   resources :products
