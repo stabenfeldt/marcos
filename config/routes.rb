@@ -1,19 +1,17 @@
 Rails.application.routes.draw do
 
-  devise_for :users
   get 'bike_parts/:id', to: 'bike_parts#show', as: :show_bike_part
 
   resources :orders
   post 'payment_received/:id', to: 'orders#payment_received', as: :payment_received
 
 	get '/auth/:provider/callback', to: 'sessions#create'
-	get '/logout', to: 'sessions#logout'
 
 	post '/toggle_admin', to: 'users#toggle_admin'
 
-  #devise_for :users, controllers: {
-  #        sessions: 'users/sessions'
-  #      }
+  devise_for :users, controllers: {
+          sessions: 'sessions'
+  }
 
 
   resources :products

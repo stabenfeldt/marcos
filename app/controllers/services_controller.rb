@@ -82,7 +82,9 @@ class ServicesController < ApplicationController
       if @service.save
         $mixpanel.track('Admin', 'Registered a service')
         format.html { redirect_to [@bike.user, @bike],
-                      notice: 'Service was successfully created.' }
+                      notice: 'Service på sykkelen er registrert. '+
+                              'Nå er det bare å levere inn sykkelen til Marcos sykkelverksted'
+                    }
         format.json { render :show, status: :created, location: @service }
       else
         Rails.logger.debug "SERVICES ==NOT== SAVED"

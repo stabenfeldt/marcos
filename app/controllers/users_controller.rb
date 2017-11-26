@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update ]
   before_action :only_admins, except: [:show, :fetch_bikes_from_strava]
   before_action :authenticate_user!
 

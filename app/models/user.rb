@@ -74,7 +74,10 @@ class User < ActiveRecord::Base
 
   def self.from_strava_omniauth(code)
     user_data = fetch_user_data(code)
-    username = user_data.parsed_response["athlete"]["username"]
+    if fetch_user_data(code).response.code.match("400")
+      raise "Fetching user failed: #{user_data.response.body}"
+    end
+    username  = user_data.parsed_response["athlete"]["username"]
     user = where( { username: username, provider: :strava })
       .first || create_from_omniauth(user_data)
 

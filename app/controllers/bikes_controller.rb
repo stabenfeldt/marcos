@@ -4,7 +4,7 @@ class BikesController < ApplicationController
   before_action :set_user #, only: [:new, :create, :show]
   before_action :authenticate_user!
 
-  before_action :only_admins, except: [:show, :edit, :update]
+  before_action :only_admins, except: [:new, :create, :show, :edit, :update]
 
   def only_admins
     return if admin?
@@ -62,8 +62,13 @@ class BikesController < ApplicationController
     respond_to do |format|
       if @bike.save
         $mixpanel.track('Admin', 'Created a bike')
+<<<<<<< HEAD
         format.html { redirect_to @bike,
                       notice: 'Bike was successfully created.' }
+=======
+        format.html { redirect_to @bike.user,
+                      notice: 'Sykkel lagret!' }
+>>>>>>> origin/div-fixes
         format.json { render :show, status: :created, location: @bike }
       else
         format.html { render :new }
@@ -78,7 +83,7 @@ class BikesController < ApplicationController
     respond_to do |format|
       if @bike.update(bike_params)
         format.html { redirect_to [@user, @bike],
-                      notice: 'Bike was successfully updated.' }
+                      notice: 'Sykkel oppdatert!' }
         format.json { render :show, status: :ok, location: @bike }
       else
         format.html { render :edit }
@@ -92,7 +97,7 @@ class BikesController < ApplicationController
   def destroy
     @bike.destroy
     respond_to do |format|
-      format.html { redirect_to [@bike.user], notice: 'Bike was successfully destroyed.' }
+      format.html { redirect_to [@bike.user], notice: 'Sykkelen ble slettet' }
       format.json { head :no_content }
     end
   end
