@@ -1,7 +1,7 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  #provider :developer unless Rails.env.production?
-  provider :strava, ENV['STRAVA_CLIENT_ID'], ENV['STRAVA_CLIENT_SECRET'], scope: 'public'
+  provider :developer unless Rails.env.production?
 
+  provider :strava, ENV['STRAVA_CLIENT_ID'], ENV['STRAVA_CLIENT_SECRET'], scope: 'public'
   provider :google, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
 
 

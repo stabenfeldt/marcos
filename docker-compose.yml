@@ -1,16 +1,67 @@
-postgres:
-  hostname: postgres
-  image: postgres:9.4.5
-  environment:
-    - POSTGRES_PASSWORD=secret
-    - POSTGRES_USER=user
-  ports:
-    - 5432:5432
-  security_opt:
-    - label:user:user
-    - label:role:user
+version: '3.2'
+services:
+
+  postgres:
+    container_name: postgres
+    image: postgres:9.6
+    restart: always
+    volumes:
+      - postgres:/var/lib/postgres/data
+    dns: 8.8.8.8
+    ports:
+      - 5432:5432
+    networks:
+      - marcos
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_NAME=marcos_test
 
 
-# Works from console:
-# docker run -it --rm --name pg1 -p 5432:5432 -e POSTGRES_PASSWORD=12345 -e POSTGRES_USER=bob postgres:9.4
+  marcos:
+    build: .
+    image: marcos:latest
+    container_name: marcos
+    depends_on:
+      - postgres
+    dns: 8.8.8.8
+    restart: always
+    networks:
+      - marcos
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    environment:
+      - RAILS_ENV=test
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_NAME=marcos_development
+      - POSTGRES_HOST=postgres
+      - SHA
+      - STRAVA_CLIENT_ID=16705
+      - STRAVA_CLIENT_SECRET=5426c6fa5d46749d38a493f704033dd07e61cca4
 
+  guard:
+    build: .
+    container_name: guard
+    depends_on:
+      - postgres
+    networks:
+      - marcos
+    volumes:
+      - .:/app
+    environment:
+      - RAILS_ENV=development
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_NAME=marcos_test
+      - POSTGRES_HOST=postgres
+    command: bundle exec guard --no-bundler-warning --no-interactions
+
+networks:
+  marcos:
+    driver: bridge
+
+volumes:
+  postgres:

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.3.3'
+ruby '2.5.3'
 
 
 gem 'rake', '< 11.0'
@@ -79,7 +79,7 @@ gem 'carrierwave', '~> 1.0'
 
 group :assets do
   gem 'therubyracer'
-	gem 'sass-rails', '>= 3.2'
+	# gem 'sass-rails', '>= 3.2'
 	gem 'uglifier', '>= 1.3.0'
 end
 
