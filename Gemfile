@@ -14,7 +14,7 @@ gem 'omniauth-twitter'
 gem 'omniauth-strava'
 gem 'omniauth-google'
 
-gem 'puma'
+gem 'puma', '>= 3.12.6'
 gem 'strava-api-v3'
 gem 'httparty'
 
