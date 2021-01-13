@@ -11,7 +11,7 @@ gem 'devise-i18n'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'omniauth-openid', github: 'intridea/omniauth-openid'
 gem 'omniauth-twitter'
-gem 'omniauth-strava'
+gem 'omniauth-strava', '>= 0.0.6'
 gem 'omniauth-google'
 
 gem 'puma'
