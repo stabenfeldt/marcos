@@ -10,9 +10,9 @@ gem 'devise-i18n'
 
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'omniauth-openid', github: 'intridea/omniauth-openid'
-gem 'omniauth-twitter'
+gem 'omniauth-twitter', '>= 1.4.0'
 gem 'omniauth-strava'
-gem 'omniauth-google'
+gem 'omniauth-google', '>= 1.0.2'
 
 gem 'puma'
 gem 'strava-api-v3'
