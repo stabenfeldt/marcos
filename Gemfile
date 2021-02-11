@@ -74,7 +74,7 @@ group :test do
 end
 
 gem 'fog-aws', group: :production
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3', '>= 1.3.2'
 
 
 group :assets do
